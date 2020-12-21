@@ -1,1 +1,3 @@
 Coming soon ...
+
+![End to end multilingual evidence retrieval and fact verification system.](/assets/system_diagram_final.pdf)
