@@ -1,6 +1,6 @@
 ## Multilingual Evidence Retrieval and Fact Verification to Combat Global Disinformation: The Power of Polyglotism
 
-System will be served via a live API during the ECIR 2021 conference. For a preview please email the author. https://arxiv.org/pdf/2012.08919.pdf
+The end to end system will be served via a live API during the ECIR 2021 conference. For a preview please email the author. https://arxiv.org/pdf/2012.08919.pdf
 
 ![Multilingual evidence retrieval and fact verification system.](/assets/system_diagram_final-1.png)
 
