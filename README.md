@@ -2,7 +2,7 @@
 
 The end to end system will be served via a live API during the ECIR 2021 conference. For a preview please email the author. https://arxiv.org/pdf/2012.08919.pdf
 
-![Multilingual evidence retrieval and fact verification system.](/assets/paceepa_eg.png)
+![Multilingual evidence retrieval and fact verification system.](/assets/pacepa_eg.png)
 
 
 Code coming soon..
