@@ -1,4 +1,4 @@
-## I. Article: [Multilingual Evidence Retrieval and Fact Verification to Combat Global Disinformation: The Power of Polyglotism] (https://arxiv.org/pdf/2012.08919.pdf)
+## I. Article: [Multilingual Evidence Retrieval and Fact Verification to Combat Global Disinformation: The Power of Polyglotism](https://arxiv.org/pdf/2012.08919.pdf)
 ```
 @article{roberts2020multilingual,
   title={Multilingual Evidence Retrieval and Fact Verification to Combat Global Disinformation: The Power of Polyglotism},
@@ -15,7 +15,7 @@ The end to end system will be served via a live API during the ECIR 2021 confere
 ![Multilingual evidence retrieval and fact verification system.](/assets/pacepa_eg.png)
 
 
-### Steps to run the API at http://0.0.0.0:8080/  :
+### Steps to access API at http://0.0.0.0:8080/  :
 
 1. Get repo:
 ```
