@@ -57,13 +57,14 @@ docker run -it --rm --ipc=host -p 8080:8080 -v /Users/denisaroberts/workspace/mu
 docker run -it --rm --ipc=host -p 8080:8080 -v /Users/denisaroberts/workspace/multilingual_nli_ECIR2021/data/fever:/mfactcheck/data -v /Users/denisaroberts/workspace/multilingual_nli_ECIR2021/out_dir_sent:/mfactcheck/out_dir_sent -v /Users/denisaroberts/workspace/multilingual_nli_ECIR2021/out_dir_rte:/mfactcheck/out_dir_rte multi_api:latest bash
 
 root@6acc74271d7b:/mfactcheck# python3 src/pipeline.py
-or 
+# or 
 root@6acc74271d7b:/mfactcheck# python3 src/mfactcheck/multi_nli/predict.py --predict_rte_file=translated_data.tsv
 ```
 
 ## III. Code Base
 Please see repository directory structure in [assets](https://github.com/D-Roberts/multilingual_nli_ECIR2021/blob/main/assets/dir_struct.txt).
 
+### Steps to train or predict on GPU 
 
 For inquiries: denisa.roberts[at]denisaroberts.me
 
