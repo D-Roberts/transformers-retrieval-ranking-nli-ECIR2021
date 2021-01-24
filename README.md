@@ -50,7 +50,7 @@ docker build -t multi_api:latest -f dockers/docker-api-cpu/Dockerfile .
 ```
 docker run -it --rm --ipc=host -p 8080:8080 -v /Users/denisaroberts/workspace/multilingual_nli_ECIR2021/data/fever:/mfactcheck/data -v /Users/denisaroberts/workspace/multilingual_nli_ECIR2021/out_dir_sent:/mfactcheck/out_dir_sent -v /Users/denisaroberts/workspace/multilingual_nli_ECIR2021/out_dir_rte:/mfactcheck/out_dir_rte multi_api:latest python3 app.py
 ```
-5. In your browser go to http://0.0.0.0:8080/ , provide a claim with recognizable named entities, and the pipeline will run as depicted in the diagram above.
+5. In your browser go to http://0.0.0.0:8080/ , provide a claim with recognizable named entities, and the pipeline will run as depicted in the diagram above. Entities will be parsed, documents (Wikipedia pages) will be retrieved in English, Romanian and Portuguese, summaries tokenized into sentences and scored by the sentence selector, top 5 sentences will be provided to fact verifier and final prediction aggregated.
 
 6. To score other files on CPU, one can run the same docker container. The dataset to score can be provided in that mapped data/data_dir and predictions will be in the mapped out_dir_rte (refined_preds.jsonl).
 ```
@@ -61,11 +61,40 @@ root@6acc74271d7b:/mfactcheck# python3 src/pipeline.py
 root@6acc74271d7b:/mfactcheck# python3 src/mfactcheck/multi_nli/predict.py --predict_rte_file=translated_data.tsv
 ```
 
-## III. Code Base
+## III To get the Romanian-English translated dataset (and readme file):
+```
+source download_scripts/download_translated_data.sh
+```
+
+## IV. Code Base
 Please see repository directory structure in [assets](https://github.com/D-Roberts/multilingual_nli_ECIR2021/blob/main/assets/dir_struct.txt).
 
-### Steps to train or predict on GPU 
+
+### Steps to get train and dev files and train or predict on (1) GPU 
+
+1. Build docker. At the repo root:
+```
+docker build -t mtest:latest -f dockers/docker-gpu/Dockerfile .
+```
+2. Get data and build datasets. Data is under Wikipedia and fever.ai associated licenses included in the downloads.
+```
+#1. Make directories and get FEVER task data (En)
+source download_scripts/download_fever_data.sh
+
+#2. Wikipedia pages used in the FEVER task (En)
+source download_scripts/download_wiki_pages.sh
+
+# Also build the db from within the docker env:
+docker run -it --rm --ipc=host  -v /home/ubuntu/mfactcheck/data:/mfactcheck/data -v /home/ubuntu/mfactcheck/onnx_model:/mfactcheck/onnx_model -v /home/ubuntu/mfactcheck/out_dir_rte/:/mfactcheck/out_dir_rte -v /home/ubuntu/mfactcheck/out_dir_sent:/mfactcheck/out_dir_sent  mtest:latest
+
+root@6acc74271d7b:/mfactcheck# python3 build_datasets_scripts/build_db.py data/wiki-pages data/fever/fever.db
+```
+
+#3. Optionally, download a variety of intermediary doc, sent train/predict, nli train/predict files (en and ro):
+```
+source download_scripts/download_doc_files_athens.sh
+source download_scripts/download_train_files.sh
+source download_scripts/download_dev_files.sh
+```
 
 For inquiries: denisa.roberts[at]denisaroberts.me
-
-
