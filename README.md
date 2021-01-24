@@ -1,4 +1,4 @@
-## I. Article: [Multilingual Evidence Retrieval and Fact Verification to Combat Global Disinformation: The Power of Polyglotism (https://arxiv.org/pdf/2012.08919.pdf)
+## I. Article: [Multilingual Evidence Retrieval and Fact Verification to Combat Global Disinformation: The Power of Polyglotism] (https://arxiv.org/pdf/2012.08919.pdf)
 ```
 @article{roberts2020multilingual,
   title={Multilingual Evidence Retrieval and Fact Verification to Combat Global Disinformation: The Power of Polyglotism},
@@ -78,7 +78,7 @@ Please see repository directory structure in [assets](https://github.com/D-Rober
 ```
 docker build -t mtest:latest -f dockers/docker-gpu/Dockerfile .
 ```
-2. Get data and build datasets. Data is under Wikipedia and fever.ai associated licenses included in the downloads.
+2. Get data and build datasets. Data is under Wikipedia and [fever.ai](https://fever.ai/) associated licenses included in the downloads.
 ```
 #1. Make directories and get FEVER task data (En)
 source download_scripts/download_fever_data.sh
@@ -92,7 +92,7 @@ docker run -it --rm --ipc=host  -v /home/ubuntu/mfactcheck/data:/mfactcheck/data
 root@6acc74271d7b:/mfactcheck# python3 build_datasets_scripts/build_db.py data/wiki-pages data/fever/fever.db
 ```
 
-#3. Optionally, download a variety of intermediary doc, sent train/predict, nli train/predict files (en and ro):
+#3. Optionally, download a variety of intermediary docs, docs from [athene](https://github.com/UKPLab/fever-2018-team-athene), sent train/predict, nli train/predict files (en and ro):
 ```
 source download_scripts/download_doc_files_athens.sh
 source download_scripts/download_train_files.sh
