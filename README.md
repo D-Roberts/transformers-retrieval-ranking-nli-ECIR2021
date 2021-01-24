@@ -97,4 +97,8 @@ source download_scripts/download_train_files.sh
 source download_scripts/download_dev_files.sh
 ```
 
-For inquiries: denisa.roberts[at]denisaroberts.me
+## Contact:
+denisa.roberts[at]denisaroberts.me
+
+## License
+Apache License Version 2.0
