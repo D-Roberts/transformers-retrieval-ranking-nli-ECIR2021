@@ -52,7 +52,7 @@ docker run -it --rm --ipc=host -p 8080:8080 -v /Users/denisaroberts/workspace/mu
 ```
 
 ## III. Code Base
-Please see repository directory structure in assets: 
+Please see repository directory structure in [assets](https://github.com/D-Roberts/multilingual_nli_ECIR2021/blob/main/assets/dir_struct.txt).
 
 
 For inquiries: denisa.roberts[at]denisaroberts.me
