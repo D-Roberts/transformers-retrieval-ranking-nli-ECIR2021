@@ -96,6 +96,14 @@ source download_scripts/download_doc_files_athens.sh
 source download_scripts/download_train_files.sh
 source download_scripts/download_dev_files.sh
 ```
+#4. Train / predict the full pipeline or intermediary components. Datasets must be in data/data_dir mapped to docker volume. In training, model dirs out_dir_sent and out_dir_rte are recreated.
+
+root@6acc74271d7b:/mfactcheck# python3 src/pipeline.py --task=train
+
+# or
+root@6acc74271d7b:/mfactcheck# python3 src/mfactcheck/multi_nli/train.py --[options]
+
+etc..
 
 ## Contact:
 denisa.roberts[at]denisaroberts.me
