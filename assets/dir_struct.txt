@@ -1,0 +1,66 @@
+├── LICENSE
+├── README.md
+├── api
+│   └── requirements.txt
+├── app.py
+├── assets
+│   └── pacepa_eg.png
+├── configs.json
+├── dockers
+│   ├── docker-api-cpu
+│   │   └── Dockerfile
+│   └── docker-gpu
+│       └── Dockerfile
+├── download_scripts
+│   ├── download_dev_files.sh
+│   ├── download_doc_files_athens.sh
+│   ├── download_fact_verification_model.sh
+│   ├── download_fever_data.sh
+│   ├── download_sentence_selection_model.sh
+│   ├── download_train_files.sh
+│   ├── download_translated_data.sh
+│   └── download_wiki_pages.sh
+├── requirements.txt
+├── scripts
+│   ├── build_db.py
+│   └── evaluation_script.py
+├── src
+│   ├── __init__.py
+│   ├── configs
+│   │   └── config.py
+│   ├── mfactcheck
+│   │   ├── __init__.py
+│   │   ├── multi_nli
+│   │   │   ├── config_util.py
+│   │   │   ├── data.py
+│   │   │   ├── predict.py
+│   │   │   └── train.py
+│   │   └── multi_retriever
+│   │       ├── document
+│   │       │   ├── api_doc_retrieval.py
+│   │       │   ├── config_utils.py
+│   │       │   ├── document_retrieval.py
+│   │       │   └── ro_document_retrieval.py
+│   │       └── sentences
+│   │           ├── __init__.py
+│   │           ├── config_util.py
+│   │           ├── data.py
+│   │           ├── predict.py
+│   │           └── train.py
+│   ├── pipeline.py
+│   ├── trainer.py
+│   └── utils
+│       ├── dataset
+│       │   ├── data_processor.py
+│       │   ├── data_utils.py
+│       │   ├── fever_doc_db.py
+│       │   └── reader.py
+│       └── log_helper.py
+├── static
+│   ├── pacepa.png
+│   └── style.css
+└── templates
+    ├── _formhelpers.html
+    ├── claimform.html
+    ├── results.html
+    └── thanks.html

@@ -1,0 +1,12 @@
+allennlp==1.0.0
+allennlp-models==1.0.0
+Flask==1.1.2
+pytorch-pretrained-bert==0.6.2
+wikipedia==1.4.0
+WTForms==2.3.3
+onnx==1.6.0
+onnxruntime==1.6.0
+tqdm==4.55.1
+prettytable==2.0.0
+fever-drqa
+fever-scorer

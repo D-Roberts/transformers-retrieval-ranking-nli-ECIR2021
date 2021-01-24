@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Multilingual Evidence Retrieval and Fact Verification</title>
+            <link rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}">
+
+    </head>
+    <body>
+        <h2 >Please enter your claim in English, then be patient while we parse entities, retrieve docs in En, Ro and Pt, select evidence sentences, and predict claim status:</h2>
+
+        {% from "_formhelpers.html" import render_field %}
+
+        <form method=post action="/results">
+            <dl>
+                {{ render_field(form.claimsubmit, cols='50', rows='5') }}
+            </dl>
+            <div>
+                <input style="background-color:Lightgreen;" type=submit value='Submit claim'
+                name='submit_btn'>
+            </div>
+        </form>
+
+        <h4 style="background-color:thistle;"> Disclaimer: This API is for research illustration purposes only and offers no
+            guarantees!</h4>
+        <img src="{{url_for('static', filename='pacepa.png')}}" height="250" width="600"/>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Multilingual Evidence Retrieval and Fact Verification</title>
+            <link rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+
+        <h3>Enter claim in English:</h3>
+        <div style="background-color:lavender;">{{ content }}</div>
+
+        <h3>Prediction:</h3>
+        <div> <strong>The evidence list (top 5 sentences) retrieved from English, Romanian, and Portuguese Wikipedia pages: </strong>{{ retrieved }}.
+        <strong>Verification predicted label:</strong> {{ predicted }}</div>
+        
+        <div id='button'>
+            <form action="/thanks" method="post">
+            <input style="background-color:Lightgreen;" type=submit value='Correct'
+            name='feedback_button'>
+            <input style="background-color:Lightgreen;" type=submit value='Incorrect'
+            name='feedback_button'>
+            <input style="background-color:Lightgreen;" type=hidden value='{{ retrieved }}'
+            name='retrieved'>
+            <input type=hidden value='{{ content }}' name='claim'>
+
+            </form>
+        </div>
+
+        <div id='button'>
+            <form action="/">
+                <input style="background-color:Lightgreen;" type=submit value='Submit another claim'>
+            </form>
+        </div>
+
+        <h3 style="background-color:thistle;"> Disclaimer: This API is for research illustration purposes only and offers no guarantees!</h3>
+        <img src="{{url_for('static', filename='pacepa.png')}}" height="250" width="600" />
+    </body>
+</html>
