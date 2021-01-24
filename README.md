@@ -1,5 +1,4 @@
-## I. Article: Multilingual Evidence Retrieval and Fact Verification to Combat Global Disinformation: The Power of Polyglotism
-https://arxiv.org/pdf/2012.08919.pdf
+## I. Article: [Multilingual Evidence Retrieval and Fact Verification to Combat Global Disinformation: The Power of Polyglotism (https://arxiv.org/pdf/2012.08919.pdf)
 ```
 @article{roberts2020multilingual,
   title={Multilingual Evidence Retrieval and Fact Verification to Combat Global Disinformation: The Power of Polyglotism},
@@ -9,8 +8,9 @@ https://arxiv.org/pdf/2012.08919.pdf
 }
 ```
 
+
 ## II. API
-The end to end system will be served via a live API during the ECIR 2021 conference. Furthermore, it can be build and accessed locally at http://0.0.0.0:8080/ when built and run via Docker. 
+The end to end system will be served via a live API during the ECIR 2021 conference. Furthermore, it can be accessed locally when built and run via Docker. 
 
 ![Multilingual evidence retrieval and fact verification system.](/assets/pacepa_eg.png)
 
@@ -61,12 +61,14 @@ root@6acc74271d7b:/mfactcheck# python3 src/mfactcheck/multi_nli/predict.py --pre
 ```
 6. To score other files on CPU, one can run the same docker container. The dataset to score can be provided in that mapped data/data_dir and predictions will be in the mapped out_dir_rte (refined_preds.jsonl).
 
+
 ## III To get the Romanian-English translated dataset (and readme file):
 ```
 source download_scripts/download_translated_data.sh
 ```
 
-## IV. Code Base
+
+## IV. Codebase
 Please see repository directory structure in [assets](https://github.com/D-Roberts/multilingual_nli_ECIR2021/blob/main/assets/dir_struct.txt).
 
 
@@ -103,6 +105,7 @@ root@6acc74271d7b:/mfactcheck# python3 src/pipeline.py --task=train
 # or
 root@6acc74271d7b:/mfactcheck# python3 src/mfactcheck/multi_nli/train.py --[options]
 ```
+
 
 ## Contact:
 denisa.roberts[at]denisaroberts.me
