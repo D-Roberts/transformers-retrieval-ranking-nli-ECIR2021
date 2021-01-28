@@ -32,9 +32,9 @@ mkdir out_dir_sent
 mkdir out_dir_rte
 
 # Download the trained optimized onnx sentence selection model (EnmBERT) that will be run via onnxruntime. Then copy converted_optim_quant_sent.onnx to dir out_dir_sent.
-source download_scripts/download_sentence_selection_model.sh
+source download_scripts/download_sentence_model.sh
 
-cp onnx_model/converted_optim_quant_sent.onnx out_dir_sent
+cp sentence_model/sentence_selection_model/* out_dir_sent
 
 # Download the trained rte/nli fact validation model (EnmBERT). Copy the model artifacts to out_dir_rte folder.
 source download_scripts/download_fact_verification_model.sh
