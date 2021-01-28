@@ -26,8 +26,8 @@ cd multilingual_nli_ECIR2021
 2.  Make directories and download models:
 
 ```
-mkdir data/data_dir
-mkdir data/fever
+mkdir -p data/data_dir
+mkdir -p data/fever
 mkdir out_dir_sent
 mkdir out_dir_rte
 
