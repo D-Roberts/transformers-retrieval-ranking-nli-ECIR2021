@@ -19,7 +19,7 @@ The end to end system will be served via a live API during the ECIR 2021 confere
 
 1. Get repo:
 ```
-git clone git@github.com:D-Roberts/multilingual_nli_ECIR2021.git.
+git clone git@github.com:D-Roberts/multilingual_nli_ECIR2021.git
 cd multilingual_nli_ECIR2021
 ```
 
