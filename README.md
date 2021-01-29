@@ -60,7 +60,7 @@ root@6acc74271d7b:/mfactcheck# python3 src/mfactcheck/multi_nli/predict.py --pre
 6. To score other files on CPU, one can run the same docker container. The dataset to score can be provided in that mapped data/data_dir and predictions will be in the mapped out_dir_rte (refined_preds.jsonl).
 
 
-## III To get the Romanian-English translated dataset (and readme file):
+## III. To get the Romanian-English translated dataset (and readme file):
 ```
 source download_scripts/download_translated_data.sh
 ```
