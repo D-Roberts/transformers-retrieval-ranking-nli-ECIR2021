@@ -9,7 +9,7 @@
 ```
 
 
-## II. API (research illustration purpose only)
+## II. API (for research illustration purpose only)
 The end to end system will be served via a live API during the ECIR 2021 conference. Furthermore, it can be accessed locally when built and run via Docker. 
 
 ![Multilingual evidence retrieval and fact verification system.](/assets/pacepa_eg.png)
