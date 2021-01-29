@@ -92,7 +92,7 @@ root@6acc74271d7b:/mfactcheck# python3 scripts/build_db.py data/wiki-pages data/
 
 #3. Optionally, download a variety of intermediary docs, docs from [athene](https://github.com/UKPLab/fever-2018-team-athene), sent train/predict, nli train/predict files (en and ro):
 ```
-bash scripts/download-doc-files_athens.sh
+bash scripts/download-doc-files-athens.sh
 bash scripts/download-train-files.sh
 bash scripts/download-dev-files.sh
 ```
