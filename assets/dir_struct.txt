@@ -4,6 +4,7 @@
 │   └── requirements.txt
 ├── app.py
 ├── assets
+│   ├── dir_struct.txt
 │   └── pacepa_eg.png
 ├── configs.json
 ├── dockers
@@ -11,18 +12,17 @@
 │   │   └── Dockerfile
 │   └── docker-gpu
 │       └── Dockerfile
-├── download_scripts
-│   ├── download_dev_files.sh
-│   ├── download_doc_files_athens.sh
-│   ├── download_fact_verification_model.sh
-│   ├── download_fever_data.sh
-│   ├── download_sentence_selection_model.sh
-│   ├── download_train_files.sh
-│   ├── download_translated_data.sh
-│   └── download_wiki_pages.sh
 ├── requirements.txt
 ├── scripts
 │   ├── build_db.py
+│   ├── download-dev-files.sh
+│   ├── download-doc-files-athens.sh
+│   ├── download-fact-verification-model.sh
+│   ├── download-fever-data.sh
+│   ├── download-sentence-model.sh
+│   ├── download-train-files.sh
+│   ├── download-translated-data.sh
+│   ├── download-wiki-pages.sh
 │   └── evaluation_script.py
 ├── src
 │   ├── __init__.py
