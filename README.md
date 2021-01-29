@@ -85,7 +85,7 @@ bash scripts/download-fever-data.sh
 bash scripts/download-wiki-pages.sh
 
 # Also build the db from within the docker env:
-docker run -it --rm --ipc=host -v /home/ubuntu/mfactcheck/data:/mfactcheck/data -v /home/ubuntu/mfactcheck/out_dir_rte/:/mfactcheck/out_dir_rte -v /home/ubuntu/mfactcheck/out_dir_sent:/mfactcheck/out_dir_sent  mtest:latest
+docker run -it --rm --ipc=host -v /home/ubuntu/multilingual-nli-ECIR2021/data:/mfactcheck/data -v /home/ubuntu/multilingual-nli-ECIR2021/out_dir_rte/:/mfactcheck/out_dir_rte -v /home/ubuntu/multilingual-nli-ECIR2021/out_dir_sent:/mfactcheck/out_dir_sent  mtest:latest
 
 root@6acc74271d7b:/mfactcheck# python3 scripts/build_db.py data/wiki-pages data/fever/fever.db
 ```
