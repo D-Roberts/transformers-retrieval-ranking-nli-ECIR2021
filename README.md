@@ -19,8 +19,8 @@ The end to end system will be served via a live API during the ECIR 2021 confere
 
 1. Get repo:
 ```
-git clone git@github.com:D-Roberts/multilingual_nli_ECIR2021.git
-cd multilingual_nli_ECIR2021
+git clone https://github.com/D-Roberts/multilingual-nli-ECIR2021.git
+cd multilingual-nli-ECIR2021
 ```
 
 2.  Make directories and download models:
@@ -32,11 +32,11 @@ mkdir out_dir_sent
 mkdir out_dir_rte
 
 # Download the trained optimized onnx sentence selection model (EnmBERT) that will be run via onnxruntime. Then copy converted_optim_quant_sent.onnx to dir out_dir_sent.
-source download_scripts/download_sentence_model.sh
+bash scripts/download-sentence-model.sh
 cp sentence_model/sentence_selection_model/* out_dir_sent
 
 # Download the trained rte/nli fact validation model (EnmBERT). Copy the model artifacts to out_dir_rte folder.
-source download_scripts/download_fact_verification_model.sh
+bash scripts/download-fact-verification-model.sh
 cp nli_model/model/* out_dir_rte
 ```
 3. Build Docker (CPU):
@@ -46,12 +46,12 @@ docker build -t multi_api:latest -f dockers/docker-api-cpu/Dockerfile .
 
 4. Run docker with mapped data volumes and ports, as such (replace your own paths):
 ```
-docker run -it --rm --ipc=host -p 8080:8080 -v /Users/denisaroberts/workspace/multilingual_nli_ECIR2021/data:/mfactcheck/data -v /Users/denisaroberts/workspace/multilingual_nli_ECIR2021/out_dir_sent:/mfactcheck/out_dir_sent -v /Users/denisaroberts/workspace/multilingual_nli_ECIR2021/out_dir_rte:/mfactcheck/out_dir_rte multi_api:latest python3 app.py
+docker run -it --rm --ipc=host -p 8080:8080 -v /Users/denisaroberts/workspace/multilingual-nli-ECIR2021/data:/mfactcheck/data -v /Users/denisaroberts/workspace/multilingual-nli-ECIR2021/out_dir_sent:/mfactcheck/out_dir_sent -v /Users/denisaroberts/workspace/multilingual-nli-ECIR2021/out_dir_rte:/mfactcheck/out_dir_rte multi_api:latest python3 app.py
 ```
 5. In your browser go to http://0.0.0.0:8080/ , provide a claim with recognizable named entities, and the pipeline will run as depicted in the diagram above. Entities will be parsed, documents (Wikipedia pages) will be retrieved in English, Romanian and Portuguese, summaries tokenized into sentences and scored by the sentence selector, top 5 sentences will be provided to fact verifier and final prediction aggregated.
 
 ```
-docker run -it --rm --ipc=host -p 8080:8080 -v /Users/denisaroberts/workspace/multilingual_nli_ECIR2021/data:/mfactcheck/data -v /Users/denisaroberts/workspace/multilingual_nli_ECIR2021/out_dir_sent:/mfactcheck/out_dir_sent -v /Users/denisaroberts/workspace/multilingual_nli_ECIR2021/out_dir_rte:/mfactcheck/out_dir_rte multi_api:latest bash
+docker run -it --rm --ipc=host -p 8080:8080 -v /Users/denisaroberts/workspace/multilingual-nli-ECIR2021/data:/mfactcheck/data -v /Users/denisaroberts/workspace/multilingual-nli-ECIR2021/out_dir_sent:/mfactcheck/out_dir_sent -v /Users/denisaroberts/workspace/multilingual-nli-ECIR2021/out_dir_rte:/mfactcheck/out_dir_rte multi_api:latest bash
 
 root@6acc74271d7b:/mfactcheck# python3 src/pipeline.py
 # or 
@@ -67,7 +67,7 @@ bash scripts/download-translated-data.sh
 
 
 ## IV. Codebase
-Please see repository directory structure in [assets](https://github.com/D-Roberts/multilingual_nli_ECIR2021/blob/main/assets/dir_struct.txt).
+Please see repository directory structure in [assets](https://github.com/D-Roberts/multilingual-nli-ECIR2021/blob/main/assets/dir_struct.txt).
 
 
 ### Steps to get train and dev files and train or predict on (1) GPU 
