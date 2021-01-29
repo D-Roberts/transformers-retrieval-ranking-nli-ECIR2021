@@ -4,6 +4,8 @@ RUN apt update && \
     apt install -y bash \
     build-essential \
     git \
+    wget \
+    unzip \
     curl \
     ca-certificates \
     python3 \
@@ -33,6 +35,7 @@ RUN mkdir -pv static
 RUN mkdir -pv templates
 
 COPY src src
+COPY scripts scripts
 COPY static static
 COPY templates templates
 

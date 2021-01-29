@@ -62,7 +62,7 @@ root@6acc74271d7b:/mfactcheck# python3 src/mfactcheck/multi_nli/predict.py --pre
 
 ## III. To get the Romanian-English translated dataset (and readme file):
 ```
-source download_scripts/download_translated_data.sh
+bash scripts/download-translated-data.sh
 ```
 
 
@@ -79,22 +79,22 @@ docker build -t mtest:latest -f dockers/docker-gpu/Dockerfile .
 2. Get data and build datasets. Data is under Wikipedia and [fever.ai](https://fever.ai/) associated licenses included in the downloads.
 ```
 #1. Make directories and get FEVER task data (En)
-source download_scripts/download_fever_data.sh
+bash scripts/download-fever-data.sh
 
 #2. Wikipedia pages used in the FEVER task (En)
-source download_scripts/download_wiki_pages.sh
+bash scripts/download-wiki-pages.sh
 
 # Also build the db from within the docker env:
-docker run -it --rm --ipc=host  -v /home/ubuntu/mfactcheck/data:/mfactcheck/data -v /home/ubuntu/mfactcheck/onnx_model:/mfactcheck/onnx_model -v /home/ubuntu/mfactcheck/out_dir_rte/:/mfactcheck/out_dir_rte -v /home/ubuntu/mfactcheck/out_dir_sent:/mfactcheck/out_dir_sent  mtest:latest
+docker run -it --rm --ipc=host -v /home/ubuntu/mfactcheck/data:/mfactcheck/data -v /home/ubuntu/mfactcheck/out_dir_rte/:/mfactcheck/out_dir_rte -v /home/ubuntu/mfactcheck/out_dir_sent:/mfactcheck/out_dir_sent  mtest:latest
 
-root@6acc74271d7b:/mfactcheck# python3 build_datasets_scripts/build_db.py data/wiki-pages data/fever/fever.db
+root@6acc74271d7b:/mfactcheck# python3 scripts/build_db.py data/wiki-pages data/fever/fever.db
 ```
 
 #3. Optionally, download a variety of intermediary docs, docs from [athene](https://github.com/UKPLab/fever-2018-team-athene), sent train/predict, nli train/predict files (en and ro):
 ```
-source download_scripts/download_doc_files_athens.sh
-source download_scripts/download_train_files.sh
-source download_scripts/download_dev_files.sh
+bash scripts/download-doc-files_athens.sh
+bash scripts/download-train-files.sh
+bash scripts/download-dev-files.sh
 ```
 #4. Train / predict the full pipeline or intermediary components. Datasets must be in data/data_dir mapped to docker volume. In training, model dirs out_dir_sent and out_dir_rte are recreated.
 ```

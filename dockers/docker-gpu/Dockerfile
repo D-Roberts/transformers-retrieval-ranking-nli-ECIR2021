@@ -3,6 +3,8 @@ FROM nvidia/cuda:10.1-cudnn7-runtime-ubuntu18.04
 RUN apt update && \
     apt install -y bash \
     build-essential \
+    wget \
+    unzip \
     git \
     curl \
     ca-certificates \
