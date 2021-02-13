@@ -13,6 +13,7 @@ from mfactcheck.multi_nli.config_util import _get_nli_configs
 from mfactcheck.multi_nli.data import NLIProcessor, convert_examples_to_features
 from trainer import Trainer
 from utils.log_helper import LogHelper
+from utils.file_utils import get_model_dir
 
 
 def predictions_aggregator(
@@ -40,7 +41,7 @@ def predictions_aggregator(
                     predicted_evidence[int(g1)].append(line[1])
                 else:
                     predicted_evidence[int(g1)].append([line[5], int(line[6])])
-            except Exception:
+            except Exception as e:
                 continue
 
     # get refined preds for each g1=claim id
@@ -94,9 +95,9 @@ def predictions_aggregator(
 
 
 def predict(logger, args):
-    # print(args)
     processor = NLIProcessor()
     output_mode = "classification"
+    get_model_dir(args.output_dir, 'enmbert-nli')
 
     label_list = processor.get_labels()
     num_labels = len(label_list)

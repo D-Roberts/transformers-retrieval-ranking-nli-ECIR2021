@@ -14,12 +14,14 @@ from mfactcheck.multi_retriever.sentences.data import (
 )
 from trainer import Trainer
 from utils.log_helper import LogHelper
+from utils.file_utils import get_model_dir
 
 
 def predict(logger, args):
 
     processor = SentenceProcessor()
     output_mode = "classification"
+
 
     label_list = processor.get_labels()
     label_verification_list = processor.get_labels_verification()
