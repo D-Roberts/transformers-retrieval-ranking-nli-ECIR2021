@@ -3,7 +3,6 @@ Flask app
 """
 import json
 import os
-import shutil
 
 from flask import Flask, render_template, request
 from wtforms import Form, TextAreaField, validators
@@ -33,16 +32,12 @@ def read_pred():
     return lines[0]["predicted_evidence"], lines[0]["predicted_label"]
 
 
-def clean_up():
-    shutil.rmtree(Config.data_top)
-    shutil.rmtree(Config.out_dir_rte)
-    shutil.rmtree(Config.out_dir_sent)
-
-
 def write_claim_json(claim):
     os.makedirs(Config.data_dir, exist_ok=True)
+
     input_list = [{"id": 1, "claim": claim}]
     claim_file_path = os.path.join(Config.data_dir, "input.jsonl")
+
     with open(claim_file_path, "w") as f:
         for line in input_list:
             f.write(json.dumps(line) + "\n")
