@@ -18,9 +18,6 @@ from configs.config import Config
 app = Flask(__name__)
 
 cur_dir = os.path.dirname(__file__)
-# DATA_DIR = os.path.join(cur_dir, "data/data_dir")
-# PRED_DIR = os.path.join(cur_dir, "out_dir_rte")
-# DOC_DIR = os.path.join(cur_dir, "data/fever")
 
 
 def read_pred():
