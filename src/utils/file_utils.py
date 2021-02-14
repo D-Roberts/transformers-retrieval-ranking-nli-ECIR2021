@@ -10,13 +10,10 @@ import shutil
 import sys
 import tarfile
 import tempfile
-from functools import wraps
 from hashlib import sha256
 from io import open
 
-import boto3
 import requests
-from botocore.exceptions import ClientError
 from tqdm import tqdm
 
 
@@ -40,9 +37,10 @@ except AttributeError:
     )
 
 
-PRETRAINED_MODEL_ARCHIVE_MAP = {
-    "enmbert-sent": "s3://claimtraindata/models/enmbert/enmbert-sent.tar.gz",
-    "enmbert-nli": "s3://claimtraindata/models/enmbert/enmbert-nli.tar.gz",
+TRAINED_MODEL_ARCHIVE_MAP = {
+    "enmbert-sent": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-sent.tar.gz",
+    "enmbert-sent-onnx": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-sent.tar.gz",
+    "enmbert-nli": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-nli.tar.gz",
 }
 
 logger = logging.getLogger(__name__)
@@ -108,7 +106,7 @@ def cached_path(url_or_filename, cache_dir=None):
 
     parsed = urlparse(url_or_filename)
 
-    if parsed.scheme in ("http", "https", "s3"):
+    if parsed.scheme in ("http", "https"):
         # URL, so get it from the cache (downloading if necessary)
         return get_from_cache(url_or_filename, cache_dir)
     elif os.path.exists(url_or_filename):
@@ -131,24 +129,21 @@ def get_from_cache(url, cache_dir=None):
     """
     if cache_dir is None:
         cache_dir = PYTORCH_PRETRAINED_BERT_CACHE
-    if sys.version_info[0] == 3 and isinstance(cache_dir, Path):
+    if isinstance(cache_dir, Path):
         cache_dir = str(cache_dir)
 
     if not os.path.exists(cache_dir):
         os.makedirs(cache_dir)
 
     # Get eTag to add to filename, if it exists.
-    if url.startswith("s3://"):
-        etag = s3_etag(url)
-    else:
-        response = requests.head(url, allow_redirects=True)
-        if response.status_code != 200:
-            raise IOError(
-                "HEAD request failed for url {} with status code {}".format(
-                    url, response.status_code
-                )
+    response = requests.head(url, allow_redirects=True)
+    if response.status_code != 200:
+        raise IOError(
+            "HEAD request failed for url {} with status code {}".format(
+                url, response.status_code
             )
-        etag = response.headers.get("ETag")
+        )
+    etag = response.headers.get("ETag")
 
     filename = url_to_filename(url, etag)
 
@@ -162,10 +157,7 @@ def get_from_cache(url, cache_dir=None):
             logger.info("%s not found in cache, downloading to %s", url, temp_file.name)
 
             # GET file object
-            if url.startswith("s3://"):
-                s3_get(url, temp_file)
-            else:
-                http_get(url, temp_file)
+            http_get(url, temp_file)
 
             # we are copying the file before closing it, so flush to avoid truncation
             temp_file.flush()
@@ -187,64 +179,6 @@ def get_from_cache(url, cache_dir=None):
     return cache_path
 
 
-def split_s3_path(url):
-    """Split a full s3 path into the bucket name and path."""
-    parsed = urlparse(url)
-    if not parsed.netloc or not parsed.path:
-        raise ValueError("bad s3 path {}".format(url))
-    bucket_name = parsed.netloc
-    s3_path = parsed.path
-    # Remove '/' at beginning of path.
-    if s3_path.startswith("/"):
-        s3_path = s3_path[1:]
-    return bucket_name, s3_path
-
-
-def s3_request(func):
-    """
-    Wrapper function for s3 requests in order to create more helpful error
-    messages.
-    """
-
-    @wraps(func)
-    def wrapper(url, *args, **kwargs):
-        try:
-            return func(url, *args, **kwargs)
-        except ClientError as exc:
-            if int(exc.response["Error"]["Code"]) == 404:
-                raise EnvironmentError("file {} not found".format(url))
-            else:
-                raise
-
-    return wrapper
-
-
-@s3_request
-def s3_get(url, temp_file):
-    """Pull a file directly from S3."""
-    s3_resource = boto3.resource("s3")
-    bucket_name, s3_path = split_s3_path(url)
-    s3_resource.Bucket(bucket_name).download_fileobj(s3_path, temp_file)
-
-
-@s3_request
-def s3_etag(url):
-    """Check ETag on S3 object."""
-    s3_resource = boto3.resource("s3")
-    bucket_name, s3_path = split_s3_path(url)
-    s3_object = s3_resource.Object(bucket_name, s3_path)
-    return s3_object.e_tag
-
-
-@s3_request
-def s3_etag(url):
-    """Check ETag on S3 object."""
-    s3_resource = boto3.resource("s3")
-    bucket_name, s3_path = split_s3_path(url)
-    s3_object = s3_resource.Object(bucket_name, s3_path)
-    return s3_object.e_tag
-
-
 def http_get(url, temp_file):
     req = requests.get(url, stream=True)
     content_length = req.headers.get("Content-Length")
@@ -264,8 +198,8 @@ def get_file_extension(path, dot=True, lower=True):
 
 
 def get_model_dir(output_dir, pretrained_model_name_or_path, cache_dir=None):
-    if pretrained_model_name_or_path in PRETRAINED_MODEL_ARCHIVE_MAP:
-        archive_file = PRETRAINED_MODEL_ARCHIVE_MAP[pretrained_model_name_or_path]
+    if pretrained_model_name_or_path in TRAINED_MODEL_ARCHIVE_MAP:
+        archive_file = TRAINED_MODEL_ARCHIVE_MAP[pretrained_model_name_or_path]
     else:
         archive_file = pretrained_model_name_or_path
     # redirect to the cache, if necessary
@@ -277,7 +211,7 @@ def get_model_dir(output_dir, pretrained_model_name_or_path, cache_dir=None):
             "We assumed '{}' was a path or url but couldn't find any file "
             "associated to this path or url.".format(
                 pretrained_model_name_or_path,
-                ", ".join(PRETRAINED_MODEL_ARCHIVE_MAP.keys()),
+                ", ".join(TRAINED_MODEL_ARCHIVE_MAP.keys()),
                 archive_file,
             )
         )

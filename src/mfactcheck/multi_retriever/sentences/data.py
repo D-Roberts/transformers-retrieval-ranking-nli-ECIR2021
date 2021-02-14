@@ -205,7 +205,7 @@ class SentenceProcessor(DataProcessor):
         api=False,
     ):
         """
-        Sample the retrieved documents for the dev/test claims; dataset is one of 
+        Sample the retrieved documents for the dev/test claims; dataset is one of
         'test', 'dev_fair', 'dev_golden'; write dataset for the records if doc_process
         otw assume doc dataset has been previously retrieved
         """
@@ -1008,7 +1008,7 @@ def get_eval_data(
             api=api,
         )
 
-    eval_examples = eval_examples[0:20]  # debugging
+    # eval_examples = eval_examples[0:20]  # debugging
     num_eg = len(eval_examples)
     eval_features = convert_examples_to_features_eval(
         logger,

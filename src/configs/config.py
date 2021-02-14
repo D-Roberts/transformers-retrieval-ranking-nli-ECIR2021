@@ -23,6 +23,7 @@ class Config:
     BASE_DIR = os.getcwd()
 
     # Original FEVER task
+    data_top = path.join(BASE_DIR, "data")
     db_path = path.join(BASE_DIR, "data/fever/fever.db")
     dataset_folder = path.join(BASE_DIR, "data/fever")
 

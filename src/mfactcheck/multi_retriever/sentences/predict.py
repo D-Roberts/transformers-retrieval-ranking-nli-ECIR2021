@@ -21,7 +21,10 @@ def predict(logger, args):
 
     processor = SentenceProcessor()
     output_mode = "classification"
-
+    if args.onnx:
+        get_model_dir(args.output_dir, "enmbert-sent-onnx")
+    else:
+        get_model_dir(args.output_dir, "enmbert-sent")
 
     label_list = processor.get_labels()
     label_verification_list = processor.get_labels_verification()
@@ -74,6 +77,8 @@ def predict(logger, args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", default="dev_fair", type=str)
+    parser.add_argument("--add_ro", default=False, type=bool)
+    parser.add_argument("--onnx", default=True, type=bool)
     args = parser.parse_args()
     args = _get_sent_configs(args)
     LogHelper.setup()

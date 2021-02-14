@@ -10,55 +10,48 @@
 
 
 ## II. API (for research illustration purpose only)
-The end to end system will be served via a live API during the ECIR 2021 conference. Furthermore, it can be accessed locally when built and run via Docker. 
+The end to end system will be served via a live API during the ECIR 2021 conference. Furthermore, it can be accessed locally via Docker. 
 
 ![Multilingual evidence retrieval and fact verification system.](/assets/pacepa_eg.png)
 
 
-### Steps to access API at http://0.0.0.0:8080/  :
+### Steps to access API at http://0.0.0.0:8080/ :
 
+Easiest. Install [Docker](https://docs.docker.com/get-docker/) then run:
+```
+docker run --ipc=host --rm -p 8080:8080 droberts1/fact-verification:latest python3 app.py
+```
+
+Build locally:
 1. Get repo:
 ```
 git clone https://github.com/D-Roberts/multilingual-nli-ECIR2021.git
 cd multilingual-nli-ECIR2021
 ```
 
-2.  Make directories and download models:
-
-```
-mkdir -p data/data_dir
-mkdir -p data/fever
-mkdir out_dir_sent
-mkdir out_dir_rte
-
-# Download the trained optimized onnx sentence selection model (EnmBERT) that will be run via onnxruntime. Then copy converted_optim_quant_sent.onnx to dir out_dir_sent.
-bash scripts/download-sentence-model.sh
-cp sentence_model/sentence_selection_model/* out_dir_sent
-
-# Download the trained rte/nli fact validation model (EnmBERT). Copy the model artifacts to out_dir_rte folder.
-bash scripts/download-fact-verification-model.sh
-cp nli_model/model/* out_dir_rte
-```
-3. Build Docker (CPU):
+2. Build Docker (CPU):
 ```
 docker build -t multi_api:latest -f dockers/docker-api-cpu/Dockerfile .
 ```
 
-4. Run docker with mapped data volumes and ports, as such (replace your own paths):
+3. Run docker with mapped ports:
 ```
-docker run -it --rm --ipc=host -p 8080:8080 -v /Users/denisaroberts/workspace/multilingual-nli-ECIR2021/data:/mfactcheck/data -v /Users/denisaroberts/workspace/multilingual-nli-ECIR2021/out_dir_sent:/mfactcheck/out_dir_sent -v /Users/denisaroberts/workspace/multilingual-nli-ECIR2021/out_dir_rte:/mfactcheck/out_dir_rte multi_api:latest python3 app.py
+docker run -it --rm --ipc=host -p 8080:8080 multi_api:latest python3 app.py
 ```
-5. In your browser go to http://0.0.0.0:8080/ , provide a claim with recognizable named entities, and the pipeline will run as depicted in the diagram above. Entities will be parsed, documents (Wikipedia pages) will be retrieved in English, Romanian and Portuguese, summaries tokenized into sentences and scored by the sentence selector, top 5 sentences will be provided to fact verifier and final prediction aggregated.
+4. In your browser go to http://0.0.0.0:8080/ , provide a claim with recognizable named entities, and the pipeline will run as depicted in the diagram above. Entities will be parsed, documents (Wikipedia pages) will be retrieved in English, Romanian and Portuguese, summaries tokenized into sentences and scored by the sentence selector, top 5 sentences will be provided to fact verifier and final prediction aggregated.
+
+
+5. To score other files on CPU, one can run the same docker container. The dataset to score can be provided in a mapped data/data_dir and predictions will be in a mapped out_dir_rte (refined_preds.jsonl). (need to replace paths to user's specifics)
 
 ```
-docker run -it --rm --ipc=host -p 8080:8080 -v /Users/denisaroberts/workspace/multilingual-nli-ECIR2021/data:/mfactcheck/data -v /Users/denisaroberts/workspace/multilingual-nli-ECIR2021/out_dir_sent:/mfactcheck/out_dir_sent -v /Users/denisaroberts/workspace/multilingual-nli-ECIR2021/out_dir_rte:/mfactcheck/out_dir_rte multi_api:latest bash
+docker run -it --rm --ipc=host -p 8080:8080 -v $LOCALPATH/data:/mfactcheck/data -v $LOCALPATH/out_dir_rte:/mfactcheck/out_dir_rte multi_api:latest bash
 
 root@6acc74271d7b:/mfactcheck# python3 src/pipeline.py
-# or 
+
+# or
+
 root@6acc74271d7b:/mfactcheck# python3 src/mfactcheck/multi_nli/predict.py --predict_rte_file=translated_data.tsv
 ```
-6. To score other files on CPU, one can run the same docker container. The dataset to score can be provided in that mapped data/data_dir and predictions will be in the mapped out_dir_rte (refined_preds.jsonl).
-
 
 ## III. To get the Romanian-English translated dataset (and readme file):
 ```
@@ -79,6 +72,7 @@ docker build -t mtest:latest -f dockers/docker-gpu/Dockerfile .
 2. Get data and build datasets. Data is under Wikipedia and [fever.ai](https://fever.ai/) associated licenses included in the downloads.
 ```
 #1. Make directories and get FEVER task data (En)
+
 bash scripts/download-fever-data.sh
 
 #2. Wikipedia pages used in the FEVER task (En)

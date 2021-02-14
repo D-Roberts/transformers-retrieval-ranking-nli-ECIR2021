@@ -97,7 +97,7 @@ def predictions_aggregator(
 def predict(logger, args):
     processor = NLIProcessor()
     output_mode = "classification"
-    get_model_dir(args.output_dir, 'enmbert-nli')
+    get_model_dir(args.output_dir, "enmbert-nli")
 
     label_list = processor.get_labels()
     num_labels = len(label_list)
@@ -109,7 +109,7 @@ def predict(logger, args):
     tokenizer = BertTokenizer.from_pretrained(args.output_dir, do_lower_case=False)
 
     eval_examples = processor.get_dev_examples(args.data_dir, args.predict_rte_file)
-    eval_examples = eval_examples[0:20]  # debugging
+    # eval_examples = eval_examples[0:20]  # debugging
     num_eg = len(eval_examples)
 
     eval_data = convert_examples_to_features(

@@ -42,4 +42,4 @@ COPY templates templates
 ENV PYTHONPATH "${PYTHONPATH}:src"
 ENV FLASK_APP app:app
 
-CMD ["flask run", "--host=0.0.0.0", "--port=8080", "--call", "app:app"]
+CMD ["/bin/bash"]
