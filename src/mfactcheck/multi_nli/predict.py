@@ -13,7 +13,7 @@ from mfactcheck.multi_nli.config_util import _get_nli_configs
 from mfactcheck.multi_nli.data import NLIProcessor, convert_examples_to_features
 from trainer import Trainer
 from utils.log_helper import LogHelper
-from utils.file_utils import get_model_dir
+from utils.model_utils import get_model_dir
 
 
 def predictions_aggregator(
