@@ -17,6 +17,8 @@ The end to end system will be served via a live API during the ECIR 2021 confere
 
 ### Steps to access API at http://0.0.0.0:8080/ :
 
+Requires ~2Gb RAM.
+
 Easiest. Install [Docker](https://docs.docker.com/get-docker/) then run:
 ```
 docker run --ipc=host --rm -p 8080:8080 droberts1/fact-verification:latest python3 app.py
