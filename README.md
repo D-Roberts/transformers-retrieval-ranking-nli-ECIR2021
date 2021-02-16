@@ -41,7 +41,7 @@ docker run -it --rm --ipc=host -p 8080:8080 multi_api:latest python3 app.py
 4. In your browser go to http://0.0.0.0:8080/ , provide a claim with recognizable named entities, and the pipeline will run as depicted in the diagram above. Entities will be parsed, documents (Wikipedia pages) will be retrieved in English, Romanian and Portuguese, summaries tokenized into sentences and scored by the sentence selector, top 5 sentences will be provided to fact verifier and final prediction aggregated.
 
 
-5. To score other files on CPU, one can run the same docker container. The dataset to score can be provided in a mapped data/data_dir and predictions will be in a mapped out_dir_rte (refined_preds.jsonl). (need to replace paths to user's specifics)
+5. To score other files on CPU, one can run the same docker container. The dataset to score can be provided in a mapped data volume (see the GPU instructions for specifics) and predictions will be in a mapped out_dir_rte (refined_preds.jsonl). (need to replace paths to user's specifics)
 
 ```
 docker run -it --rm --ipc=host -p 8080:8080 -v $LOCALPATH/data:/mfactcheck/data -v $LOCALPATH/out_dir_rte:/mfactcheck/out_dir_rte multi_api:latest bash
@@ -84,7 +84,7 @@ docker run -it --rm --ipc=host -v /home/ubuntu/multilingual-nli-ECIR2021/data:/m
 root@6acc74271d7b:/mfactcheck# python3 scripts/build_db.py data/wiki-pages data/fever/fever.db
 ```
 
-#3. Optionally, download a variety of intermediary docs, docs from [athene](https://github.com/UKPLab/fever-2018-team-athene), sent train/predict, nli train/predict files (en and ro):
+#3. Optionally, download intermediary datasets output by each module: docs from [athene](https://github.com/UKPLab/fever-2018-team-athene), sent train/predict, nli train/predict files (en and ro):
 ```
 bash scripts/download-doc-files-athens.sh
 bash scripts/download-train-files.sh

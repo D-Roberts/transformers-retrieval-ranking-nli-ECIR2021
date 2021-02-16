@@ -228,7 +228,7 @@ def get_model_dir(output_dir, pretrained_model_name_or_path, cache_dir=None):
     if not os.path.isdir(output_dir):
         os.makedirs(output_dir)
     logger.info(
-        f"extracting archive file {resolved_archive_file} to temp dir {output_dir}"
+        f"extracting archive file {resolved_archive_file} to dir {output_dir}"
     )
     with tarfile.open(resolved_archive_file, "r:gz") as archive:
         archive.extractall(output_dir)

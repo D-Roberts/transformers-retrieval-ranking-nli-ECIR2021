@@ -143,8 +143,7 @@ if __name__ == "__main__":
     parser.add_argument("--task", help="train or predict", default="predict", type=str)
     parser.add_argument(
         "--add_ro",
-        help="if EnmBERT or EnRomBERT (with Romanian docs retrieval) pipeline; \
-                                    for predict task only available for FEVER dev claims",
+        help="if to retrieve Romanian documents",
         default=False,
         type=bool,
     )
