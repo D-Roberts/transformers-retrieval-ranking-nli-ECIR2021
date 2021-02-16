@@ -41,6 +41,7 @@ TRAINED_MODEL_ARCHIVE_MAP = {
     "enmbert-sent": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-sent.tar.gz",
     "enmbert-sent-onnx": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-sent.tar.gz",
     "enmbert-nli": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-nli.tar.gz",
+    "enmbert-nli-onnx": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-nli.tar.gz", 
 }
 
 logger = logging.getLogger(__name__)
