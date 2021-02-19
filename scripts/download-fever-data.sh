@@ -1,5 +1,5 @@
 #!/bin/bash
-mkdir data
+
 mkdir -p data/fever-data
 
 # From https://github.com/UKPLab/fever-2018-team-athene

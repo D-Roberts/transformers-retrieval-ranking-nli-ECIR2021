@@ -97,7 +97,10 @@ def predictions_aggregator(
 def predict(logger, args):
     processor = NLIProcessor()
     output_mode = "classification"
-    get_model_dir(args.output_dir, "enmbert-nli")
+    if args.onnx:
+        get_model_dir(args.output_dir, "enmbert-nli-onnx")
+    else:
+        get_model_dir(args.output_dir, "enmbert-nli")
 
     label_list = processor.get_labels()
     num_labels = len(label_list)
@@ -117,7 +120,8 @@ def predict(logger, args):
     )
 
     trainer = Trainer(model=model, args=args)
-    preds, labels, new_guids, guids_map = trainer.predict(eval_data, num_eg)
+    
+    preds, labels, new_guids, guids_map = trainer.predict(eval_data, num_eg, args)
     preds = np.argmax(preds, axis=1)  # 0 = Support; 1 = Refute; 2 = NEI
 
     # Implements the logic rules to get one verification prediction per claim from 5 separate predictions

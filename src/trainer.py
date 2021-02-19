@@ -248,7 +248,7 @@ class Trainer:
         )
         return eval_data, guid_ids_map
 
-    def predict(self, predict_inputs, num_eg, onnx=False):
+    def predict(self, predict_inputs, num_eg, onnx):
         logger.info("***** Predicting *****")
         eval_data, guid_map = self._prepare_inputs(predict_inputs, num_eg)
         eval_dataloader = self._get_eval_dataloader(eval_data)
@@ -282,7 +282,7 @@ class Trainer:
 
         # the stored optimized onnx model; this is only for the sentence selection module
         model_quant = os.path.join(
-            self.args.output_dir, "converted_optim_quant_sent.onnx"
+            self.args.output_dir, "converted_optim_quant.onnx"
         )
 
         options = SessionOptions()

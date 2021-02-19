@@ -14,6 +14,7 @@ def _get_nli_configs(args):
         setattr(_args, k, v)
 
     setattr(_args, "api", False)
+    setattr(_args, "onnx", False)
     setattr(_args, "cache_dir", "")
     setattr(_args, "data_dir", Config.data_dir)
     setattr(_args, "output_dir", Config.out_dir_rte)

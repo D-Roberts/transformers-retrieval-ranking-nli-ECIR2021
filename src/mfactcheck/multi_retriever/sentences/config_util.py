@@ -14,7 +14,7 @@ def _get_sent_configs(args):
     for k, v in Config.sent_param.items():
         setattr(_args, k, v)
 
-    setattr(_args, "onnx", False)
+    setattr(_args, "onnx", True)
     setattr(_args, "api", False)
     setattr(_args, "dataset", "dev_fair")
     setattr(_args, "cache_dir", "")
