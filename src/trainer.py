@@ -281,9 +281,7 @@ class Trainer:
         from onnxruntime import ExecutionMode, InferenceSession, SessionOptions
 
         # the stored optimized onnx model; this is only for the sentence selection module
-        model_quant = os.path.join(
-            self.args.output_dir, "converted_optim_quant.onnx"
-        )
+        model_quant = os.path.join(self.args.output_dir, "converted-optimized.onnx")
 
         options = SessionOptions()
         options.intra_op_num_threads = 1

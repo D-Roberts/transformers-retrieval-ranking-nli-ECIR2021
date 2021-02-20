@@ -41,7 +41,11 @@ TRAINED_MODEL_ARCHIVE_MAP = {
     "enmbert-sent": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-sent.tar.gz",
     "enmbert-sent-onnx": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-sent.tar.gz",
     "enmbert-nli": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-nli.tar.gz",
-    "enmbert-nli-onnx": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-nli.tar.gz", 
+    "enmbert-nli-onnx": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-nli.tar.gz",
+    "enrombert-sent": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enrombert-sent.tar.gz",
+    "enrombert-sent-onnx": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enrombert-sent.tar.gz",
+    "enrombert-nli": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enrombert-nli.tar.gz",
+    "enrombert-nli-onnx": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enrombert-nli.tar.gz",
 }
 
 logger = logging.getLogger(__name__)
@@ -228,8 +232,6 @@ def get_model_dir(output_dir, pretrained_model_name_or_path, cache_dir=None):
 
     if not os.path.isdir(output_dir):
         os.makedirs(output_dir)
-    logger.info(
-        f"extracting archive file {resolved_archive_file} to dir {output_dir}"
-    )
+    logger.info(f"extracting archive file {resolved_archive_file} to dir {output_dir}")
     with tarfile.open(resolved_archive_file, "r:gz") as archive:
         archive.extractall(output_dir)
