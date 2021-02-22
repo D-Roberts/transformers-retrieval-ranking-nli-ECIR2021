@@ -42,10 +42,10 @@ TRAINED_MODEL_ARCHIVE_MAP = {
     "enmbert-sent-onnx": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-sent.tar.gz",
     "enmbert-nli": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-nli.tar.gz",
     "enmbert-nli-onnx": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-nli.tar.gz",
-    "enrombert-sent": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enrombert-sent.tar.gz",
-    "enrombert-sent-onnx": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enrombert-sent.tar.gz",
-    "enrombert-nli": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enrombert-nli.tar.gz",
-    "enrombert-nli-onnx": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enrombert-nli.tar.gz",
+    "enrombert-sent": "https://claimtraindata.s3.amazonaws.com/models/enrombert/enrombert-sent.tar.gz",
+    "enrombert-sent-onnx": "https://claimtraindata.s3.amazonaws.com/models/enrombert/enrombert-sent.tar.gz",
+    "enrombert-nli": "https://claimtraindata.s3.amazonaws.com/models/enrombert/enrombert-nli.tar.gz",
+    "enrombert-nli-onnx": "https://claimtraindata.s3.amazonaws.com/models/enrombert/enrombert-nli.tar.gz",
 }
 
 logger = logging.getLogger(__name__)
@@ -202,7 +202,11 @@ def get_file_extension(path, dot=True, lower=True):
     return ext.lower() if lower else ext
 
 
-def get_model_dir(output_dir, pretrained_model_name_or_path, cache_dir=None):
+def get_model_dir(output_dir, add_ro, module, onnx, cache_dir=None):
+    pretrained_model_name_or_path = (
+        "en" + "ro" * int(add_ro) + "mbert" + "-" + module + "-onnx" * int(onnx)
+    )
+    print(pretrained_model_name_or_path)
     if pretrained_model_name_or_path in TRAINED_MODEL_ARCHIVE_MAP:
         archive_file = TRAINED_MODEL_ARCHIVE_MAP[pretrained_model_name_or_path]
     else:

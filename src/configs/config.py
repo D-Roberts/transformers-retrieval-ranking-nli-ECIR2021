@@ -51,6 +51,9 @@ class Config:
     # If EnmBERT or EnRomBERT pipeline
     add_ro = True
 
+    # If using onnx converted models for prediction
+    onnx = True
+
     # Doc retrieval
     document_k_wiki = 7
     document_ro_k_wiki = 1

@@ -21,10 +21,9 @@ def predict(logger, args):
 
     processor = SentenceProcessor()
     output_mode = "classification"
-    if args.onnx:
-        get_model_dir(args.output_dir, "enmbert-sent-onnx")
-    else:
-        get_model_dir(args.output_dir, "enmbert-sent")
+
+    # load/download the right model
+    get_model_dir(args.output_dir, args.add_ro, "sent", args.onnx)
 
     label_list = processor.get_labels()
     label_verification_list = processor.get_labels_verification()

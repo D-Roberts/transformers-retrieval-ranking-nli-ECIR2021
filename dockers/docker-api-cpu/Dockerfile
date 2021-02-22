@@ -12,7 +12,6 @@ RUN apt update && \
     python3-pip && \
     rm -rf /var/lib/apt/lists
 
-# for drqa for db
 ENV LC_ALL=C.UTF-8
 
 RUN python3 -m pip install --no-cache-dir --upgrade pip && \

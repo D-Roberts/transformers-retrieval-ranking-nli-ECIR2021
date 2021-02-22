@@ -68,6 +68,8 @@ def run_verification():
 
     args = Namespace()
     args = _get_nli_configs(args)
+    setattr(args, "onnx", True)
+    setattr(args, "add_ro", False)
     setattr(args, "task", "predict")
     setattr(args, "api", True)
     nli(app.logger, args)

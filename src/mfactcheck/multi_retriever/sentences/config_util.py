@@ -16,6 +16,8 @@ def _get_sent_configs(args):
 
     setattr(_args, "onnx", True)
     setattr(_args, "api", False)
+    setattr(_args, "add_ro", Config.add_ro)
+
     setattr(_args, "dataset", "dev_fair")
     setattr(_args, "cache_dir", "")
     setattr(_args, "data_dir", Config.data_dir)

@@ -97,10 +97,9 @@ def predictions_aggregator(
 def predict(logger, args):
     processor = NLIProcessor()
     output_mode = "classification"
-    if args.onnx:
-        get_model_dir(args.output_dir, "enmbert-nli-onnx")
-    else:
-        get_model_dir(args.output_dir, "enmbert-nli")
+
+    # load/download the right model
+    get_model_dir(args.output_dir, args.add_ro, "nli", args.onnx)
 
     label_list = processor.get_labels()
     num_labels = len(label_list)
@@ -144,6 +143,8 @@ if __name__ == "__main__":
         default=True,
         help="if a separate input file is provided",
     )
+    parser.add_argument("--onnx", type=bool, default=True)
+    parser.add_argument("--add_ro", type=bool, default=False)
     args = parser.parse_args()
     # print('args here', args)
     args = _get_nli_configs(args)
