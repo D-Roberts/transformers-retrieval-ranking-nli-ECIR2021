@@ -58,9 +58,7 @@ class Trainer:
         )
 
         logger.info(
-            "device: {} n_gpu: {}, distributed training: {}".format(
-                self.device, self.n_gpu, bool(args.local_rank != -1)
-            )
+            f"device: {self.device} n_gpu: {self.n_gpu}, distributed training: {bool(args.local_rank != -1)}"
         )
         self.model.to(self.device)
         self.args.train_batch_size = (
@@ -170,7 +168,7 @@ class Trainer:
     def train(
         self, train_data, num_labels, num_eg, num_eg_neg=None, negative_train_data=None
     ):
-        logger.info("***** Training Module {} *****".format(self.module))
+        logger.info(f"***** Training Module {self.module} *****")
         train_dataset, _ = self._prepare_inputs(train_data, num_eg)
         train_dataloader = self._get_train_dataloader(
             train_dataset, self.args.train_batch_size
