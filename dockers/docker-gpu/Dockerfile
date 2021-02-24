@@ -5,6 +5,7 @@ RUN apt update && \
     build-essential \
     wget \
     unzip \
+    vim \
     git \
     curl \
     ca-certificates \

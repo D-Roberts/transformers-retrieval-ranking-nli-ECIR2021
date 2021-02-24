@@ -206,7 +206,7 @@ def get_model_dir(output_dir, add_ro, module, onnx, cache_dir=None):
     pretrained_model_name_or_path = (
         "en" + "ro" * int(add_ro) + "mbert" + "-" + module + "-onnx" * int(onnx)
     )
-    print(pretrained_model_name_or_path)
+    
     if pretrained_model_name_or_path in TRAINED_MODEL_ARCHIVE_MAP:
         archive_file = TRAINED_MODEL_ARCHIVE_MAP[pretrained_model_name_or_path]
     else:
@@ -216,23 +216,17 @@ def get_model_dir(output_dir, add_ro, module, onnx, cache_dir=None):
         resolved_archive_file = cached_path(archive_file, cache_dir=cache_dir)
     except EnvironmentError:
         logger.error(
-            "Model name '{}' was not found in model name list ({}). "
-            "We assumed '{}' was a path or url but couldn't find any file "
-            "associated to this path or url.".format(
-                pretrained_model_name_or_path,
-                ", ".join(TRAINED_MODEL_ARCHIVE_MAP.keys()),
-                archive_file,
+            f"Model name '{pretrained_model_name_or_path}' was not found in model name list ({','.join(TRAINED_MODEL_ARCHIVE_MAP.keys())}). \
+            We assumed '{archive_file}' was a path or url but couldn't find any file \
+            associated to this path or url."
             )
-        )
         return None
     if resolved_archive_file == archive_file:
-        logger.info("loading archive file {}".format(archive_file))
+        logger.info(f"loading archive file {archive_file}")
     else:
         logger.info(
-            "loading archive file {} from cache at {}".format(
-                archive_file, resolved_archive_file
+            f"loading archive file {archive_file} from cache at {resolved_archive_file}"
             )
-        )
 
     if not os.path.isdir(output_dir):
         os.makedirs(output_dir)
