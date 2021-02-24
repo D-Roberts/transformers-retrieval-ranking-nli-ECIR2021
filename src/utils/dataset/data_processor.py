@@ -22,8 +22,6 @@ class DataProcessor(object):
         with open(input_file, "r", encoding="utf-8") as f:
             reader = csv.reader(f, delimiter="\t", quotechar=quotechar)
             lines = []
-            for line in reader:  # TODO: do not support Python2
-                # if sys.version_info[0] == 2:
-                #     line = list(unicode(cell, 'utf-8') for cell in line)
+            for line in reader:
                 lines.append(line)
             return lines

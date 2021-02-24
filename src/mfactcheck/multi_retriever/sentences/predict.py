@@ -23,7 +23,8 @@ def predict(logger, args):
     output_mode = "classification"
 
     # load/download the right model
-    get_model_dir(args.output_dir, args.add_ro, "sent", args.onnx)
+    if not os.path.isdir(args.output_dir):
+        get_model_dir(args.output_dir, args.add_ro, "sent", args.onnx)
 
     label_list = processor.get_labels()
     label_verification_list = processor.get_labels_verification()
@@ -58,7 +59,7 @@ def predict(logger, args):
     )
 
     trainer = Trainer(model=model, args=args)
-    logger.info("If predicting with onnx optimized model: {}".format(args.onnx))
+    logger.info(f"If predicting with onnx optimized model: {args.onnx}")
     logits, _, new_guids, guids_map = trainer.predict(
         eval_features, num_eg, onnx=args.onnx
     )

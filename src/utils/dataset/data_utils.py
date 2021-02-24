@@ -26,18 +26,14 @@ def get_whole_evidence(evidence_set, db):
     """Evidence sets come in the form of indeces"""
     pos_sents = []
     for evidence in evidence_set:
-        # print("what is the evidence in evidence_set in get_whole_evidence", evidence)
         page = evidence[2]
 
         doc_lines = db.get_doc_lines(page)
-        # print("get doc_lines from db", doc_lines)
         doc_lines = get_valid_texts(doc_lines, page)
         for doc_line in doc_lines:
-            # print("get doc_lines from db and some cleanup", doc_line)
             if doc_line[2] == evidence[3]:
-                # print('check taht doc_line[2] in db is same as evidence[3] then retain pos as doc[0]', evidence[3], doc_line[0])
                 pos_sents.append("[ " + page + " ] " + doc_line[0])
-    pos_sent = " ".join(pos_sents)  # concatenate with space the found pos sent
+    pos_sent = " ".join(pos_sents)
     return pos_sent
 
 
@@ -45,13 +41,13 @@ def clean_text(text):
     text = re.sub(r"https?:\/\/.*[\r\n]*", "", text, flags=re.MULTILINE)
     text = re.sub(r"\<a href", " ", text)
     text = re.sub(r"&amp;", "", text)
-    text = re.sub(r'["|+&=*#$@/]', "", text)  # by Amir; DR: remove _ from here
-    text = re.sub(r"\(", " ( ", text)  # by Amir
-    text = re.sub(r"\)", " ) ", text)  # by Amir
-    text = re.sub(r"LRB", " ( ", text)  # by Amir
-    text = re.sub(r"RRB", " ) ", text)  # by Amir
+    text = re.sub(r'["|+&=*#$@/]', "", text)  
+    text = re.sub(r"\(", " ( ", text)  
+    text = re.sub(r"\)", " ) ", text)
+    text = re.sub(r"LRB", " ( ", text)
+    text = re.sub(r"RRB", " ) ", text)
 
-    text = re.sub("LSB.*?RSB", "", text)  # by DR
+    text = re.sub("LSB.*?RSB", "", text)
 
     text = re.sub(r"\-", " ", text)
     text = re.sub(r"\_", " ", text)

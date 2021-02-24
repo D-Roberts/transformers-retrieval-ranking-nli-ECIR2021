@@ -70,11 +70,8 @@ def predictions_aggregator(
     # compute label accuracy
     if compute_acc:
         logger.info(
-            "Label accuracy calculation for the scored file: {:.2f}".format(
-                (
-                    np.array([x[1] for x in refined_preds]) == np.array(refined_labels)
-                ).mean()
-            )
+            f"Label accuracy calculation for the scored file: \
+            {(np.array([x[1] for x in refined_preds]) == np.array(refined_labels)).mean():.2f}"
         )
 
     label_map = {2: "NOT ENOUGH INFO", 0: "SUPPORTS", 1: "REFUTES"}
@@ -99,7 +96,8 @@ def predict(logger, args):
     output_mode = "classification"
 
     # load/download the right model
-    get_model_dir(args.output_dir, args.add_ro, "nli", args.onnx)
+    if not os.path.isdir(args.output_dir):
+        get_model_dir(args.output_dir, args.add_ro, "nli", args.onnx)
 
     label_list = processor.get_labels()
     num_labels = len(label_list)

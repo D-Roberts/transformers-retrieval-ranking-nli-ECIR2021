@@ -37,7 +37,7 @@ def train(logger, args):
         args.cache_dir
         if args.cache_dir
         else os.path.join(
-            str(PYTORCH_PRETRAINED_BERT_CACHE), "distributed_{}".format(args.local_rank)
+            str(PYTORCH_PRETRAINED_BERT_CACHE), f"distributed_{args.local_rank}"
         )
     )
     model = BertForSequenceClassification.from_pretrained(

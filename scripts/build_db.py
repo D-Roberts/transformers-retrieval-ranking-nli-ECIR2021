@@ -136,7 +136,7 @@ if __name__ == "__main__":
 
     save_dir = os.path.dirname(args.save_path)
     if not os.path.exists(save_dir):
-        logger.info("Save directory doesn't exist. Making {0}".format(save_dir))
+        logger.info(f"Save directory doesn't exist. Making {save_dir}")
         os.makedirs(save_dir)
 
     store_contents(args.data_path, args.save_path, args.preprocess, args.num_workers)

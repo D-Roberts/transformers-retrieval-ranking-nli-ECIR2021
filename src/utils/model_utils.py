@@ -81,11 +81,11 @@ def filename_to_url(filename, cache_dir=None):
 
     cache_path = os.path.join(cache_dir, filename)
     if not os.path.exists(cache_path):
-        raise EnvironmentError("file {} not found".format(cache_path))
+        raise EnvironmentError(f"file {cache_path} not found")
 
     meta_path = cache_path + ".json"
     if not os.path.exists(meta_path):
-        raise EnvironmentError("file {} not found".format(meta_path))
+        raise EnvironmentError(f"file {meta_path} not found")
 
     with open(meta_path, encoding="utf-8") as meta_file:
         metadata = json.load(meta_file)
@@ -119,11 +119,11 @@ def cached_path(url_or_filename, cache_dir=None):
         return url_or_filename
     elif parsed.scheme == "":
         # File, but it doesn't exist.
-        raise EnvironmentError("file {} not found".format(url_or_filename))
+        raise EnvironmentError(f"file {url_or_filename} not found")
     else:
         # Something unknown
         raise ValueError(
-            "unable to parse {} as a URL or as a local path".format(url_or_filename)
+            f"unable to parse {url_or_filename} as a URL or as a local path"
         )
 
 
@@ -144,9 +144,7 @@ def get_from_cache(url, cache_dir=None):
     response = requests.head(url, allow_redirects=True)
     if response.status_code != 200:
         raise IOError(
-            "HEAD request failed for url {} with status code {}".format(
-                url, response.status_code
-            )
+            f"HEAD request failed for url {url} with status code {response.status_code}"
         )
     etag = response.headers.get("ETag")
 
@@ -203,10 +201,12 @@ def get_file_extension(path, dot=True, lower=True):
 
 
 def get_model_dir(output_dir, add_ro, module, onnx, cache_dir=None):
+    # load by default the model in output_dir if there is one
+    os.makedirs(output_dir)
     pretrained_model_name_or_path = (
         "en" + "ro" * int(add_ro) + "mbert" + "-" + module + "-onnx" * int(onnx)
     )
-    
+
     if pretrained_model_name_or_path in TRAINED_MODEL_ARCHIVE_MAP:
         archive_file = TRAINED_MODEL_ARCHIVE_MAP[pretrained_model_name_or_path]
     else:
@@ -219,17 +219,15 @@ def get_model_dir(output_dir, add_ro, module, onnx, cache_dir=None):
             f"Model name '{pretrained_model_name_or_path}' was not found in model name list ({','.join(TRAINED_MODEL_ARCHIVE_MAP.keys())}). \
             We assumed '{archive_file}' was a path or url but couldn't find any file \
             associated to this path or url."
-            )
+        )
         return None
     if resolved_archive_file == archive_file:
         logger.info(f"loading archive file {archive_file}")
     else:
         logger.info(
             f"loading archive file {archive_file} from cache at {resolved_archive_file}"
-            )
+        )
 
-    if not os.path.isdir(output_dir):
-        os.makedirs(output_dir)
     logger.info(f"extracting archive file {resolved_archive_file} to dir {output_dir}")
     with tarfile.open(resolved_archive_file, "r:gz") as archive:
         archive.extractall(output_dir)
