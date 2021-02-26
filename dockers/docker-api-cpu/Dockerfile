@@ -42,4 +42,4 @@ COPY templates templates
 ENV PYTHONPATH "${PYTHONPATH}:src"
 ENV FLASK_APP app:app
 
-CMD ["/bin/bash"]
+CMD ["python3", "./app.py"]
