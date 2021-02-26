@@ -20,6 +20,14 @@ class Config:
         with open(conf_path, "w") as f:
             json.dump(obj, f, indent=4)
 
+    @classmethod
+    def get_args(cls):
+        obj = {}
+        for k, v in cls.__dict__.items():
+            if not isinstance(v, classmethod) and not isinstance(v, dict) and not k.startswith("__"):
+                obj.update({k: v})
+        return obj
+
     BASE_DIR = os.getcwd()
 
     # Original FEVER task
@@ -41,6 +49,7 @@ class Config:
 
     # Sentence Selector and Fact Checker data dir and files
     data_dir = path.join(BASE_DIR, "data/data_dir")
+    cache_dir = ""
 
     train_tsv_file_pos = path.join(data_dir, "train_sent_pos.tsv")
     train_tsv_file_neg = path.join(data_dir, "train_sent_neg_32.tsv")
@@ -49,10 +58,13 @@ class Config:
     predict_rte_file = path.join(data_dir, "predict_rte_file.tsv")
 
     # If EnmBERT or EnRomBERT pipeline
-    add_ro = True
+    add_ro = False
 
     # If using onnx converted models for prediction
     onnx = True
+
+    # If running the API
+    api = False
 
     # Doc retrieval
     document_k_wiki = 7
@@ -72,14 +84,16 @@ class Config:
         "num_ro_samples": 2,
     }
     # eval dataset options: 'dev_fair', 'dev_gold', 'test', 'train'
+    dataset = 'test'
+    task = 'predict'
 
     # Models configs
     model_params_sentence = {
         "bert_model": "bert-base-multilingual-cased",
         "max_seq_length": 128,
         "do_lower_case": False,
-        "train_batch_size": 4,
-        "negative_batch_size": 4,
+        "train_batch_size": 4, # 32
+        "negative_batch_size": 4, # 32
         "losstype": "cross_entropy",
         "eval_batch_size": 1,
         "learning_rate": 2e-5,
@@ -92,11 +106,11 @@ class Config:
         "bert_model": "bert-base-multilingual-cased",
         "max_seq_length": 128,
         "do_lower_case": False,
-        "train_batch_size": 4,
+        "train_batch_size": 4, # 32
         "losstype": "cross_entropy",
         "eval_batch_size": 1,
         "learning_rate": 2e-5,
-        "num_train_epochs": 1,
+        "num_train_epochs": 2,
         "warmup_proportion": 0.1,
         "gradient_accumulation_steps": 1,
     }

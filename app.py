@@ -54,12 +54,8 @@ def run_evidence_recommendation():
     from argparse import Namespace
 
     args = Namespace()
-    setattr(args, "add_ro", False)
-    setattr(args, "dataset", "test")
-    setattr(args, "task", "predict")
-    setattr(args, "onnx", True)
-    setattr(args, "api", True)
     args = _get_sent_configs(args)
+    setattr(args, "api", True)
     sentence_retrieval(app.logger, args)
 
 
@@ -68,9 +64,6 @@ def run_verification():
 
     args = Namespace()
     args = _get_nli_configs(args)
-    setattr(args, "onnx", True)
-    setattr(args, "add_ro", False)
-    setattr(args, "task", "predict")
     setattr(args, "api", True)
     nli(app.logger, args)
 
