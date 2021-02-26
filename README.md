@@ -21,7 +21,7 @@ Requires ~2Gb RAM.
 
 Easiest. Install [Docker](https://docs.docker.com/get-docker/) then run:
 ```
-docker run --ipc=host --rm -p 8080:8080 droberts1/fact-verification:latest python3 app.py
+docker run --rm -p 8080:8080 droberts1/fact-verification
 ```
 
 Build locally:
@@ -38,7 +38,7 @@ docker build -t multi_api:latest -f dockers/docker-api-cpu/Dockerfile .
 
 3. Run docker with mapped ports:
 ```
-docker run -it --rm --ipc=host -p 8080:8080 multi_api:latest python3 app.py
+docker run --rm --ipc=host -p 8080:8080 multi_api:latest
 ```
 4. In your browser go to http://0.0.0.0:8080/ , provide a claim with recognizable named entities, and the pipeline will run as depicted in the diagram above. Entities will be parsed, documents (Wikipedia pages) will be retrieved in English, Romanian and Portuguese, summaries tokenized into sentences and scored by the sentence selector, top 5 sentences will be provided to fact verifier and final prediction aggregated.
 
