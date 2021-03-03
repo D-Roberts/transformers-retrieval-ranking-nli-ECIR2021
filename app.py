@@ -29,25 +29,39 @@ def read_pred():
     return lines[0]["predicted_evidence"], lines[0]["predicted_label"]
 
 
-def write_claim_json(claim):
-    os.makedirs(Config.data_dir, exist_ok=True)
+def write_claim_json(claim, input_id=None):
+    if not os.path.isdir(Config.data_dir):
+        os.makedirs(Config.data_dir)
 
     input_list = [{"id": 1, "claim": claim}]
     claim_file_path = os.path.join(Config.data_dir, "input.jsonl")
 
-    with open(claim_file_path, "w") as f:
+    with open(claim_file_path, "w+") as f:
         for line in input_list:
             f.write(json.dumps(line) + "\n")
 
 
-def run_document_retrieval():
-    os.makedirs(Config.dataset_folder, exist_ok=True)
+def run_document_retrieval(input_id=None):
+    if not os.path.isdir(Config.dataset_folder):
+        os.makedirs(Config.dataset_folder)
 
-    doc_retrieval(
-        3,
-        os.path.join(Config.data_dir, "input.jsonl"),
-        os.path.join(Config.dataset_folder, "test.wiki7.jsonl"),
-    )
+    # cached claim results
+    jlr = JSONLineReader()
+    cached_docs = jlr.read(Config.cached_docs)
+    doc_path = Config.test_doc_file
+
+    if input_id:
+        with open(doc_path, 'w+') as f1:
+            for line in cached_docs:
+                if line["id"] == input_id:
+                    f1.write(json.dumps(line) + "\n")
+    else:
+        # do the actual search
+        doc_retrieval(
+            3,
+            os.path.join(Config.data_dir, "input.jsonl"),
+            os.path.join(doc_path),
+        )
 
 
 def run_evidence_recommendation():

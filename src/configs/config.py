@@ -47,8 +47,14 @@ class Config:
     dev_ro_doc_file = path.join(dataset_folder, "ro_dev.wiki1.jsonl")
     train_ro_doc_file = path.join(dataset_folder, "ro_train.wiki1.jsonl")
 
+
     # Sentence Selector and Fact Checker data dir and files
     data_dir = path.join(BASE_DIR, "data/data_dir")
+    # cached docs for api run
+    cached_docs = path.join(data_dir, "en_ro_pt_docs.jsonl")
+    
+
+    # For model runs
     cache_dir = ""
 
     train_tsv_file_pos = path.join(data_dir, "train_sent_pos.tsv")
