@@ -8,6 +8,8 @@ import random
 
 import numpy as np
 import torch
+from onnxruntime import ExecutionMode, InferenceSession, SessionOptions
+
 from pytorch_pretrained_bert.file_utils import CONFIG_NAME, WEIGHTS_NAME
 from pytorch_pretrained_bert.optimization import BertAdam
 from torch.nn import CrossEntropyLoss
@@ -275,8 +277,6 @@ class Trainer:
         return (preds, labels, guids)
 
     def prediction_loop_onnx(self, data_loader):
-
-        from onnxruntime import ExecutionMode, InferenceSession, SessionOptions
 
         # the stored optimized onnx model; this is only for the sentence selection module
         model_quant = os.path.join(self.args.output_dir, "converted-optimized.onnx")
