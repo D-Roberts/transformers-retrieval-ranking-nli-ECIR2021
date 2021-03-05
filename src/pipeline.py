@@ -87,12 +87,13 @@ def sentence_retrieval(logger, args):
     args = _get_sent_configs(args)
 
     if args.task == "train":
-        os.makedirs(args.data_dir, exist_ok=True)
+        if not os.path.isdir(args.data_dir):
+            os.makedirs(args.data_dir)
         logger.info("Starting sentence retrieval training...")
         sentence_selector_train(logger, args)
         # cleanup
-        os.remove(args.pos_sent_train)
-        os.remove(args.neg_sent_train)
+        os.remove(args.train_tsv_file_pos)
+        os.remove(args.train_tsv_file_neg)
         os.remove(os.path.join(args.data_dir, args.train_sentence_file_eval))
         logger.info("Finished sentence retrieval for training set.")
     else:  # predict

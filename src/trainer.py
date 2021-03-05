@@ -3,21 +3,51 @@
 Set up for cpu or 1 GPU.
 """
 import logging
+import math
 import os
 import random
 
 import numpy as np
 import torch
 from onnxruntime import ExecutionMode, InferenceSession, SessionOptions
-
-from pytorch_pretrained_bert.file_utils import CONFIG_NAME, WEIGHTS_NAME
-from pytorch_pretrained_bert.optimization import BertAdam
+from transformers.file_utils import CONFIG_NAME, WEIGHTS_NAME
+from transformers.optimization import AdamW
 from torch.nn import CrossEntropyLoss
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler, TensorDataset
+from torch.optim.lr_scheduler import LambdaLR
 from tqdm import tqdm, trange
 
 
 logger = logging.getLogger(__name__)
+
+
+def get_linear_schedule_with_warmup(
+    optimizer, num_warmup_steps, num_training_steps, last_epoch=-1
+):
+    def lr_lambda(current_step: int):
+        if current_step < num_warmup_steps:
+            return float(current_step) / float(max(1, num_warmup_steps))
+        return max(
+            0.0,
+            float(num_training_steps - current_step)
+            / float(max(1, num_training_steps - num_warmup_steps)),
+        )
+
+    return LambdaLR(optimizer, lr_lambda, last_epoch)
+
+
+def get_scheduler(
+    name,
+    optimizer,
+    num_warmup_steps,
+    num_training_steps,
+):
+
+    return get_linear_schedule_with_warmup(
+        optimizer,
+        num_warmup_steps=num_warmup_steps,
+        num_training_steps=num_training_steps,
+    )
 
 
 class Trainer:
@@ -36,6 +66,7 @@ class Trainer:
         self.args = args
         self.eval_dataset = eval_dataset
         self.tokenizer = tokenizer
+        self.optimizer, self.lr_scheduler = optimizers
 
         random.seed(args.seed)
         np.random.seed(args.seed)
@@ -79,28 +110,42 @@ class Trainer:
         return DataLoader(train_dataset, sampler=train_sampler, batch_size=batch_size)
 
     def get_optimizer(self, num_train_optimization_steps):
-        param_optimizer = list(self.model.named_parameters())
-        no_decay = ["bias", "LayerNorm.bias", "LayerNorm.weight"]
+        no_decay = ["bias", "LayerNorm.weight"]
         optimizer_grouped_parameters = [
             {
                 "params": [
-                    p for n, p in param_optimizer if not any(nd in n for nd in no_decay)
+                    p
+                    for n, p in self.model.named_parameters()
+                    if not any(nd in n for nd in no_decay)
                 ],
                 "weight_decay": 0.01,
             },
             {
                 "params": [
-                    p for n, p in param_optimizer if any(nd in n for nd in no_decay)
+                    p
+                    for n, p in self.model.named_parameters()
+                    if any(nd in n for nd in no_decay)
                 ],
                 "weight_decay": 0.0,
             },
         ]
-        self.optimizer = BertAdam(
+
+        self.optimizer = AdamW(
             optimizer_grouped_parameters,
             lr=self.args.learning_rate,
-            warmup=self.args.warmup_proportion,
-            t_total=num_train_optimization_steps,
         )
+
+        if self.lr_scheduler is None:
+            warmup_steps = math.ceil(
+                num_train_optimization_steps * self.args.warmup_proportion
+            )
+
+            self.lr_scheduler = get_scheduler(
+                "linear",
+                self.optimizer,
+                num_warmup_steps=warmup_steps,
+                num_training_steps=num_train_optimization_steps,
+            )
 
     def get_loss(self):
         self.loss_fct = CrossEntropyLoss()
@@ -218,6 +263,7 @@ class Trainer:
                 nb_tr_steps += 1
                 if (step + 1) % self.args.gradient_accumulation_steps == 0:
                     self.optimizer.step()
+                    self.lr_scheduler.step()
                     self.optimizer.zero_grad()
                     global_step += 1
             print("training_loss~=", tr_loss / nb_tr_steps)
@@ -248,13 +294,13 @@ class Trainer:
         )
         return eval_data, guid_ids_map
 
-    def predict(self, predict_inputs, num_eg, onnx):
+    def predict(self, predict_inputs, num_eg):
         logger.info("***** Predicting *****")
         eval_data, guid_map = self._prepare_inputs(predict_inputs, num_eg)
         eval_dataloader = self._get_eval_dataloader(eval_data)
         return (
             (*self.prediction_loop(eval_dataloader), guid_map)
-            if not onnx
+            if not self.args.onnx
             else (*self.prediction_loop_onnx(eval_dataloader), guid_map)
         )
 
