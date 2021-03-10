@@ -93,7 +93,7 @@ def sentence_retrieval(logger, args):
         # cleanup
         os.remove(args.pos_sent_train)
         os.remove(args.neg_sent_train)
-        os.remove(os.path.join(args.data_dir, args.train_sentence_file_eval))
+        # os.remove(os.path.join(args.data_dir, args.train_sentence_file_eval))
         logger.info("Finished sentence retrieval for training set.")
     else:  # predict
         logger.info("Starting sentence retrieval for dev/test set...")

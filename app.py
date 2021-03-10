@@ -1,11 +1,13 @@
 """
 Flask app
 """
+import csv
 import json
 import os
 
 from flask import Flask, render_template, request
 from wtforms import Form, TextAreaField, validators
+from redis import Redis
 
 from mfactcheck.multi_nli.config_util import _get_nli_configs
 from mfactcheck.multi_retriever.document.api_doc_retrieval import main as doc_retrieval
@@ -19,6 +21,39 @@ app = Flask(__name__)
 
 cur_dir = os.path.dirname(__file__)
 
+r = Redis(host='127.0.0.1',
+          port='6379',
+          password='')
+
+
+def write_cache(claim_id):
+    d_to_write = {}
+    d_to_write["id"] = str(claim_id)
+    d_to_write["evidence"] = []
+
+    with open(Config.predict_rte_file, 'r', encoding="utf-8") as f:
+        reader = csv.reader(f, delimiter='\t')
+        for i, line in enumerate(reader):
+            if i == 0:
+                continue
+            if i == 1:
+                d_to_write["claim"] = line[2]
+            d_to_write["evidence"].append(line[1])
+
+    json_obj = json.dumps(d_to_write)
+    r.set(str(claim_id), json_obj)
+
+
+def read_cache(claim_id):
+    dict_obj = json.loads(r.get(str(claim_id)))
+    with open(Config.predict_rte_file, 'w', encoding="utf-8") as f:
+        tsv_writer = csv.writer(f, delimiter = '\t')
+        tsv_writer.writerow(["id", "evidence", "claim", "evidence_label", "label"])
+        for sent in dict_obj['evidence']:
+            line = [claim_id] + [sent] + [dict_obj['claim']] + [False] + ["NOT ENOUGH INFO"]
+            tsv_writer.writerow(line)
+    return dict_obj['claim']
+
 
 def read_pred():
     predictions_file_path = os.path.join(
@@ -26,14 +61,15 @@ def read_pred():
     )
     jlr = JSONLineReader()
     lines = jlr.read(predictions_file_path)
+  
     return lines[0]["predicted_evidence"], lines[0]["predicted_label"]
 
 
-def write_claim_json(claim, input_id=None):
+def write_claim_json(claim, input_id):
     if not os.path.isdir(Config.data_dir):
         os.makedirs(Config.data_dir)
 
-    input_list = [{"id": 1, "claim": claim}]
+    input_list = [{"id": input_id, "claim": claim}]
     claim_file_path = os.path.join(Config.data_dir, "input.jsonl")
 
     with open(claim_file_path, "w+") as f:
@@ -41,27 +77,17 @@ def write_claim_json(claim, input_id=None):
             f.write(json.dumps(line) + "\n")
 
 
-def run_document_retrieval(input_id=None):
+def run_document_retrieval():
     if not os.path.isdir(Config.dataset_folder):
         os.makedirs(Config.dataset_folder)
 
-    # cached claim results
-    jlr = JSONLineReader()
-    cached_docs = jlr.read(Config.cached_docs)
     doc_path = Config.test_doc_file
 
-    if input_id:
-        with open(doc_path, 'w+') as f1:
-            for line in cached_docs:
-                if line["id"] == input_id:
-                    f1.write(json.dumps(line) + "\n")
-    else:
-        # do the actual search
-        doc_retrieval(
-            3,
-            os.path.join(Config.data_dir, "input.jsonl"),
-            os.path.join(doc_path),
-        )
+    doc_retrieval(
+        3,
+        os.path.join(Config.data_dir, "input.jsonl"),
+        os.path.join(doc_path),
+    )
 
 
 def run_evidence_recommendation():
@@ -75,7 +101,6 @@ def run_evidence_recommendation():
 
 def run_verification():
     from argparse import Namespace
-
     args = Namespace()
     args = _get_nli_configs(args)
     setattr(args, "api", True)
@@ -85,7 +110,7 @@ def run_verification():
 # Flask
 class ClaimForm(Form):
     claimsubmit = TextAreaField(
-        "", [validators.DataRequired(), validators.length(min=20)]
+        "", [validators.DataRequired(), validators.length(min=1)]
     )
 
 
@@ -99,14 +124,30 @@ def index():
 def results():
     form = ClaimForm(request.form)
     if request.method == "POST" and form.validate():
-        claim = request.form["claimsubmit"]
-        write_claim_json(claim)
+        claim_id_or_claim = request.form["claimsubmit"]
 
-        app.logger.info("Starting document retrieval...")
-        run_document_retrieval()
+        # A claim was entered
+        if len(claim_id_or_claim) > 20:
+            claim = claim_id_or_claim
+            claim_id = max([int(x.decode("utf8")) for x in r.keys()]) + 1
+        else:
+            # an ID was entered
+            # TODO: if id does not exist in REdis - reload front page
+            claim_id = claim_id_or_claim
+            claim = read_cache(claim_id)
 
-        app.logger.info("Sentence selection step...")
-        run_evidence_recommendation()
+        write_claim_json(claim, claim_id)
+
+        if not r.exists(str(claim_id)):
+
+            app.logger.info("Starting document retrieval...")
+            run_document_retrieval()
+
+            app.logger.info("Sentence selection step...")
+            run_evidence_recommendation()
+
+            app.logger.info("Caching results...")
+            write_cache(claim_id)
 
         app.logger.info("Verification step...")
         run_verification()
