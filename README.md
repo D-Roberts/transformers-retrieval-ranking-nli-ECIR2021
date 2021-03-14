@@ -17,7 +17,7 @@ The end to end system will be served via a live API during the ECIR 2021 confere
 
 ### Steps to access API at http://0.0.0.0:8080/ :
 
-Requires ~2Gb RAM.
+Requires ~2Gb RAM but best increase default Docker resources in Preferences to 4Gb.
 
 Easiest. Install [Docker](https://docs.docker.com/get-docker/) then run:
 ```
