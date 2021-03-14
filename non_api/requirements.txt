@@ -10,4 +10,3 @@ tqdm==4.55.1
 prettytable==2.0.0
 fever-drqa
 fever-scorer
-redis

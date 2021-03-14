@@ -41,6 +41,7 @@ def write_cache(claim_id):
 
     json_obj = json.dumps(d_to_write)
     r.set(str(claim_id), json_obj)
+    r.bgsave()
 
 
 def read_cache(claim_id):
@@ -65,9 +66,7 @@ def read_pred():
 
 
 def write_claim_json(claim, input_id):
-    if not os.path.isdir(Config.data_dir):
-        os.makedirs(Config.data_dir)
-
+    
     input_list = [{"id": input_id, "claim": claim}]
     claim_file_path = os.path.join(Config.data_dir, "input.jsonl")
 
@@ -77,9 +76,7 @@ def write_claim_json(claim, input_id):
 
 
 def run_document_retrieval():
-    if not os.path.isdir(Config.dataset_folder):
-        os.makedirs(Config.dataset_folder)
-
+    
     doc_path = Config.test_doc_file
 
     doc_retrieval(
@@ -124,6 +121,11 @@ def results():
     form = ClaimForm(request.form)
     if request.method == "POST" and form.validate():
         claim_id_or_claim = request.form["claimsubmit"]
+
+        if not os.path.isdir(Config.dataset_folder):
+            os.makedirs(Config.dataset_folder)
+        if not os.path.isdir(Config.data_dir):
+            os.makedirs(Config.data_dir)
 
         # A claim was entered
         if len(claim_id_or_claim) > 20:
@@ -176,4 +178,4 @@ def feedback():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host="0.0.0.0", port=8080, processes=1)

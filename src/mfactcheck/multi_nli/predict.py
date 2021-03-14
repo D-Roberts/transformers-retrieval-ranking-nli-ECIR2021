@@ -118,7 +118,7 @@ def predict(logger, args):
 
     trainer = Trainer(model=model, args=args)
 
-    preds, labels, new_guids, guids_map = trainer.predict(eval_data, num_eg, args)
+    preds, labels, new_guids, guids_map = trainer.predict(eval_data, num_eg, onnx=args.onnx)
     preds = np.argmax(preds, axis=1)  # 0 = Support; 1 = Refute; 2 = NEI
 
     # Implements the logic rules to get one verification prediction per claim from 5 separate predictions
