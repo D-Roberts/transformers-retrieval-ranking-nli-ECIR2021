@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+  redis:
+    image: "redis:alpine"
+    command: ["redis-server", "--appendonly", "yes"]
+    hostname: redis
+    volumes:
+      - /Users/denisaroberts/workspace/multilingual_nli_ECIR2021/redis-data:/data

@@ -21,9 +21,8 @@ app = Flask(__name__)
 
 cur_dir = os.path.dirname(__file__)
 
-r = Redis(host='127.0.0.1',
-          port='6379',
-          password='')
+r = Redis(host='redis', port=6379)
+# r = Redis(port=6379)
 
 
 def write_cache(claim_id):
@@ -129,7 +128,11 @@ def results():
         # A claim was entered
         if len(claim_id_or_claim) > 20:
             claim = claim_id_or_claim
-            claim_id = max([int(x.decode("utf8")) for x in r.keys()]) + 1
+            if len(r.keys()) == 0:
+                claim_id = 1
+            else:
+                claim_id = max([int(x.decode("utf8")) for x in r.keys()]) + 1
+            
         else:
             # an ID was entered
             # TODO: if id does not exist in REdis - reload front page
