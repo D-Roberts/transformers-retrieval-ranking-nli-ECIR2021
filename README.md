@@ -23,7 +23,7 @@ Easiest. Install [Docker](https://docs.docker.com/get-docker/) then run:
 ```
 docker run --rm -p 8080:8080 -m 4g droberts1/fact-verification
 ```
-(tested on MacOS Big Sur and Ubuntu18.04 64-bitX86)
+Tested on MacOS Big Sur and Ubuntu18.04 64-bitX86. Pretrained models will be downloaded from S3.
 
 Build locally:
 1. Get repo:
