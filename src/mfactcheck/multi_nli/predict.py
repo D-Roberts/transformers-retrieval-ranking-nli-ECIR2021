@@ -14,15 +14,8 @@ from mfactcheck.multi_nli.data import NLIProcessor, convert_examples_to_features
 from trainer import Trainer
 from utils.log_helper import LogHelper
 from utils.model_utils import get_model_dir
+from utils.dataset.data_utils import _clean_last as clean
 
-def clean(page):
-    page = page.replace("_", " ")
-    page = page.replace("-LRB-", "(")
-    page = page.replace("-RRB-", ")")
-    page = page.replace("-COLON-", ":")
-    page = page.replace("\\u200", " ")
-    page = page.replace('"""', ' ')
-    return page
 
 def predictions_aggregator(
     logger, args, preds, labels, new_guids, guids_map, compute_acc=False

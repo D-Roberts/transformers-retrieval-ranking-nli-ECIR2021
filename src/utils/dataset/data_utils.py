@@ -72,3 +72,14 @@ def _clean(s):
     s = s.replace("\\", " ").replace("\n", " ").replace("\t", " ")
     s = remove_diacritics(s)
     return s
+
+
+# Used at the end
+def _clean_last(page):
+    page = page.replace("_", " ")
+    page = page.replace("-LRB-", "(")
+    page = page.replace("-RRB-", ")")
+    page = page.replace("-COLON-", ":")
+    page = page.replace("\\u200", " ")
+    page = page.replace('"""', ' ')
+    return page
