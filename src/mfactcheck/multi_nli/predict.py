@@ -15,6 +15,14 @@ from trainer import Trainer
 from utils.log_helper import LogHelper
 from utils.model_utils import get_model_dir
 
+def clean(page):
+    page = page.replace("_", " ")
+    page = page.replace("-LRB-", "(")
+    page = page.replace("-RRB-", ")")
+    page = page.replace("-COLON-", ":")
+    page = page.replace("\\u200", " ")
+    page = page.replace('"""', ' ')
+    return page
 
 def predictions_aggregator(
     logger, args, preds, labels, new_guids, guids_map, compute_acc=False
@@ -40,7 +48,7 @@ def predictions_aggregator(
                 if args.api or args.translated:
                     predicted_evidence[int(g1)].append(line[1])
                 else:
-                    predicted_evidence[int(g1)].append([line[5], int(line[6])])
+                    predicted_evidence[int(g1)].append([clean(line[5]), int(line[6])])
             except Exception as e:
                 continue
 

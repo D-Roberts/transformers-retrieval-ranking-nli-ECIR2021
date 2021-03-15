@@ -1,6 +1,6 @@
-"""
-Flask app
-"""
+#!/usr/bin/env python
+# coding=utf-8
+"""Flask app"""
 import csv
 import json
 import os
@@ -21,8 +21,8 @@ app = Flask(__name__)
 
 cur_dir = os.path.dirname(__file__)
 
-r = Redis(host='redis', port=6379)
-# r = Redis(port=6379)
+# r = Redis(host='redis', port=6379)
+r = Redis(port=6379)
 
 
 def write_cache(claim_id):
@@ -137,9 +137,11 @@ def results():
             
         else:
             # an ID was entered
-            # TODO: if id does not exist in REdis - reload front page
             claim_id = claim_id_or_claim
-            claim = read_cache(claim_id)
+            if r.exists(str(claim_id)): 
+                claim = read_cache(claim_id)
+            else:
+                return render_template("unknown_id.html", form=form)
 
         write_claim_json(claim, claim_id)
 
