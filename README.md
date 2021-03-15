@@ -17,12 +17,13 @@ The end to end system will be served via a live API during the ECIR 2021 confere
 
 ### Steps to access API at http://0.0.0.0:8080/ :
 
-Requires ~2Gb RAM but best increase default Docker resources in Preferences to 4Gb.
+Requires up to 4Gb RAM. 
 
 Easiest. Install [Docker](https://docs.docker.com/get-docker/) then run:
 ```
-docker run --rm -p 8080:8080 droberts1/fact-verification
+docker run --rm -p 8080:8080 -m 4g droberts1/fact-verification
 ```
+(tested on MacOS Big Sur and Ubuntu18.04 64-bitX86)
 
 Build locally:
 1. Get repo:
