@@ -66,7 +66,6 @@ def read_pred():
 
 
 def write_claim_json(claim, input_id):
-    
     input_list = [{"id": input_id, "claim": claim}]
     claim_file_path = os.path.join(Config.data_dir, "input.jsonl")
 
@@ -128,7 +127,9 @@ def results():
             os.makedirs(Config.data_dir)
 
         # A claim was entered
+        
         if len(claim_id_or_claim) > 20:
+            app.logger.info("Starting full pipeline...")
             claim = claim_id_or_claim
             if len(r.keys()) == 0:
                 claim_id = 1
@@ -139,8 +140,10 @@ def results():
             # an ID was entered
             claim_id = claim_id_or_claim
             if r.exists(str(claim_id)): 
+                app.logger.info("Claim id found in cache, reading 5 sentences for scoring...")
                 claim = read_cache(claim_id)
             else:
+                app.logger.info("Claim id not found in cache, user must re-enter...")
                 return render_template("unknown_id.html", form=form)
 
         write_claim_json(claim, claim_id)
