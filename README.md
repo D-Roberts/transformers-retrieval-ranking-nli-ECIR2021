@@ -9,7 +9,7 @@
 ```
 
 
-## II. API (for research illustration purpose only)
+## II. API (MVP for research illustration purpose only)
 The end to end system will be served via a live API during the ECIR 2021 conference. Furthermore, it can be accessed locally via Docker. 
 
 ![Multilingual evidence retrieval and fact verification system.](/assets/pacepa_eg.png)
@@ -17,12 +17,13 @@ The end to end system will be served via a live API during the ECIR 2021 confere
 
 ### Steps to access API at http://0.0.0.0:8080/ :
 
-Requires ~2Gb RAM.
+Requires up to 4Gb RAM. 
 
 Easiest. Install [Docker](https://docs.docker.com/get-docker/) then run:
 ```
-docker run --rm -p 8080:8080 droberts1/fact-verification
+docker run --rm -p 8080:8080 -m 4g droberts1/fact-verification
 ```
+Tested on MacOS Big Sur and Ubuntu18.04 64-bitX86. Pretrained models will be downloaded from S3.
 
 Build locally:
 1. Get repo:

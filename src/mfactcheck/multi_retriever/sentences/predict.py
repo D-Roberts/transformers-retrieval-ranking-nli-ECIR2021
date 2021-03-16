@@ -61,7 +61,7 @@ def predict(logger, args):
     trainer = Trainer(model=model, args=args)
     logger.info(f"If predicting with onnx optimized model: {args.onnx}")
     logits, _, new_guids, guids_map = trainer.predict(
-        eval_features, num_eg, onnx=args.onnx
+        eval_features, num_eg
     )
 
     # topk selector: get dataset for nli module (dev, test)

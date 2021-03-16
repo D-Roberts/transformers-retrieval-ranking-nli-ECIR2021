@@ -119,7 +119,11 @@ def predict(logger, args):
 
     trainer = Trainer(model=model, args=args)
 
+<<<<<<< HEAD
     preds, labels, new_guids, guids_map = trainer.predict(eval_data, num_eg, onnx=args.onnx)
+=======
+    preds, labels, new_guids, guids_map = trainer.predict(eval_data, num_eg)
+>>>>>>> main
     preds = np.argmax(preds, axis=1)  # 0 = Support; 1 = Refute; 2 = NEI
 
     # Implements the logic rules to get one verification prediction per claim from 5 separate predictions
@@ -145,7 +149,6 @@ if __name__ == "__main__":
     parser.add_argument("--onnx", type=bool, default=True)
     parser.add_argument("--add_ro", type=bool, default=False)
     args = parser.parse_args()
-    # print('args here', args)
     args = _get_nli_configs(args)
     LogHelper.setup()
     # can score separately
