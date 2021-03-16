@@ -5,15 +5,15 @@ import os
 import nltk
 from tqdm import tqdm
 
-from utils.dataset.data_processor import DataProcessor
-from utils.dataset.data_utils import (
+from mfactcheck.utils.dataset.data_processor import DataProcessor
+from mfactcheck.utils.dataset.data_utils import (
     _clean,
     clean_text,
     get_valid_texts,
     get_whole_evidence,
 )
-from utils.dataset.fever_doc_db import FeverDocDB
-from utils.dataset.reader import JSONLineReader
+from mfactcheck.utils.dataset.fever_doc_db import FeverDocDB
+from mfactcheck.utils.dataset.reader import JSONLineReader
 
 
 class InputExample(object):

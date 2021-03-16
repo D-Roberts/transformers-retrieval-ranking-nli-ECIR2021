@@ -12,9 +12,9 @@ from mfactcheck.multi_retriever.sentences.data import (
     get_eval_data,
     get_topk_sentences_eval,
 )
-from trainer import Trainer
-from utils.log_helper import LogHelper
-from utils.model_utils import get_model_dir
+from mfactcheck.trainer import Trainer
+from mfactcheck.utils.log_helper import LogHelper
+from mfactcheck.utils.model_utils import get_model_dir
 
 
 def predict(logger, args):

@@ -7,8 +7,8 @@ from multiprocessing.pool import ThreadPool
 import wikipedia
 from tqdm import tqdm
 
-from utils.dataset.data_utils import normalize
-from utils.dataset.reader import JSONLineReader
+from mfactcheck.utils.dataset.data_utils import normalize
+from mfactcheck.utils.dataset.reader import JSONLineReader
 
 
 def processed_line(method, line):

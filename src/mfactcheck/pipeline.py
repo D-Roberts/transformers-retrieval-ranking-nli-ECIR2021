@@ -11,7 +11,7 @@ https://github.com/ASoleimaniB/BERT_FEVER
 import argparse
 import os
 
-from configs.config import Config
+from mfactcheck.configs.config import Config
 from mfactcheck.multi_nli.config_util import _get_nli_configs
 from mfactcheck.multi_nli.predict import predict as nli_predict
 from mfactcheck.multi_nli.train import train as nli_train
@@ -27,7 +27,7 @@ from mfactcheck.multi_retriever.sentences.predict import (
     predict as sentence_selector_predict,
 )
 from mfactcheck.multi_retriever.sentences.train import train as sentence_selector_train
-from utils.log_helper import LogHelper
+from mfactcheck.utils.log_helper import LogHelper
 
 
 def document_retrieval(logger, args):

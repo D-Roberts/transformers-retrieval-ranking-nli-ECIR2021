@@ -1,6 +1,6 @@
 """Parse configs for the Document Retriever module"""
 
-from configs.config import Config
+from mfactcheck.configs.config import Config
 
 
 def _get_doc_configs(args):

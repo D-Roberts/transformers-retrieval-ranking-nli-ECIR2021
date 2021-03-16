@@ -3,7 +3,7 @@
 import logging
 import os
 
-from utils.dataset.data_processor import DataProcessor
+from mfactcheck.utils.dataset.data_processor import DataProcessor
 
 
 logger = logging.getLogger(__name__)

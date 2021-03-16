@@ -14,8 +14,8 @@ from mfactcheck.multi_retriever.sentences.data import (
     get_eval_data,
     get_topk_sentences_train,
 )
-from trainer import Trainer
-from utils.log_helper import LogHelper
+from mfactcheck.trainer import Trainer
+from mfactcheck.utils.log_helper import LogHelper
 
 
 def train(logger, args):

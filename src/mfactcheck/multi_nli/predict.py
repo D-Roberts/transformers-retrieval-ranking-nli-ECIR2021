@@ -11,10 +11,10 @@ from pytorch_pretrained_bert.tokenization import BertTokenizer
 
 from mfactcheck.multi_nli.config_util import _get_nli_configs
 from mfactcheck.multi_nli.data import NLIProcessor, convert_examples_to_features
-from trainer import Trainer
-from utils.log_helper import LogHelper
-from utils.model_utils import get_model_dir
-from utils.dataset.data_utils import _clean_last as clean
+from mfactcheck.trainer import Trainer
+from mfactcheck.utils.log_helper import LogHelper
+from mfactcheck.utils.model_utils import get_model_dir
+from mfactcheck.utils.dataset.data_utils import _clean_last as clean
 
 
 def predictions_aggregator(
