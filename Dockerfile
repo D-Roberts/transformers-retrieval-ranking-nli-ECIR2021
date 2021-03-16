@@ -27,19 +27,13 @@ RUN python3 -m pip install --no-cache-dir -r requirements.txt
 
 RUN python3 -c "import nltk; nltk.download('punkt')"
 
-COPY app.py .
-
 RUN mkdir -pv src
-RUN mkdir -pv scripts
-RUN mkdir -pv static
-RUN mkdir -pv templates
+RUN mkdir -pv server
 
 COPY src src
-COPY scripts scripts
-COPY static static
-COPY templates templates
+COPY server server
 
 ENV PYTHONPATH "${PYTHONPATH}:src"
 ENV FLASK_APP app:app
 
-CMD ["python3", "./app.py"]
+CMD ["python3", "./server/app.py"]

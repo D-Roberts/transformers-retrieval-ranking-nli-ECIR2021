@@ -21,8 +21,8 @@ app = Flask(__name__)
 
 cur_dir = os.path.dirname(__file__)
 
-# r = Redis(host='redis', port=6379)
-r = Redis(port=6379)
+r = Redis(host='redis', port=6379)
+# r = Redis(port=6379)
 
 
 def write_cache(claim_id):

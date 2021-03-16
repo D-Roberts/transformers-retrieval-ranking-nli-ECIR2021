@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.3"
 services:
   web:
     build: .
@@ -9,4 +9,4 @@ services:
     command: ["redis-server", "--appendonly", "yes"]
     hostname: redis
     volumes:
-      - /Users/denisaroberts/workspace/multilingual_nli_ECIR2021/redis-data:/data
+      - ./redis-data:/data
