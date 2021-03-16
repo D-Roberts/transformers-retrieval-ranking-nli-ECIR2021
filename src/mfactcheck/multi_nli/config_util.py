@@ -1,6 +1,6 @@
 """Config parsing for NLI module"""
 
-from configs.config import Config
+from mfactcheck.configs.config import Config
 
 
 def _get_nli_configs(args):

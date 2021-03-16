@@ -1,6 +1,6 @@
 """Parse configs for the Sentence Selector module"""
 
-from configs.config import Config
+from mfactcheck.configs.config import Config
 
 
 def _get_sent_configs(args):

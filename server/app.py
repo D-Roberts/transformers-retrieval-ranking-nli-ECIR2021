@@ -12,9 +12,9 @@ from redis import Redis
 from mfactcheck.multi_nli.config_util import _get_nli_configs
 from mfactcheck.multi_retriever.document.api_doc_retrieval import main as doc_retrieval
 from mfactcheck.multi_retriever.sentences.config_util import _get_sent_configs
-from pipeline import nli, sentence_retrieval
-from utils.dataset.reader import JSONLineReader
-from configs.config import Config
+from mfactcheck.pipeline import nli, sentence_retrieval
+from mfactcheck.utils.dataset.reader import JSONLineReader
+from mfactcheck.configs.config import Config
 
 
 app = Flask(__name__)

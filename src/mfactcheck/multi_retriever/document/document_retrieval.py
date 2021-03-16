@@ -10,9 +10,9 @@ import wikipedia
 from allennlp.predictors.predictor import Predictor
 from tqdm import tqdm
 
-from utils.dataset.data_utils import normalize
-from utils.dataset.fever_doc_db import FeverDocDB
-from utils.dataset.reader import JSONLineReader
+from mfactcheck.utils.dataset.data_utils import normalize
+from mfactcheck.utils.dataset.fever_doc_db import FeverDocDB
+from mfactcheck.utils.dataset.reader import JSONLineReader
 
 
 def processed_line(method, line):

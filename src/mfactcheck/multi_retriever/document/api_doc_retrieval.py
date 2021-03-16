@@ -9,7 +9,7 @@ import wikipedia
 from allennlp.predictors.predictor import Predictor
 from tqdm import tqdm
 
-from utils.dataset.reader import JSONLineReader
+from mfactcheck.utils.dataset.reader import JSONLineReader
 
 
 def normalize(text):
