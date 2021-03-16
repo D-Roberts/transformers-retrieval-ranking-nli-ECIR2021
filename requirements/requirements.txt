@@ -8,5 +8,5 @@ onnx==1.6.0
 onnxruntime==1.6.0
 tqdm==4.55.1
 prettytable==2.0.0
-fever-drqa
+fever-drqa==1.0.13
 fever-scorer

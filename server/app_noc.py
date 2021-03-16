@@ -30,19 +30,14 @@ def read_pred():
 
 
 def write_claim_json(claim):
-    os.makedirs(Config.data_dir, exist_ok=True)
-
     input_list = [{"id": 1, "claim": claim}]
     claim_file_path = os.path.join(Config.data_dir, "input.jsonl")
 
-    with open(claim_file_path, "w") as f:
+    with open(claim_file_path, "w+") as f:
         for line in input_list:
             f.write(json.dumps(line) + "\n")
 
-
 def run_document_retrieval():
-    os.makedirs(Config.dataset_folder, exist_ok=True)
-
     doc_retrieval(
         3,
         os.path.join(Config.data_dir, "input.jsonl"),
@@ -86,6 +81,12 @@ def results():
     form = ClaimForm(request.form)
     if request.method == "POST" and form.validate():
         claim = request.form["claimsubmit"]
+
+        if not os.path.isdir(Config.dataset_folder):
+            os.makedirs(Config.dataset_folder)
+        if not os.path.isdir(Config.data_dir):
+            os.makedirs(Config.data_dir)
+
         write_claim_json(claim)
 
         app.logger.info("Starting document retrieval...")
@@ -118,4 +119,4 @@ def feedback():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host="0.0.0.0", port=8080, processes=1)

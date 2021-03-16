@@ -1,0 +1,14 @@
+version: "3.3"
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: ./dockers/docker-api-cpu/Dockerfile
+    ports:
+      - "8080:8080"
+  redis:
+    image: "redis:alpine"
+    command: ["redis-server", "--appendonly", "yes"]
+    hostname: redis
+    volumes:
+      - ./redis-data:/data

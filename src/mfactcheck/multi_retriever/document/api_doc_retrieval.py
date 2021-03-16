@@ -167,14 +167,14 @@ def main(k_wiki, in_file, out_file, add_claim=True, parallel=True):
             for line in tqdm(
                 get_map_function(parallel, p)(
                     lambda l: process_line_with_progress(method, l, progress=None),
-                    lines[:1],
+                    lines,
                 ),
-                total=len(lines[:1]),
+                total=len(lines),
             ):
                 processed[line["id"]] = line
                 # time.sleep(0.5)
         with open(os.path.join(path, out_file), "w+") as f2:
-            for line in lines[:1]:
+            for line in lines:
                 f2.write(json.dumps(processed[line["id"]]) + "\n")
     finally:
         print("...")
@@ -189,7 +189,7 @@ if __name__ == "__main__":
         "--out-file",
         type=str,
         help="path to save output dataset",
-        default="data/data_dir/en_pacepa_wiki9.jsonl",
+        default="data/data_dir/en_ro_pt_docs.jsonl",
     )
     parser.add_argument(
         "--k-wiki", type=int, help="first k pages for wiki search", default=3

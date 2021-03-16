@@ -1,0 +1,72 @@
+*2
+$6
+SELECT
+$1
+0
+*3
+$3
+SET
+$1
+1
+$1346
+{"id": "1", "evidence": [" [ ro_Joe_Biden ] Joseph Robinette \u201eJoe\u201d Biden, Jr. (n. 20 noiembrie 1942, Scranton, Pennsylvania, SUA) este cel de-al 46-lea presedinte al Statelor Unite si fost vicepresedinte in timpul mandatelor prezidentiale ale lui Barack Obama.", " [ ro_Jill_Biden ] Jill Biden (n. 3 iunie 1951, Hammonton, New Jersey, SUA) este o profesoara americana, care a fost A Doua Doamna a Statelor Unite din 2009 pana in 2017 si actuala Prima Doamna, dupa ce sotul ei, Joe Biden, a castigat alegerile prezidentiale in SUA din 2020 si a fost inaugurat ca cel de-al 46-lea presedinte al Statelor Unite la 20 ianuarie 2021.", "\" [ pt_Joe_Biden ] Joseph Robinette \"\"Joe\"\" Biden Jr. (Scranton, 20 de novembro de 1942) e um advogado e politico norte-americano que serve atualmente como o 46.o presidente dos Estados Unidos.\"", " [ pt_Jill_Biden ] Jill Tracy Jacobs Biden ( Hammonton, 3 de junho de 1951) e uma educadora americana e esposa do 46.\u00b0 presidente dos Estados Unidos, Joe Biden, sendo atualmente a primeira-dama dos Estados Unidos.", " [ en_The_President ] In all, 45 individuals have served 46 presidencies spanning 58 full four-year terms.Joe Biden is the 46th and current president of the United States, having assumed office on January 20, 2021."], "claim": "joe biden is the president of the united states."}
+*2
+$6
+SELECT
+$1
+0
+*3
+$3
+SET
+$1
+2
+$1467
+{"id": "2", "evidence": [" [ en_Janis_Joplin ] Janis Lyn Joplin (January 19, 1943 \u2013 October 4, 1970) was an American singer-songwriter who sang rock, soul and blues music.", "\" [ en_Janis_Joplin ] One of the most successful and widely known rock stars of her era, she was noted for her powerful mezzo-soprano vocals and \"\"electric\"\" stage presence.In 1967, Joplin rose to fame following an appearance at Monterey Pop Festival, where she was the lead singer of the then little-known San Francisco psychedelic rock band Big Brother and the Holding Company.\"", " [ en_Janis_Joplin ] She remains one of the top-selling musicians in the United States, with Recording Industry Association of America certifications of 18.5 million albums sold.", " [ ro_Janis_Joplin ] Janis Lyn Joplin (n. 19 ianuarie 1943, Port Arthur, Comitatul Jefferson, Texas, Texas \u2013 d. 4 octombrie 1970, Hollywood, SUA), supranumita Perla (The Pearl), a fost o cantareata, compozitoare si textiera americana de muzica rock (blues-rock, hard rock, psihedelic) cu puternice influente de rhythm and blues si soul.Joplin este considerata unul dintre cele trei superstaruri ale generatiei flower power, alaturi de Jimi Hendrix si Jim Morrison.", " [ pt_Janis_Joplin ] Janis Lyn Joplin (Port Arthur, 19 de janeiro de 1943 \u2014 Los Angeles, 4 de outubro de 1970) foi uma cantora, compositora e multi-instrumentista norte-americana."], "claim": "Janis Joplin was a famous American singer."}
+*2
+$6
+SELECT
+$1
+0
+*3
+$3
+SET
+$1
+3
+$1119
+{"id": "3", "evidence": [" [ en_Jane_Avril ] Jane Avril (9 June 1868 \u2013 31st January 1943) was a French can-can dancer made famous by Henri de Toulouse-Lautrec through his paintings.", " [ ro_Kamala_Harris ] Kamala Devi Harris (n. 20 octombrie 1964, Comitatul Alameda, California, SUA) este o politiciana si avocata americana care ocupa functia de senator al Statelor Unite pentru California din 2017.", " [ ro_Kamala_Harris ] Ea este prima afro-americana, prima americanca de origine asiatica si a treia femeie dupa Geraldine Ferraro si Sarah Palin care candideaza pentru vicepresedintie din partea unui partid major.Alegerile prezidentiale din 2020 au fost castigate de Joe Biden si, implicit, de Harris.", " [ pt_Kamala_Harris ] Kamala Devi Harris (Oakland, California, 20 de outubro de 1964) e uma advogada e politica norte-americana, que atualmente serve como 49.\u00b0 vice-presidente dos Estados Unidos.", " [ pt_Kamala_Harris ] Em agosto de 2020, foi escolhida por Joe Biden como sua companheira de chapa e, em novembro, derrotaram Trump e Mike Pence."], "claim": "Kamala harris is a famous french dancer."}
+*2
+$6
+SELECT
+$1
+0
+*3
+$3
+SET
+$1
+4
+$985
+{"id": "4", "evidence": [" [ en_Ion_Iliescu ] Ion Iliescu (Romanian pronunciation: [i\u02c8on ili\u02c8esku] (listen); born 3 March 1930) is a Romanian politician and engineer who served as President of Romania from 1989 to 1996 and from 2000 until 2004.", " [ en_Ion_Iliescu ] He had a leading role in the Romanian Revolution, becoming the country's president in December 1989.", " [ en_Ion_Iliescu ] During his presidency, Romania joined NATO.", " [ ro_Ion_Iliescu ] Ion Iliescu (n. 3 martie 1930, Oltenita[*]\u200b, Romania) este un politician roman, care a condus statul roman in trei randuri, ca presedinte al CFSN intre 22 decembrie 1989-1992, apoi ca presedinte ales al Romaniei intre anii 1992-1996 si 2000-2004.", " [ pt_Ion_Iliescu ] Ion Iliescu (Oltenita, 3 de marco de 1930) e um politico romeno, foi presidente de seu pais durante tres mandatos (1990-1992), (1992-1996) e (2000-2004), totalizando onze anos no cargo."], "claim": "Ion Iliescu is the president of Romania."}
+*2
+$6
+SELECT
+$1
+0
+*3
+$3
+SET
+$1
+5
+$938
+{"id": "5", "evidence": [" [ en_Vama_Veche ] Vama Veche (historical names: Ilanlak, Ilanlac, Turkish: Ilanl\u0131k) is a village in  Constanta County, Romania, on the Black Sea coast, near the border with Bulgaria, at 28.57 E longitude, 43.75 N latitude.", " [ en_Vama_Veche ] It is part of the commune of Limanu and in 2002, it had a population of 178.", "\" [ en_Vama_Veche_-LRB-band-RRB- ] Vama Veche was a Romanian soft rock band, founded in 1996, the same year in which they recorded the song that would become a big hit in Romania the following year, \"\"Nu am chef azi\"\".\"", " [ ro_Vama_Veche,_Constant\u0326a ] Vama Veche (denumirea turca: Yilanlik, greaca Ofidaki) este un sat in comuna Limanu din judetul Constanta, Dobrogea, Romania.", " [ ro_Vama_Veche_-LRB-format\u0326ie-RRB- ] Vama Veche a fost o formatie romaneasca de muzica rock, fondata in septembrie 1996."], "claim": "Vama Veche is the hippie capital of romania."}
+*2
+$6
+SELECT
+$1
+0
+*3
+$3
+SET
+$1
+6
+$948
+{"id": "6", "evidence": [" [ en_Vama_Veche ] Vama Veche (historical names: Ilanlak, Ilanlac, Turkish: Ilanl\u0131k) is a village in  Constanta County, Romania, on the Black Sea coast, near the border with Bulgaria, at 28.57 E longitude, 43.75 N latitude.", " [ en_Vama_Veche ] It is part of the commune of Limanu and in 2002, it had a population of 178.", "\" [ en_Vama_Veche_-LRB-band-RRB- ] Vama Veche was a Romanian soft rock band, founded in 1996, the same year in which they recorded the song that would become a big hit in Romania the following year, \"\"Nu am chef azi\"\".\"", " [ ro_Vama_Veche,_Constant\u0326a ] Vama Veche (denumirea turca: Yilanlik, greaca Ofidaki) este un sat in comuna Limanu din judetul Constanta, Dobrogea, Romania.", " [ ro_Vama_Veche_-LRB-format\u0326ie-RRB- ] Vama Veche a fost o formatie romaneasca de muzica rock, fondata in septembrie 1996."], "claim": "Vama Veche is the hippie capital of the united states."}

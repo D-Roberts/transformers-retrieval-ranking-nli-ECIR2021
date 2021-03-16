@@ -14,6 +14,7 @@ from mfactcheck.multi_nli.data import NLIProcessor, convert_examples_to_features
 from trainer import Trainer
 from utils.log_helper import LogHelper
 from utils.model_utils import get_model_dir
+from utils.dataset.data_utils import _clean_last as clean
 
 
 def predictions_aggregator(
@@ -40,7 +41,7 @@ def predictions_aggregator(
                 if args.api or args.translated:
                     predicted_evidence[int(g1)].append(line[1])
                 else:
-                    predicted_evidence[int(g1)].append([line[5], int(line[6])])
+                    predicted_evidence[int(g1)].append([clean(line[5]), int(line[6])])
             except Exception as e:
                 continue
 
