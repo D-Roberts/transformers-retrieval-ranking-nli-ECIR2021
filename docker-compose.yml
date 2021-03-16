@@ -1,7 +1,9 @@
 version: "3.3"
 services:
   web:
-    build: .
+    build: 
+      context: .
+      dockerfile: ./dockers/docker-api-cpu/Dockerfile
     ports:
       - "8080:8080"
   redis:

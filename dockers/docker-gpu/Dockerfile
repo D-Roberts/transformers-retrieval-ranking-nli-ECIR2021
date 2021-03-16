@@ -18,13 +18,12 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip && \
     mkl \
     torch==1.5.1
 
-# for drqa
 ENV LC_ALL=C.UTF-8
 
 RUN mkdir /mfactcheck
 WORKDIR /mfactcheck
 
-COPY requirements.txt .
+COPY ./requirements/requirements.txt .
 RUN python3 -m pip install --no-cache-dir -r requirements.txt
 
 RUN mkdir -pv scripts
