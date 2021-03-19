@@ -39,9 +39,9 @@ except AttributeError:
 
 TRAINED_MODEL_ARCHIVE_MAP = {
     "enmbert-sent": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-sent.tar.gz",
-    "enmbert-sent-onnx": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-sent.tar.gz",
+    "enmbert-sent-onnx": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-sent-onnx.tar.gz",
     "enmbert-nli": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-nli.tar.gz",
-    "enmbert-nli-onnx": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-nli.tar.gz",
+    "enmbert-nli-onnx": "https://claimtraindata.s3.amazonaws.com/models/enmbert/enmbert-nli-onnx.tar.gz",
     "enrombert-sent": "https://claimtraindata.s3.amazonaws.com/models/enrombert/enrombert-sent.tar.gz",
     "enrombert-sent-onnx": "https://claimtraindata.s3.amazonaws.com/models/enrombert/enrombert-sent.tar.gz",
     "enrombert-nli": "https://claimtraindata.s3.amazonaws.com/models/enrombert/enrombert-nli.tar.gz",
