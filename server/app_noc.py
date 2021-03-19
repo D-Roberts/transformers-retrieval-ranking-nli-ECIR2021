@@ -6,6 +6,8 @@ import os
 
 from flask import Flask, render_template, request
 from wtforms import Form, TextAreaField, validators
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 from mfactcheck.multi_nli.config_util import _get_nli_configs
 from mfactcheck.multi_retriever.document.api_doc_retrieval import main as doc_retrieval
@@ -16,6 +18,11 @@ from mfactcheck.configs.config import Config
 
 
 app = Flask(__name__)
+limiter = Limiter(
+    app,
+    key_func=get_remote_address,
+    default_limits=["50 per day", "20 per hour"]
+)
 
 cur_dir = os.path.dirname(__file__)
 
@@ -71,12 +78,14 @@ class ClaimForm(Form):
 
 
 @app.route("/")
+@limiter.limit("10/hour", override_defaults=False)
 def index():
     form = ClaimForm(request.form)
     return render_template("claimform.html", form=form)
 
 
 @app.route("/results", methods=["POST"])
+@limiter.limit("10/hour", override_defaults=False)
 def results():
     form = ClaimForm(request.form)
     if request.method == "POST" and form.validate():

@@ -92,21 +92,22 @@ def predictions_aggregator(
             f.write(json.dumps(l) + "\n")
 
 
-def predict(logger, args):
+def predict(logger, trainer, args):
     processor = NLIProcessor()
     output_mode = "classification"
 
-    # load/download the right model
-    if not os.path.isdir(args.output_dir):
-        get_model_dir(args.output_dir, args.add_ro, "nli", args.onnx)
+    # # load/download the right model
+    # if not os.path.isdir(args.output_dir):
+    #     get_model_dir(args.output_dir, args.add_ro, "nli", args.onnx)
 
     label_list = processor.get_labels()
     num_labels = len(label_list)
 
     # Load the trained model
-    model = BertForSequenceClassification.from_pretrained(
-        args.output_dir, num_labels=num_labels
-    )
+    model = None
+    # model = BertForSequenceClassification.from_pretrained(
+    #     args.output_dir, num_labels=num_labels
+    # )
     tokenizer = BertTokenizer.from_pretrained(args.output_dir, do_lower_case=False)
 
     eval_examples = processor.get_dev_examples(args.data_dir, args.predict_rte_file)
@@ -116,15 +117,15 @@ def predict(logger, args):
     eval_data = convert_examples_to_features(
         eval_examples, label_list, args.max_seq_length, tokenizer, output_mode
     )
-
-    trainer = Trainer(model=model, args=args)
-
+    
+    # trainer = Trainer(model=model, args=args)
+    logger.info(f"If predicting with onnx optimized model: {args.onnx}")
     preds, labels, new_guids, guids_map = trainer.predict(eval_data, num_eg)
     preds = np.argmax(preds, axis=1)  # 0 = Support; 1 = Refute; 2 = NEI
 
     # Implements the logic rules to get one verification prediction per claim from 5 separate predictions
     predictions_aggregator(
-        logger, args, preds, labels, new_guids, guids_map, compute_acc=True
+        logger, args, preds, labels, new_guids, guids_map, compute_acc=False
     )
 
 

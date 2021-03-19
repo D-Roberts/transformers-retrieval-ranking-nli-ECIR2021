@@ -201,7 +201,7 @@ def get_file_extension(path, dot=True, lower=True):
 
 
 def get_model_dir(output_dir, add_ro, module, onnx, cache_dir=None):
-    # load by default the model in output_dir if there is one
+    # load by default the model from output_dir if there is one
     os.makedirs(output_dir)
     pretrained_model_name_or_path = (
         "en" + "ro" * int(add_ro) + "mbert" + "-" + module + "-onnx" * int(onnx)
