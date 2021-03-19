@@ -39,7 +39,7 @@ class MultiNLIPipeline(Pipeline):
 
         # Implements the logic rules to get one verification prediction per claim from 5 separate predictions
         predictions_aggregator(
-            logger, self.args, preds, labels, new_guids, guids_map, compute_acc=True
+            logger, self.args, preds, labels, new_guids, guids_map, compute_acc=False
         )
     
     

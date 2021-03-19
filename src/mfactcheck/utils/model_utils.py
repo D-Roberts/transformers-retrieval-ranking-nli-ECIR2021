@@ -78,6 +78,7 @@ def filename_to_url(filename, cache_dir=None):
         cache_dir = PYTORCH_PRETRAINED_BERT_CACHE
     if isinstance(cache_dir, Path):
         cache_dir = str(cache_dir)
+        print('cache_dir', cache_dir)
 
     cache_path = os.path.join(cache_dir, filename)
     if not os.path.exists(cache_path):

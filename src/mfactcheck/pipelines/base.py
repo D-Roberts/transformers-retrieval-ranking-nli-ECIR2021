@@ -50,10 +50,12 @@ class Pipeline:
         self.tokenizer = BertTokenizer.from_pretrained(self.args.output_dir, do_lower_case=False)
 
         self.options = SessionOptions()
+        # 1 thread ensures higher throughput overall 
+        
         # self.options.enable_profiling = True
         self.options.intra_op_num_threads = 1
         self.options.inter_op_num_threads = 1
-        self.options.log_severity_level = 1
+        # self.options.log_severity_level = 1
         self.options.execution_mode = ExecutionMode.ORT_SEQUENTIAL
         # the stored optimized onnx model for the module given by the output_dir value.
         self.model_quant = os.path.join(self.args.output_dir, "converted-optimized.onnx")

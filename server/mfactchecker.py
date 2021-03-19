@@ -4,7 +4,7 @@ import os
 
 from mfactcheck.configs.config import Config
 from mfactcheck.utils.dataset.reader import JSONLineReader
-from app_utils import run_document_retrieval, run_evidence_recommendation
+from server.app_utils import run_document_retrieval, run_evidence_recommendation
 
 class MFactChecker:
     def __init__(self, verifier, r):
