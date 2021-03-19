@@ -59,7 +59,6 @@ def predict(logger, args):
     )
 
     trainer = Trainer(model=model, args=args)
-    logger.info(f"If predicting with onnx optimized model: {args.onnx}")
     logits, _, new_guids, guids_map = trainer.predict(
         eval_features, num_eg
     )
@@ -78,7 +77,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", default="dev_fair", type=str)
     parser.add_argument("--add_ro", default=False, type=bool)
-    parser.add_argument("--onnx", default=True, type=bool)
     args = parser.parse_args()
     args = _get_sent_configs(args)
     LogHelper.setup()

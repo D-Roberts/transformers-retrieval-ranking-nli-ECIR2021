@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Pipelines ONNX runtime only"""
 
 import argparse
 import os
@@ -51,7 +52,7 @@ class Pipeline:
 
         self.options = SessionOptions()
         # 1 thread ensures higher throughput overall 
-        
+
         # self.options.enable_profiling = True
         self.options.intra_op_num_threads = 1
         self.options.inter_op_num_threads = 1
@@ -97,7 +98,6 @@ class Pipeline:
 
     def predict(self, predict_inputs, num_eg):
         eval_data, guid_map = self._prepare_inputs(predict_inputs, num_eg)
-        print(eval_data)
         eval_dataloader = self._get_eval_dataloader(eval_data)
         preds, labels, guids = self.prediction_loop_onnx(eval_dataloader)  
         return (preds, labels, guids, guid_map)
@@ -138,6 +138,5 @@ class Pipeline:
             "attention_mask": input_mask.detach().cpu().numpy(),
         }
         logits = session.run(None, tokens)[0]
-
         
         return (logits, label_ids, guid_ids)

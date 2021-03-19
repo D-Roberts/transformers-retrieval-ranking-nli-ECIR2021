@@ -144,8 +144,8 @@ def get_map_function(parallel, p=None):
     return p.imap_unordered if parallel else map
 
 
-def main(k_wiki, in_file, out_file, add_claim=True, parallel=True):
-    method = Doc_Retrieval(add_claim=add_claim, k_wiki_results=k_wiki)
+def main(doc_retriever, in_file, out_file, k_wiki=1, add_claim=True, parallel=True):
+    method = doc_retriever
     processed = dict()
     path = os.getcwd()
     jlr = JSONLineReader()
@@ -180,22 +180,22 @@ def main(k_wiki, in_file, out_file, add_claim=True, parallel=True):
         print("...")
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--in-file", type=str, help="input dataset", default="data/data_dir/input.jsonl"
-    )
-    parser.add_argument(
-        "--out-file",
-        type=str,
-        help="path to save output dataset",
-        default="data/data_dir/en_ro_pt_docs.jsonl",
-    )
-    parser.add_argument(
-        "--k-wiki", type=int, help="first k pages for wiki search", default=3
-    )
-    parser.add_argument("--parallel", type=bool, default=True)
-    parser.add_argument("--add-claim", type=bool, default=True)
-    args = parser.parse_args()
+# if __name__ == "__main__":
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument(
+#         "--in-file", type=str, help="input dataset", default="data/data_dir/input.jsonl"
+#     )
+#     parser.add_argument(
+#         "--out-file",
+#         type=str,
+#         help="path to save output dataset",
+#         default="data/data_dir/en_ro_pt_docs.jsonl",
+#     )
+#     parser.add_argument(
+#         "--k-wiki", type=int, help="first k pages for wiki search", default=3
+#     )
+#     parser.add_argument("--parallel", type=bool, default=True)
+#     parser.add_argument("--add-claim", type=bool, default=True)
+#     args = parser.parse_args()
 
-    main(args.k_wiki, args.in_file, args.out_file, args.add_claim, args.parallel)
+#     main(args.k_wiki, args.in_file, args.out_file, args.add_claim, args.parallel)

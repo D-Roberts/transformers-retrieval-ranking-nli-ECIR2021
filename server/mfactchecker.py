@@ -1,13 +1,16 @@
 import csv
 import json
 import os 
+import time
 
 from mfactcheck.configs.config import Config
 from mfactcheck.utils.dataset.reader import JSONLineReader
-from app_utils import run_document_retrieval, run_evidence_recommendation
+from mfactcheck.multi_retriever.document.api_doc_retrieval import main as doc_retrieval
 
 class MFactChecker:
-    def __init__(self, verifier, r):
+    def __init__(self, doc_retriever, sentence_selector, verifier, r):
+        self.doc_retriever = doc_retriever
+        self.sentence_selector = sentence_selector
         self.verifier = verifier
         self.r = r
         self.post_init()
@@ -20,6 +23,18 @@ class MFactChecker:
 
     def predict(self):
         self.verifier()
+
+    def get_evidence(self, logger):
+
+        logger.info("Starting document retrieval...")
+        doc_retrieval(
+            doc_retriever=self.doc_retriever,
+            in_file=os.path.join(Config.data_dir, "input.jsonl"),
+            out_file=os.path.join(Config.test_doc_file),
+        )
+
+        logger.info("Sentence selection step...")
+        self.sentence_selector()
 
     def handle_claim_or_id(self, logger, claim_id_or_claim):
         # a claim was entered
@@ -45,19 +60,16 @@ class MFactChecker:
 
         if not self.r.exists(str(claim_id)):
 
-            logger.info("Starting document retrieval...")
-            run_document_retrieval()
-
-            logger.info("Sentence selection step...")
-            run_evidence_recommendation(logger)
+            # get full evidence
+            self.get_evidence(logger)
 
             logger.info("Caching results...")
             self.write_cache(claim_id, self.r)
 
         logger.info("Verification step...")
+       
         self.predict()
 
-        logger.info("Predicting complete...")
         evidence, label = self.read_pred()
 
         return claim, evidence, label

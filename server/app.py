@@ -4,12 +4,15 @@
 import csv
 import json
 import os
+import time
 
 from flask import Flask, render_template, request
 from wtforms import Form, TextAreaField, validators
 from redis import Redis
 
 from mfactchecker import MFactChecker
+from mfactcheck.multi_retriever.document.api_doc_retrieval import Doc_Retrieval
+from mfactcheck.pipelines.multi_sent import MultiSentPipeline
 from mfactcheck.pipelines.multi_nli import MultiNLIPipeline
 
 
@@ -21,9 +24,11 @@ cur_dir = os.path.dirname(__file__)
 # r = Redis(host='redis', port=6379)
 r = Redis(port=6379)
 
-# load pipeline
+# load pipeline models to assemble multilingual fact checker
+doc_retriever = Doc_Retrieval(add_claim=True, k_wiki_results=1)
+sentence_selector = MultiSentPipeline()
 verifier = MultiNLIPipeline()
-predictor = MFactChecker(verifier, r)
+predictor = MFactChecker(doc_retriever, sentence_selector, verifier, r)
 
 
 # Flask
@@ -46,8 +51,10 @@ def results():
     if request.method == "POST" and form.validate():
         claim_id_or_claim = request.form["claimsubmit"]
 
+        startt = time.time()
         claim, evidence, label = predictor.handle_claim_or_id(app.logger, claim_id_or_claim)
-
+        app.logger.info(f"Predicting complete... in {time.time() - startt}")
+        
         if claim is None:
             return render_template("unknown_id.html", form=form)
 

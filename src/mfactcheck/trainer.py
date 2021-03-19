@@ -73,18 +73,6 @@ class Trainer:
         np.random.seed(args.seed)
         torch.manual_seed(args.seed)
 
-        if args.onnx:
-            # self.runoptions = RunOptions()
-            # self.runoptions.log_severity_level = 1
-            self.options = SessionOptions()
-            # self.options.enable_profiling = True
-            self.options.intra_op_num_threads = 1
-            self.options.inter_op_num_threads = 1
-            self.options.log_severity_level = 1
-            self.options.execution_mode = ExecutionMode.ORT_SEQUENTIAL
-            # the stored optimized onnx model for the module given by the output_dir value.
-            self.model_quant = os.path.join(self.args.output_dir, "converted-optimized.onnx")
-            self.session = InferenceSession(self.model_quant, self.options)
 
         if args.local_rank == -1 or args.no_cuda:
             self.device = torch.device(
@@ -337,23 +325,6 @@ class Trainer:
 
         return (preds, labels, guids)
 
-    def prediction_loop_onnx(self, data_loader):
-    
-
-        preds, labels = [], []
-        guids = []
-
-        for guid, input_ids, input_mask, segment_ids, label_ids in tqdm(
-            data_loader, desc="Predicting"
-        ):
-            logits, label_ids, guid_ids = self.prediction_step_onnx(
-                self.session, input_ids, input_mask, segment_ids, label_ids, guid
-            )
-            labels.extend(label_ids.detach().cpu().numpy())
-            guids.extend(guid_ids.detach().cpu().numpy())
-            preds.append(logits[0])
-
-        return (preds, labels, guids)
 
     def prediction_step(
         self, model, input_ids, input_mask, segment_ids, label_ids, guid_ids
@@ -368,26 +339,4 @@ class Trainer:
         with torch.no_grad():
             logits = model(input_ids, segment_ids, input_mask, labels=None)
 
-        return (logits, label_ids, guid_ids)
-
-    def prediction_step_onnx(
-        self, session, input_ids, input_mask, segment_ids, label_ids, guid_ids
-    ):
-
-        input_ids = input_ids.to(self.device)
-        input_mask = input_mask.to(self.device)
-        segment_ids = segment_ids.to(self.device)
-        label_ids = label_ids.to(self.device)
-        guid_ids = guid_ids.to(self.device)
-
-        # tokens for session run
-        
-        tokens = {
-            "input_ids": input_ids.detach().cpu().numpy(),
-            "token_type_ids": segment_ids.detach().cpu().numpy(),
-            "attention_mask": input_mask.detach().cpu().numpy(),
-        }
-        logits = session.run(None, tokens)[0]
-
-        
         return (logits, label_ids, guid_ids)
