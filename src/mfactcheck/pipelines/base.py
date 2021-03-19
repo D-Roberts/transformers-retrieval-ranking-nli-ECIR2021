@@ -50,7 +50,7 @@ class Pipeline:
         self.tokenizer = BertTokenizer.from_pretrained(self.args.output_dir, do_lower_case=False)
 
         self.options = SessionOptions()
-        self.options.enable_profiling = True
+        # self.options.enable_profiling = True
         self.options.intra_op_num_threads = 1
         self.options.inter_op_num_threads = 1
         self.options.log_severity_level = 1

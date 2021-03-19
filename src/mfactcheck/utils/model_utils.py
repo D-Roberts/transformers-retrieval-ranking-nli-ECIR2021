@@ -76,7 +76,7 @@ def filename_to_url(filename, cache_dir=None):
     """
     if cache_dir is None:
         cache_dir = PYTORCH_PRETRAINED_BERT_CACHE
-    if sys.version_info[0] == 3 and isinstance(cache_dir, Path):
+    if isinstance(cache_dir, Path):
         cache_dir = str(cache_dir)
 
     cache_path = os.path.join(cache_dir, filename)
@@ -104,11 +104,10 @@ def cached_path(url_or_filename, cache_dir=None):
     """
     if cache_dir is None:
         cache_dir = PYTORCH_PRETRAINED_BERT_CACHE
-    if sys.version_info[0] == 3 and isinstance(url_or_filename, Path):
+    if isinstance(url_or_filename, Path):
         url_or_filename = str(url_or_filename)
-    if sys.version_info[0] == 3 and isinstance(cache_dir, Path):
+    if isinstance(cache_dir, Path):
         cache_dir = str(cache_dir)
-
     parsed = urlparse(url_or_filename)
 
     if parsed.scheme in ("http", "https"):
@@ -167,17 +166,17 @@ def get_from_cache(url, cache_dir=None):
             # shutil.copyfileobj() starts at the current position, so go to the start
             temp_file.seek(0)
 
-            logger.info("copying %s to cache at %s", temp_file.name, cache_path)
+            logger.info(f"copying {temp_file.name} to cache at {cache_path}")
             with open(cache_path, "wb") as cache_file:
                 shutil.copyfileobj(temp_file, cache_file)
 
-            logger.info("creating metadata file for %s", cache_path)
+            logger.info(f"creating metadata file for {cache_path}")
             meta = {"url": url, "etag": etag}
             meta_path = cache_path + ".json"
             with open(meta_path, "w", encoding="utf-8") as meta_file:
                 json.dump(meta, meta_file)
 
-            logger.info("removing temp file %s", temp_file.name)
+            logger.info(f"removing temp file {temp_file.name}")
 
     return cache_path
 

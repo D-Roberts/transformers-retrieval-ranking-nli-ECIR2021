@@ -93,6 +93,8 @@ def predictions_aggregator(
 
 
 def predict(logger, trainer, args):
+
+    # TODO: instanciate Model class.
     processor = NLIProcessor()
     output_mode = "classification"
 
