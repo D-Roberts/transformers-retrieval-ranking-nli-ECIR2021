@@ -6,10 +6,11 @@ import logging
 import math
 import os
 import random
+# import psutil
 
 import numpy as np
 import torch
-from onnxruntime import ExecutionMode, InferenceSession, SessionOptions
+from onnxruntime import ExecutionMode, InferenceSession, SessionOptions, RunOptions
 from transformers.file_utils import CONFIG_NAME, WEIGHTS_NAME
 from transformers.optimization import AdamW
 from torch.nn import CrossEntropyLoss
@@ -72,6 +73,7 @@ class Trainer:
         np.random.seed(args.seed)
         torch.manual_seed(args.seed)
 
+
         if args.local_rank == -1 or args.no_cuda:
             self.device = torch.device(
                 "cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu"
@@ -93,7 +95,8 @@ class Trainer:
         logger.info(
             f"device: {self.device} n_gpu: {self.n_gpu}, distributed training: {bool(args.local_rank != -1)}"
         )
-        self.model.to(self.device)
+        if model:
+            self.model.to(self.device)
         self.args.train_batch_size = (
             self.args.train_batch_size // self.args.gradient_accumulation_steps
         )
@@ -295,7 +298,7 @@ class Trainer:
         return eval_data, guid_ids_map
 
     def predict(self, predict_inputs, num_eg):
-        logger.info("***** Predicting *****")
+        logger.info(f"***** Predicting ***** with onnx {self.args.onnx}")
         eval_data, guid_map = self._prepare_inputs(predict_inputs, num_eg)
         eval_dataloader = self._get_eval_dataloader(eval_data)
         return (
@@ -322,30 +325,6 @@ class Trainer:
 
         return (preds, labels, guids)
 
-    def prediction_loop_onnx(self, data_loader):
-
-        # the stored optimized onnx model; this is only for the sentence selection module
-        model_quant = os.path.join(self.args.output_dir, "converted-optimized.onnx")
-
-        options = SessionOptions()
-        options.intra_op_num_threads = 1
-        options.execution_mode = ExecutionMode.ORT_SEQUENTIAL
-        session = InferenceSession(model_quant, options)
-
-        preds, labels = [], []
-        guids = []
-
-        for guid, input_ids, input_mask, segment_ids, label_ids in tqdm(
-            data_loader, desc="Predicting"
-        ):
-            logits, label_ids, guid_ids = self.prediction_step_onnx(
-                session, input_ids, input_mask, segment_ids, label_ids, guid
-            )
-            labels.extend(label_ids.detach().cpu().numpy())
-            guids.extend(guid_ids.detach().cpu().numpy())
-            preds.append(logits[0])
-
-        return (preds, labels, guids)
 
     def prediction_step(
         self, model, input_ids, input_mask, segment_ids, label_ids, guid_ids
@@ -359,25 +338,5 @@ class Trainer:
 
         with torch.no_grad():
             logits = model(input_ids, segment_ids, input_mask, labels=None)
-
-        return (logits, label_ids, guid_ids)
-
-    def prediction_step_onnx(
-        self, session, input_ids, input_mask, segment_ids, label_ids, guid_ids
-    ):
-
-        input_ids = input_ids.to(self.device)
-        input_mask = input_mask.to(self.device)
-        segment_ids = segment_ids.to(self.device)
-        label_ids = label_ids.to(self.device)
-        guid_ids = guid_ids.to(self.device)
-
-        # tokens for session run
-        tokens = {
-            "input_ids": input_ids.detach().cpu().numpy(),
-            "token_type_ids": segment_ids.detach().cpu().numpy(),
-            "attention_mask": input_mask.detach().cpu().numpy(),
-        }
-        logits = session.run(None, tokens)[0]
 
         return (logits, label_ids, guid_ids)

@@ -70,7 +70,7 @@ class Config:
     onnx = True
 
     # If running the API
-    api = False
+    api = True
 
     # Doc retrieval
     document_k_wiki = 7

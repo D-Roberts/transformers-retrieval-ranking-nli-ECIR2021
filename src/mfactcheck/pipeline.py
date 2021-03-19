@@ -103,7 +103,7 @@ def sentence_retrieval(logger, args):
         logger.info("Finished sentence retrieval for dev/test set.")
 
 
-def nli(logger, args):
+def nli(logger, trainer, args):
     args = _get_nli_configs(args)
     if args.task == "train":
         logger.info("Starting training fact validation module...")
@@ -111,7 +111,7 @@ def nli(logger, args):
         logger.info("Finished training fact validation module.")
     else:  # predict
         logger.info("Starting predicting fact validation module...")
-        nli_predict(logger, args)
+        nli_predict(logger, trainer, args)
         logger.info("Finished predicting fact validation module.")
 
 
