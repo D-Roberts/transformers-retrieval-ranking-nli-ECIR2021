@@ -146,7 +146,7 @@ def convert_examples_to_features(
             label_id = None
             raise KeyError(output_mode)
 
-        if ex_index < 2:
+        if ex_index < 1:
             logger.info("*** Example ***")
             logger.info("guid: %s" % (example.guid))
             logger.info("tokens: %s" % " ".join([str(x) for x in tokens]))

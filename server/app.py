@@ -10,8 +10,9 @@ from flask import Flask, render_template, request
 from wtforms import Form, TextAreaField, validators
 from redis import Redis
 
+# from server.mfactchecker import MFactChecker
 from mfactchecker import MFactChecker
-from mfactcheck.multi_retriever.document.api_doc_retrieval import Doc_Retrieval
+from mfactcheck.pipelines.multi_doc import Doc_Retrieval
 from mfactcheck.pipelines.multi_sent import MultiSentPipeline
 from mfactcheck.pipelines.multi_nli import MultiNLIPipeline
 
@@ -51,9 +52,8 @@ def results():
     if request.method == "POST" and form.validate():
         claim_id_or_claim = request.form["claimsubmit"]
 
-        startt = time.time()
-        claim, evidence, label = predictor.handle_claim_or_id(app.logger, claim_id_or_claim)
-        app.logger.info(f"Predicting complete... in {time.time() - startt}")
+        claim, evidence, label = predictor.handle_claim_or_id(claim_id_or_claim)
+        app.logger.info(f"MFactchecker completed...")
         
         if claim is None:
             return render_template("unknown_id.html", form=form)

@@ -8,14 +8,11 @@
 </head>
 
 <body>
-    <div class="row">
-        <div class="column" id="left">
-
-    <h4 style="border:2px solid lavender;">Please enter a claim id number from the adjacent list for fast retrieval or a
+    <h2 style="border:2px solid lavender;">Please enter a claim id number from the adjacent list for fast retrieval or a
         claim in English for the end-to-end system to run. If you entered and unkown ID, please enter a valid ID or a
-        new claim. </h4>
-    <h4 style="border:2px solid lavenderblush;">Claims should contain internationally recognized entities (politics,
-        business, media etc.): </h4>
+        new claim. </h2>
+    <h2 style="border:2px solid lavenderblush;">Claims should contain internationally recognized entities (politics,
+        business, media etc.): </h2>
 
     {% from "_formhelpers.html" import render_field %}
 
@@ -31,13 +28,6 @@
     <h4 style="background-color:thistle;"> Disclaimer: This API is for research illustration purposes only and offers no
         guarantees!</h4>
     <img src="{{url_for('static', filename='pacepa.png')}}" height="250" width="600" />
-
-        </div>
-        <div class="column" id="right">
-            <!-- this is the right hand side column -->
-            <img src="{{url_for('static', filename='pacepa.png')}}" height="250" width="50%" />
-        </div>
-    </div>
 
 </body>
 

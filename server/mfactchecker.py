@@ -5,13 +5,18 @@ import time
 
 from mfactcheck.configs.config import Config
 from mfactcheck.utils.dataset.reader import JSONLineReader
-from mfactcheck.multi_retriever.document.api_doc_retrieval import main as doc_retrieval
+from mfactcheck.pipelines.multi_doc import main as doc_retrieval
+from mfactcheck.utils.log_helper import LogHelper
+
+LogHelper.setup()
+logger = LogHelper.get_logger(os.path.splitext(os.path.basename(__file__))[0])
 
 class MFactChecker:
     def __init__(self, doc_retriever, sentence_selector, verifier, r):
         self.doc_retriever = doc_retriever
         self.sentence_selector = sentence_selector
         self.verifier = verifier
+        # the Redis cache is r
         self.r = r
         self.post_init()
 
@@ -24,22 +29,27 @@ class MFactChecker:
     def predict(self):
         self.verifier()
 
-    def get_evidence(self, logger):
+    def get_evidence(self):
 
         logger.info("Starting document retrieval...")
+        st = time.time()
         doc_retrieval(
             doc_retriever=self.doc_retriever,
             in_file=os.path.join(Config.data_dir, "input.jsonl"),
             out_file=os.path.join(Config.test_doc_file),
+            k_wiki=1,
+            add_claim=True,
+            parallel=False
         )
 
-        logger.info("Sentence selection step...")
+        logger.info(f"Doc retrieved in {time.time() - st}. Now sentence selection step...")
         self.sentence_selector()
 
-    def handle_claim_or_id(self, logger, claim_id_or_claim):
+    def handle_claim_or_id(self, claim_id_or_claim):
         # a claim was entered
+        st = time.time()
         if len(claim_id_or_claim) > 20:
-            logger.info("Starting full pipeline...")
+            logger.info("Starting end to end MFactChecker...")
             claim = claim_id_or_claim
             if len(self.r.keys()) == 0:
                 claim_id = 1
@@ -50,10 +60,10 @@ class MFactChecker:
             # an ID was entered
             claim_id = claim_id_or_claim
             if self.r.exists(str(claim_id)): 
-                logger.info("Claim id found in cache, reading 5 sentences for scoring...")
+                logger.info("Claim id found in cache, reading 5 evidence sentences for verifier scoring...")
                 claim = self.read_cache(claim_id, self.r)
             else:
-                logger.info("Claim id not found in cache, user must re-enter...")
+                logger.info("And id was givenn but id not found in cache, user must re-enter...")
                 return (None, None, None)
 
         self.write_claim_json(claim, claim_id)
@@ -61,7 +71,7 @@ class MFactChecker:
         if not self.r.exists(str(claim_id)):
 
             # get full evidence
-            self.get_evidence(logger)
+            self.get_evidence()
 
             logger.info("Caching results...")
             self.write_cache(claim_id, self.r)
@@ -71,6 +81,7 @@ class MFactChecker:
         self.predict()
 
         evidence, label = self.read_pred()
+        logger.info(f"Mfactchecker took {time.time() - st} seconds.")
 
         return claim, evidence, label
 
