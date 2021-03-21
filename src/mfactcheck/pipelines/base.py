@@ -27,12 +27,14 @@ from ..utils.log_helper import LogHelper
 LogHelper.setup()
 logger = LogHelper.get_logger(os.path.splitext(os.path.basename(__file__))[0])
 
+
 class Pipeline:
-    def __init__(self,
-                module="",
-                args=None,
-                args_parser=None,
-                ):
+    def __init__(
+        self,
+        module="",
+        args=None,
+        args_parser=None,
+    ):
 
         self.device = "cpu"
         self.module = module
@@ -46,12 +48,19 @@ class Pipeline:
         self.args = self.args_parser(self.args)
 
         if not os.path.isdir(self.args.output_dir):
-            get_model_dir(output_dir=self.args.output_dir, add_ro=self.args.add_ro, module=self.module, onnx=self.args.onnx) # onnx = True
+            get_model_dir(
+                output_dir=self.args.output_dir,
+                add_ro=self.args.add_ro,
+                module=self.module,
+                onnx=self.args.onnx,
+            )  # onnx = True
 
-        self.tokenizer = BertTokenizer.from_pretrained(self.args.output_dir, do_lower_case=False)
+        self.tokenizer = BertTokenizer.from_pretrained(
+            self.args.output_dir, do_lower_case=False
+        )
 
         self.options = SessionOptions()
-        # 1 thread ensures higher throughput overall 
+        # 1 thread ensures higher throughput overall
 
         # self.options.enable_profiling = True
         self.options.intra_op_num_threads = 1
@@ -59,7 +68,9 @@ class Pipeline:
         # self.options.log_severity_level = 1
         self.options.execution_mode = ExecutionMode.ORT_SEQUENTIAL
         # the stored optimized onnx model for the module given by the output_dir value.
-        self.model_quant = os.path.join(self.args.output_dir, "converted-optimized.onnx")
+        self.model_quant = os.path.join(
+            self.args.output_dir, "converted-optimized.onnx"
+        )
         self.session = InferenceSession(self.model_quant, self.options)
 
     def __call__(self, eval_data, num_eg):
@@ -99,11 +110,11 @@ class Pipeline:
     def predict(self, predict_inputs, num_eg):
         eval_data, guid_map = self._prepare_inputs(predict_inputs, num_eg)
         eval_dataloader = self._get_eval_dataloader(eval_data)
-        preds, labels, guids = self.prediction_loop_onnx(eval_dataloader)  
+        preds, labels, guids = self.prediction_loop_onnx(eval_dataloader)
         return (preds, labels, guids, guid_map)
 
     def prediction_loop_onnx(self, data_loader):
-    
+
         preds, labels = [], []
         guids = []
 
@@ -119,7 +130,6 @@ class Pipeline:
 
         return (preds, labels, guids)
 
-
     def prediction_step_onnx(
         self, session, input_ids, input_mask, segment_ids, label_ids, guid_ids
     ):
@@ -131,12 +141,12 @@ class Pipeline:
         guid_ids = guid_ids.to(self.device)
 
         # tokens for session run
-        
+
         tokens = {
             "input_ids": input_ids.detach().cpu().numpy(),
             "token_type_ids": segment_ids.detach().cpu().numpy(),
             "attention_mask": input_mask.detach().cpu().numpy(),
         }
         logits = session.run(None, tokens)[0]
-        
+
         return (logits, label_ids, guid_ids)

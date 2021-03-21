@@ -6,6 +6,7 @@ import logging
 import math
 import os
 import random
+
 # import psutil
 
 import numpy as np
@@ -72,7 +73,6 @@ class Trainer:
         random.seed(args.seed)
         np.random.seed(args.seed)
         torch.manual_seed(args.seed)
-
 
         if args.local_rank == -1 or args.no_cuda:
             self.device = torch.device(
@@ -324,7 +324,6 @@ class Trainer:
             preds.append(logits.detach().cpu().numpy()[0])
 
         return (preds, labels, guids)
-
 
     def prediction_step(
         self, model, input_ids, input_mask, segment_ids, label_ids, guid_ids

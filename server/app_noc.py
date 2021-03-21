@@ -19,12 +19,12 @@ from mfactcheck.configs.config import Config
 
 app = Flask(__name__)
 limiter = Limiter(
-    app,
-    key_func=get_remote_address,
-    default_limits=["50 per day", "20 per hour"]
+    app, key_func=get_remote_address, default_limits=["50 per day", "20 per hour"]
 )
 
 cur_dir = os.path.dirname(__file__)
+
+# TODO: complete refactor
 
 
 def read_pred():
@@ -43,6 +43,7 @@ def write_claim_json(claim):
     with open(claim_file_path, "w+") as f:
         for line in input_list:
             f.write(json.dumps(line) + "\n")
+
 
 def run_document_retrieval():
     doc_retrieval(

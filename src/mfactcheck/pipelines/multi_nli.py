@@ -26,14 +26,20 @@ class MultiNLIPipeline(Pipeline):
     def __call__(self):
         """Classify verification label given input claim-sentence pairs"""
 
-        eval_examples = self.processor.get_dev_examples(self.args.data_dir, self.args.predict_rte_file)
+        eval_examples = self.processor.get_dev_examples(
+            self.args.data_dir, self.args.predict_rte_file
+        )
         # eval_examples = eval_examples[0:20]  # debugging
         self.num_eg = len(eval_examples)
 
         eval_data = convert_examples_to_features(
-            eval_examples, self.label_list, self.args.max_seq_length, self.tokenizer, "classification"
+            eval_examples,
+            self.label_list,
+            self.args.max_seq_length,
+            self.tokenizer,
+            "classification",
         )
-       
+
         preds, labels, new_guids, guids_map = super().__call__(eval_data, self.num_eg)
         preds = np.argmax(preds, axis=1)  # 0 = Support; 1 = Refute; 2 = NEI
 
@@ -41,5 +47,3 @@ class MultiNLIPipeline(Pipeline):
         predictions_aggregator(
             logger, self.args, preds, labels, new_guids, guids_map, compute_acc=False
         )
-    
-    

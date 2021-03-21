@@ -1,13 +1,31 @@
-<!doctype html>
 <html>
-    <head>
-        <title>Multilingual Evidence Retrieval and Fact Verification</title>
-            <link rel="stylesheet"
-            href="{{ url_for('static', filename='style.css') }}">
-    </head>
-    <body>
 
-        <h3>Results:</h3>
+<head>
+    <style>
+        {
+            box-sizing: border-box;
+        }
+
+        /* Set additional styling options for the columns*/
+        .column {
+            float: left;
+            width: 50%;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row">
+        <div class="column" style="background-color:#f7f4f2;">
+          <h2 style = "text-align:center">Multilingual Evidence Retrieval and Fact Verification</h2>
+            <p>
+           <h3>Results:</h3>
         <div style="background-color:lavender;">{{ content }}</div>
 
         <h3>Prediction:</h3>
@@ -16,9 +34,9 @@
         
         <div id='button'>
             <form action="/thanks" method="post">
-            <input style="background-color:Lightgreen;" type=submit value='Correct'
+            <input style="background-color:Lightgreen;" type=submit value='Human agrees.'
             name='feedback_button'>
-            <input style="background-color:Lightgreen;" type=submit value='Incorrect'
+            <input style="background-color:Lightgreen;" type=submit value='Human disagrees.'
             name='feedback_button'>
             <input style="background-color:Lightgreen;" type=hidden value='{{ retrieved }}'
             name='retrieved'>
@@ -34,6 +52,14 @@
         </div>
 
         <h3 style="background-color:thistle;"> Disclaimer: This API is for research illustration purposes only and offers no guarantees!</h3>
-        <img src="{{url_for('static', filename='pacepa.png')}}" height="250" width="600" />
-    </body>
-</html>
+        <img src="{{url_for('static', filename='pacepa.png')}}" height="250" width="600" /
+
+            </p>
+        </div>
+
+        <div class="column" style="background-color:#fafcfb;">
+            <h3 style = "text-align:center">Cached Claims (and their IDs) for Fast Scoring</h3>
+            <p>
+            <img src="{{url_for('static', filename='claims-final.png')}}" height="600" width="650"/>
+            </p>
+        </div>

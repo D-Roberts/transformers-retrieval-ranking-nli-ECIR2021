@@ -48,9 +48,9 @@ class MultiSentPipeline(Pipeline):
             ro_doc_file=self.args.dev_ro_doc_file,
             api=self.args.api,
         )
-       
+
         logits, _, new_guids, guids_map = super().__call__(eval_features, self.num_eg)
-         # topk selector: get dataset for nli module (dev, test)
+        # topk selector: get dataset for nli module (dev, test)
         get_topk_sentences_eval(
             zip(new_guids, logits),
             guids_map,

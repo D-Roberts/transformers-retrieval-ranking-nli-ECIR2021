@@ -731,7 +731,7 @@ def convert_examples_to_features(
         verification_label_id = label_map[example.verification_label]
         label_id = float(example.label)
 
-        if ex_index < 2:
+        if ex_index < 1:
             logger.info("*** Example ***")
             logger.info("guid: %s" % (example.guid))
             logger.info("tokens: %s" % " ".join([str(x) for x in tokens]))
@@ -833,14 +833,14 @@ def convert_examples_to_features_train(
         label_id = label_map[example.label]
         verification_label_id = label_verification_map[example.verification_label]
 
-        if ex_index < 2:
-            logger.info("*** Example ***")
-            logger.info("guid: %s" % (example.guid))
-            logger.info("tokens: %s" % " ".join([str(x) for x in tokens]))
-            logger.info("input_ids: %s" % " ".join([str(x) for x in input_ids]))
-            logger.info("input_mask: %s" % " ".join([str(x) for x in input_mask]))
-            logger.info("segment_ids: %s" % " ".join([str(x) for x in segment_ids]))
-            logger.info("label: %s (id = %d)" % (example.label, label_id))
+        # if ex_index < 2:
+        #     logger.info("*** Example ***")
+        #     logger.info("guid: %s" % (example.guid))
+        #     logger.info("tokens: %s" % " ".join([str(x) for x in tokens]))
+        #     logger.info("input_ids: %s" % " ".join([str(x) for x in input_ids]))
+        #     logger.info("input_mask: %s" % " ".join([str(x) for x in input_mask]))
+        #     logger.info("segment_ids: %s" % " ".join([str(x) for x in segment_ids]))
+        #     logger.info("label: %s (id = %d)" % (example.label, label_id))
 
         features.append(
             InputFeatures_train(
@@ -931,14 +931,14 @@ def convert_examples_to_features_eval(
 
         label_id = label_map[example.label]
 
-        if ex_index < 2:
-            logger.info("*** Example ***")
-            logger.info("guid: %s" % (example.guid))
-            logger.info("tokens: %s" % " ".join([str(x) for x in tokens]))
-            logger.info("input_ids: %s" % " ".join([str(x) for x in input_ids]))
-            logger.info("input_mask: %s" % " ".join([str(x) for x in input_mask]))
-            logger.info("segment_ids: %s" % " ".join([str(x) for x in segment_ids]))
-            logger.info("label: %s (id = %d)" % (example.label, label_id))
+        # if ex_index < 2:
+        #     logger.info("*** Example ***")
+        #     logger.info("guid: %s" % (example.guid))
+        #     logger.info("tokens: %s" % " ".join([str(x) for x in tokens]))
+        #     logger.info("input_ids: %s" % " ".join([str(x) for x in input_ids]))
+        #     logger.info("input_mask: %s" % " ".join([str(x) for x in input_mask]))
+        #     logger.info("segment_ids: %s" % " ".join([str(x) for x in segment_ids]))
+        #     logger.info("label: %s (id = %d)" % (example.label, label_id))
 
         features.append(
             InputFeatures_dev(

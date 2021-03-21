@@ -7,7 +7,7 @@ import unicodedata
 
 
 def normalize(text):
-    """Resolve different type of unicode encodings. FROM DRQA."""
+    """Resolve different type of unicode encodings."""
     return unicodedata.normalize("NFD", text)
 
 
@@ -41,8 +41,8 @@ def clean_text(text):
     text = re.sub(r"https?:\/\/.*[\r\n]*", "", text, flags=re.MULTILINE)
     text = re.sub(r"\<a href", " ", text)
     text = re.sub(r"&amp;", "", text)
-    text = re.sub(r'["|+&=*#$@/]', "", text)  
-    text = re.sub(r"\(", " ( ", text)  
+    text = re.sub(r'["|+&=*#$@/]', "", text)
+    text = re.sub(r"\(", " ( ", text)
     text = re.sub(r"\)", " ) ", text)
     text = re.sub(r"LRB", " ( ", text)
     text = re.sub(r"RRB", " ) ", text)
@@ -76,10 +76,21 @@ def _clean(s):
 
 # Used at the end
 def _clean_last(page):
+    page = normalize(page)
     page = page.replace("_", " ")
     page = page.replace("-LRB-", "(")
     page = page.replace("-RRB-", ")")
     page = page.replace("-COLON-", ":")
     page = page.replace("\\u200", " ")
-    page = page.replace('"""', ' ')
+    page = page.replace('"""', " ")
+    return page
+
+
+# page clean
+def page_clean(page):
+    page = normalize(page)
+    page = page.replace(" ", "_")
+    page = page.replace("(", "-LRB-")
+    page = page.replace(")", "-RRB-")
+    page = page.replace(":", "-COLON-")
     return page
