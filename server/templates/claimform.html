@@ -1,44 +1,61 @@
-<!doctype html>
 <html>
 
 <head>
-    <title>Multilingual Evidence Retrieval and Fact Verification</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="shortcut icon" href="#">
+    <style>
+        {
+            box-sizing: border-box;
+        }
+
+        /* Set additional styling options for the columns*/
+        .column {
+            float: left;
+            width: 50%;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
 </head>
 
 <body>
     <div class="row">
-        <div class="column" id="left">
+        <div class="column" style="background-color:#f7f4f2;">
+            <h2 style = "text-align:center">Multilingual Evidence Retrieval and Fact Verification</h2>
+            <p>
+                <h4 style="background-color: lavender;">Please enter a claim id number from the adjacent list for fast
+                    retrieval or a
+                    claim in English for the end-to-end system to run. If you entered and unkown ID, please enter a valid ID
+                    or a
+                    new claim. </h4>
+                <h4 style="background-color: lavenderblush;">Claims should contain internationally recognized entities
+                    (politics,
+                    business, media etc.): </h4>
+                
+                {% from "_formhelpers.html" import render_field %}
+                
+                <form method=post action="/results">
+                    <dl>
+                        {{ render_field(form.claimsubmit, cols='50', rows='3') }}
+                    </dl>
+                    <div>
+                        <input style="background-color:Lightgreen;" type=submit value='Submit id or claim' name='submit_btn'>
+                    </div>
+                </form>
+                
+                <h4 style="background-color:thistle;"> Disclaimer: This API is for research illustration purposes only and
+                    offers no
+                    guarantees!</h4>
+                <img src="{{url_for('static', filename='pacepa.png')}}" height="250" width="600" />
 
-    <h4 style="border:2px solid lavender;">Please enter a claim id number from the adjacent list for fast retrieval or a
-        claim in English for the end-to-end system to run. If you entered and unkown ID, please enter a valid ID or a
-        new claim. </h4>
-    <h4 style="border:2px solid lavenderblush;">Claims should contain internationally recognized entities (politics,
-        business, media etc.): </h4>
-
-    {% from "_formhelpers.html" import render_field %}
-
-    <form method=post action="/results">
-        <dl>
-            {{ render_field(form.claimsubmit, cols='50', rows='3') }}
-        </dl>
-        <div>
-            <input style="background-color:Lightgreen;" type=submit value='Submit id or claim' name='submit_btn'>
+            </p>
         </div>
-    </form>
 
-    <h4 style="background-color:thistle;"> Disclaimer: This API is for research illustration purposes only and offers no
-        guarantees!</h4>
-    <img src="{{url_for('static', filename='pacepa.png')}}" height="250" width="600" />
-
+        <div class="column" style="background-color:#fafcfb;">
+            <h3 style = "text-align:center">Cached Claims (and their IDs) for Fast Scoring</h3>
+            <p>
+            <img src="{{url_for('static', filename='claims-final.png')}}" height="600" width="650"/>
+            </p>
         </div>
-        <div class="column" id="right">
-            <!-- this is the right hand side column -->
-            <img src="{{url_for('static', filename='pacepa.png')}}" height="250" width="50%" />
-        </div>
-    </div>
-
-</body>
-
-</html>

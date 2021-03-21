@@ -1,12 +1,29 @@
-<!doctype html>
 <html>
-    <head>
-        <title>Multilingual Evidence Retrieval and Fact Verification</title>
-            <link rel="stylesheet"
-            href="{{ url_for('static', filename='style.css') }}">
-            <link rel="shortcut icon" href="#">
-    </head>
-    <body>
+
+<head>
+    <style>
+        {
+            box-sizing: border-box;
+        }
+
+        /* Set additional styling options for the columns*/
+        .column {
+            float: left;
+            width: 50%;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row">
+        <div class="column" style="background-color:#f7f4f2;">
+        <p>
         <h2>Invalid ID entered. Please enter a valid claim id number from the adjacent list (Eg. 1, 2 ..) or a new claim text at least 20 characters long.): </h2>
         {% from "_formhelpers.html" import render_field %}
 
@@ -23,5 +40,13 @@
         <h4 style="background-color:thistle;"> Disclaimer: This API is for research illustration purposes only and offers no
             guarantees!</h4>
         <img src="{{url_for('static', filename='pacepa.png')}}" height="250" width="600"/>
-    </body>
-</html>
+
+            </p>
+        </div>
+
+        <div class="column" style="background-color:#fafcfb;">
+            <h3 style = "text-align:center">Cached Claims (and their IDs) for Fast Scoring</h3>
+            <p>
+            <img src="{{url_for('static', filename='claims-final.png')}}" height="600" width="650"/>
+            </p>
+        </div>

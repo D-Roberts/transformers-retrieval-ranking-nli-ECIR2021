@@ -36,5 +36,4 @@ COPY server server
 ENV PYTHONPATH "${PYTHONPATH}:src"
 ENV FLASK_APP app:app
 
-# CMD ["python3", "./server/app.py"]
 ENTRYPOINT ["./server/gunicorn_starter.sh"]

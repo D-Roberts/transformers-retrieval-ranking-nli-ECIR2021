@@ -22,7 +22,7 @@ def predict(logger, args):
 
     processor = NLIProcessor()
     output_mode = "classification"
-    args.onnx=False
+    args.onnx = False
 
     # load/download the right model
     if not os.path.isdir(args.output_dir):
@@ -45,7 +45,7 @@ def predict(logger, args):
     eval_data = convert_examples_to_features(
         eval_examples, label_list, args.max_seq_length, tokenizer, output_mode
     )
-    
+
     trainer = Trainer(model=model, args=args)
     preds, labels, new_guids, guids_map = trainer.predict(eval_data, num_eg)
     preds = np.argmax(preds, axis=1)  # 0 = Support; 1 = Refute; 2 = NEI

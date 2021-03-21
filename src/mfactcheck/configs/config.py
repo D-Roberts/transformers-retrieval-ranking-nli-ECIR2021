@@ -24,7 +24,11 @@ class Config:
     def get_args(cls):
         obj = {}
         for k, v in cls.__dict__.items():
-            if not isinstance(v, classmethod) and not isinstance(v, dict) and not k.startswith("__"):
+            if (
+                not isinstance(v, classmethod)
+                and not isinstance(v, dict)
+                and not k.startswith("__")
+            ):
                 obj.update({k: v})
         return obj
 
@@ -47,12 +51,10 @@ class Config:
     dev_ro_doc_file = path.join(dataset_folder, "ro_dev.wiki1.jsonl")
     train_ro_doc_file = path.join(dataset_folder, "ro_train.wiki1.jsonl")
 
-
     # Sentence Selector and Fact Checker data dir and files
     data_dir = path.join(BASE_DIR, "data/data_dir")
     # cached docs for api run
     cached_docs = path.join(data_dir, "en_ro_pt_docs.jsonl")
-    
 
     # For model runs
     cache_dir = ""
@@ -90,16 +92,16 @@ class Config:
         "num_ro_samples": 2,
     }
     # eval dataset options: 'dev_fair', 'dev_gold', 'test', 'train'
-    dataset = 'test'
-    task = 'predict'
+    dataset = "test"
+    task = "predict"
 
     # Models configs
     model_params_sentence = {
         "bert_model": "bert-base-multilingual-cased",
         "max_seq_length": 128,
         "do_lower_case": False,
-        "train_batch_size": 4, # 32
-        "negative_batch_size": 4, # 32
+        "train_batch_size": 4,  # 32
+        "negative_batch_size": 4,  # 32
         "losstype": "cross_entropy",
         "eval_batch_size": 1,
         "learning_rate": 2e-5,
@@ -112,7 +114,7 @@ class Config:
         "bert_model": "bert-base-multilingual-cased",
         "max_seq_length": 128,
         "do_lower_case": False,
-        "train_batch_size": 4, # 32
+        "train_batch_size": 4,  # 32
         "losstype": "cross_entropy",
         "eval_batch_size": 1,
         "learning_rate": 2e-5,

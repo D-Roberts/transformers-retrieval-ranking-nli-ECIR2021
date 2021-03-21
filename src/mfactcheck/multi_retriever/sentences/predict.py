@@ -59,9 +59,7 @@ def predict(logger, args):
     )
 
     trainer = Trainer(model=model, args=args)
-    logits, _, new_guids, guids_map = trainer.predict(
-        eval_features, num_eg
-    )
+    logits, _, new_guids, guids_map = trainer.predict(eval_features, num_eg)
 
     # topk selector: get dataset for nli module (dev, test)
     get_topk_sentences_eval(

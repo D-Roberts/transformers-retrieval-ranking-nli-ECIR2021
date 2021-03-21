@@ -118,9 +118,10 @@ class Doc_Retrieval:
         # logger.info(f"line{line}")
         page_dict = {}
         langs = ["en", "ro", "pt"]
-        
+
         combos = list(itertools.product(noun_phrases, langs))
-        with concurrent.futures.ThreadPoolExecutor(max_workers=36) as executor:
+        # print(combos)
+        with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
             res = (executor.submit(self.searches, np, lang) for (np, lang) in combos)
             for future in concurrent.futures.as_completed(res):
                 try:
@@ -129,8 +130,8 @@ class Doc_Retrieval:
                 except Exception as e:
                     logger.info("some e")
                 else:
-                   page_dict.update(r)
-
+                    page_dict.update(r)
+        # print(page_dict)
         return noun_phrases, [*page_dict.values()], [*page_dict]
 
 
@@ -139,9 +140,8 @@ def main(doc_retriever, in_file, out_file, k_wiki, add_claim, parallel):
     path = os.getcwd()
     jlr = JSONLineReader()
     lines = jlr.read(os.path.join(path, in_file))
-    processed = {line["id"]:processed_line(method, line) for line in lines}
-                
+    processed = {line["id"]: processed_line(method, line) for line in lines}
+
     with open(os.path.join(path, out_file), "w+") as f2:
         for line in lines:
             f2.write(json.dumps(processed[line["id"]]) + "\n")
-    
