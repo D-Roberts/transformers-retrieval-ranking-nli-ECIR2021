@@ -64,14 +64,14 @@ docker run -it --rm --ipc=host -v /home/ubuntu/multilingual-nli-ECIR2021/data:/m
 root@6acc74271d7b:/mfactcheck# python3 scripts/build_db.py data/wiki-pages data/fever/fever.db
 ```
 
-#3. Optionally, download intermediary datasets output by each module: docs from [athene](https://github.com/UKPLab/fever-2018-team-athene), sent train/predict, nli train/predict files (en and ro):
+3. Optionally, download intermediary datasets output by each module: docs from [athene](https://github.com/UKPLab/fever-2018-team-athene), sent train/predict, nli train/predict files (en and ro):
 
 ```
 bash scripts/download-doc-files-athens.sh
 bash scripts/download-train-files.sh
 bash scripts/download-dev-files.sh
 ```
-#4. Train / predict the full pipeline or intermediary components. Datasets must be in data/data_dir mapped to docker volume. In training, model dirs out_dir_sent and out_dir_rte are recreated.
+4. Train / predict the full pipeline or intermediary components. Datasets must be in data/data_dir mapped to docker volume. In training, model dirs out_dir_sent and out_dir_rte are recreated.
 ```
 root@6acc74271d7b:/mfactcheck# python3 src/end_to_end_fine_tune.py --task=train
 
