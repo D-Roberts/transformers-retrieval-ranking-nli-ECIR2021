@@ -18,11 +18,6 @@ The end to end system will be served via a live API during the ECIR 2021 confere
 ### Steps to access API at http://0.0.0.0:8080/ :
 
 Requires up to 4Gb RAM. 
-
-Easiest. Install [Docker](https://docs.docker.com/get-docker/) then run:
-```
-docker run --rm -p 8080:8080 -m 4g droberts1/fact-verification
-```
 Tested on MacOS Big Sur and Ubuntu18.04 64-bitX86. Pretrained models will be downloaded from S3.
 
 Build locally:
@@ -32,28 +27,9 @@ git clone https://github.com/D-Roberts/multilingual-nli-ECIR2021.git
 cd multilingual-nli-ECIR2021
 ```
 
-2. Build Docker (CPU):
+2. Build and run Docker (CPU):
 ```
-docker build -t multi_api:latest -f dockers/docker-api-cpu/Dockerfile .
-```
-
-3. Run docker with mapped ports:
-```
-docker run --rm --ipc=host -p 8080:8080 multi_api:latest
-```
-4. In your browser go to http://0.0.0.0:8080/ , provide a claim with recognizable named entities, and the pipeline will run as depicted in the diagram above. Entities will be parsed, documents (Wikipedia pages) will be retrieved in English, Romanian and Portuguese, summaries tokenized into sentences and scored by the sentence selector, top 5 sentences will be provided to fact verifier and final prediction aggregated.
-
-
-5. To score other files on CPU, one can run the same docker container. The dataset to score can be provided in a mapped data volume (see the GPU instructions for specifics) and predictions will be in a mapped out_dir_rte (refined_preds.jsonl). (need to replace paths to user's specifics)
-
-```
-docker run -it --rm --ipc=host -p 8080:8080 -v $LOCALPATH/data:/mfactcheck/data -v $LOCALPATH/out_dir_rte:/mfactcheck/out_dir_rte multi_api:latest bash
-
-root@6acc74271d7b:/mfactcheck# python3 src/pipeline.py
-
-# or
-
-root@6acc74271d7b:/mfactcheck# python3 src/mfactcheck/multi_nli/predict.py --predict_rte_file=translated_data.tsv
+docker-compose up --build
 ```
 
 ## III. To get the Romanian-English translated dataset (and readme file):
@@ -95,7 +71,7 @@ bash scripts/download-dev-files.sh
 ```
 #4. Train / predict the full pipeline or intermediary components. Datasets must be in data/data_dir mapped to docker volume. In training, model dirs out_dir_sent and out_dir_rte are recreated.
 ```
-root@6acc74271d7b:/mfactcheck# python3 src/pipeline.py --task=train
+root@6acc74271d7b:/mfactcheck# python3 src/end_to_end_fine_tune.py --task=train
 
 # or
 root@6acc74271d7b:/mfactcheck# python3 src/mfactcheck/multi_nli/train.py --[options]
