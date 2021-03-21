@@ -49,6 +49,7 @@ Please see repository directory structure in [assets](https://github.com/D-Rober
 docker build -t mtest:latest -f dockers/docker-gpu/Dockerfile .
 ```
 2. Get data and build datasets. Data is under Wikipedia and [fever.ai](https://fever.ai/) associated licenses included in the downloads.
+
 ```
 #1. Make directories and get FEVER task data (En)
 
@@ -64,6 +65,7 @@ root@6acc74271d7b:/mfactcheck# python3 scripts/build_db.py data/wiki-pages data/
 ```
 
 #3. Optionally, download intermediary datasets output by each module: docs from [athene](https://github.com/UKPLab/fever-2018-team-athene), sent train/predict, nli train/predict files (en and ro):
+
 ```
 bash scripts/download-doc-files-athens.sh
 bash scripts/download-train-files.sh
