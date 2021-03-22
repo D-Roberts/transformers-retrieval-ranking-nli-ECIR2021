@@ -85,3 +85,34 @@ $2
 11
 $1013
 {"id": "11", "evidence": [" [ en Madonna ] Madonna Louise Ciccone (; Italian: [t\u0283ik\u02c8ko\u02d0ne]; born August 16, 1958) is an American singer, songwriter, and actress.", " [ en Madonna ] Born and raised in Michigan, Madonna moved to New York City in 1978 to pursue a career in modern dance.", " [ ro Madonna ] Madonna Louise Ciccone (n. 16 august 1958, Bay City, Michigan, Statele Unite ale Americii), supranumita \u201eregina muzicii pop\u201d este o cantareata americana, actrita, producatoare si compozitoare de muzica pop, castigatoare a sapte premii Grammy, laureata a doua premii Globul de Aur si autoare de carti.", " [ pt Madonna ] Madonna Louise Veronica Ciccone (Bay City, 16 de agosto de 1958) e uma cantora, compositora, produtora musical, atriz, escritora, dancarina e empresaria americana.", " [ pt Madonna ] Nascida e criada em Michigan, Madonna se mudou para a cidade de Nova Iorque em 1978 para seguir carreira na danca contemporanea."], "claim": "Madonna is a famous Romanian actress."}
+*2
+$6
+SELECT
+$1
+0
+*3
+$3
+SET
+$2
+12
+$960
+{"id": "12", "evidence": [" [ en COVID-19 ] Coronavirus disease 2019 (COVID-19) is a contagious disease caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2).", " [ en COVID-19 ] The first case was identified in Wuhan, China, in December 2019.", " [ ro COVID-19 ] Infectii au fost raportate in intreaga lume occidentala si Asia-Pacific, in cea mai mare parte la turisti provenind din China Continentala, cu transmitere locala raportata in Romania Italia Spania Germania, Franta, Hong Kong, Vietnam, Thailanda, Singapore, Japonia, Coreea de Sud si Australia.", " [ ro COVID-19 ] Incepand cu 11 februarie 2020, China Continentala este considerata ca o zona cunoscuta cu transmitere comunitara de SARS-CoV-2.", " [ pt COVID-19 ] Os antibioticos nao tem efeito contra virus.O SARS-CoV-2 foi identificado pela primeira vez em seres humanos em dezembro de 2019 na cidade de Wuhan, na China."], "claim": "COVID-19 was sent over by aliens from Mars."}
+*3
+$3
+SET
+$2
+13
+$1010
+{"id": "13", "evidence": [" [ ro Aliens - Misiune de pedeaps\u0103 ] Actiunea filmului are loc la 57 ani dupa cea din primul film, personajul Weaver Ellen Ripley se reintoarce pe planetoidul LV-426 unde a intalnit pentru prima oara extraterestrul ostil.", " [ en Biker Mice from Mars ] Despite the frequent battles, no blood is shown, no firearms are used and many villains are monsters, aliens, and robots.", " [ pt COVID-19 ] Os antibioticos nao tem efeito contra virus.O SARS-CoV-2 foi identificado pela primeira vez em seres humanos em dezembro de 2019 na cidade de Wuhan, na China.", " [ pt COVID-19 ] O surto inicial deu origem a uma pandemia global que a data de 21 de marco de 2021 tinha resultado em 122 745 269 casos confirmados e 2 709 318 mortes em todo o mundo.", " [ pt COVID-19 ] Entre outras epidemias causadas por coronavirus estao a epidemia de SARS em 2002-2003 e a epidemia de sindrome respiratoria do Medio Oriente (MERS) em 2012."], "claim": "COVID-16 was sent over by aliens from Mars."}
+*2
+$6
+SELECT
+$1
+0
+*3
+$3
+SET
+$2
+14
+$960
+{"id": "14", "evidence": [" [ en COVID-19 ] Coronavirus disease 2019 (COVID-19) is a contagious disease caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2).", " [ en COVID-19 ] The first case was identified in Wuhan, China, in December 2019.", " [ ro COVID-19 ] Infectii au fost raportate in intreaga lume occidentala si Asia-Pacific, in cea mai mare parte la turisti provenind din China Continentala, cu transmitere locala raportata in Romania Italia Spania Germania, Franta, Hong Kong, Vietnam, Thailanda, Singapore, Japonia, Coreea de Sud si Australia.", " [ ro COVID-19 ] Incepand cu 11 februarie 2020, China Continentala este considerata ca o zona cunoscuta cu transmitere comunitara de SARS-CoV-2.", " [ pt COVID-19 ] Os antibioticos nao tem efeito contra virus.O SARS-CoV-2 foi identificado pela primeira vez em seres humanos em dezembro de 2019 na cidade de Wuhan, na China."], "claim": "COVID-19 was sent over by aliens from Mars."}
