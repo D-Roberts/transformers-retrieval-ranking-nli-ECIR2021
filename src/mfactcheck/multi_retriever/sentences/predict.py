@@ -3,37 +3,23 @@
 import argparse
 import os
 
-from pytorch_pretrained_bert.modeling import BertForSequenceClassification
-from pytorch_pretrained_bert.tokenization import BertTokenizer
-
 from mfactcheck.multi_retriever.sentences.config_util import _get_sent_configs
 from mfactcheck.multi_retriever.sentences.data import (
     SentenceProcessor,
     get_eval_data,
     get_topk_sentences_eval,
 )
+from mfactcheck.models.sent_mbert import SentMBert
 from mfactcheck.trainer import Trainer
 from mfactcheck.utils.log_helper import LogHelper
-from mfactcheck.utils.model_utils import get_model_dir
 
 
 def predict(logger, args):
 
-    processor = SentenceProcessor()
-    output_mode = "classification"
-
-    # load/download the right model
-    if not os.path.isdir(args.output_dir):
-        get_model_dir(args.output_dir, args.add_ro, "sent", args.onnx)
-
-    label_list = processor.get_labels()
-    label_verification_list = processor.get_labels_verification()
-    num_labels = len(label_list)
-
-    model = BertForSequenceClassification.from_pretrained(
-        args.output_dir, num_labels=num_labels
-    )
-    tokenizer = BertTokenizer.from_pretrained(args.output_dir, do_lower_case=False)
+    module = SentMBert(args.output_dir)
+    label_list = module.processor.get_labels()
+    label_verification_list = module.processor.get_labels_verification()
+    model = module.model
 
     input_doc_file = args.dev_doc_file
     if args.dataset == "test":
@@ -44,11 +30,11 @@ def predict(logger, args):
         db_path=args.db_path,
         data_dir=args.data_dir,
         output_file_name=args.predict_sentence_file_name,
-        processor=processor,
-        tokenizer=tokenizer,
-        output_mode=output_mode,
-        label_list=label_list,
-        label_verification_list=label_verification_list,
+        processor=module.processor,
+        tokenizer=module.tokenizer,
+        output_mode="classification",
+        label_list=module.label_list,
+        label_verification_list=module.label_verification_list,
         max_seq_length=args.max_seq_length,
         dataset=args.dataset,
         do_doc_process=args.do_doc_process,

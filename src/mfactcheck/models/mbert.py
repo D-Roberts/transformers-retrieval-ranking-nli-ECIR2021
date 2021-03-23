@@ -20,7 +20,6 @@ class MBert:
         if not os.path.isdir(output_dir):
             get_model_dir(output_dir, add_ro=add_ro, module=module, onnx=False)
         self.model = BertForSequenceClassification.from_pretrained(
-            output_dir, num_labels=self.num_labels)
+            output_dir, num_labels=self.num_labels
+        )
         self.tokenizer = BertTokenizer.from_pretrained(output_dir, do_lower_case=False)
-        
-    

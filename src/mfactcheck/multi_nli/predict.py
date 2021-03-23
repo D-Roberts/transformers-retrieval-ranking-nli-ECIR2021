@@ -22,15 +22,21 @@ def predict(logger, args):
     model = module.model
     label_list = module.label_list
     num_labels = module.num_labels
-    eval_examples = module.processor.get_dev_examples(args.data_dir, args.predict_rte_file)
+    eval_examples = module.processor.get_dev_examples(
+        args.data_dir, args.predict_rte_file
+    )
     # eval_examples = eval_examples[0:20]  # debugging
     num_eg = len(eval_examples)
 
     eval_data = convert_examples_to_features(
-        eval_examples, label_list, args.max_seq_length, module.tokenizer, "classification"
+        eval_examples,
+        label_list,
+        args.max_seq_length,
+        module.tokenizer,
+        "classification",
     )
-    # Predict with torch 
-    args.onnx = False
+
+    args.onnx = False  # used in pipelines
     trainer = Trainer(model=model, args=args)
     preds, labels, new_guids, guids_map = trainer.predict(eval_data, num_eg)
     preds = np.argmax(preds, axis=1)  # 0 = Support; 1 = Refute; 2 = NEI
