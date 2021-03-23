@@ -6,46 +6,37 @@ import json
 import os
 
 import numpy as np
-from pytorch_pretrained_bert.modeling import BertForSequenceClassification
-from pytorch_pretrained_bert.tokenization import BertTokenizer
 
 from mfactcheck.multi_nli.config_util import _get_nli_configs
-from mfactcheck.multi_nli.data import NLIProcessor, convert_examples_to_features
+from mfactcheck.models.nli_mbert import NLIMBert
+from mfactcheck.multi_nli.data import convert_examples_to_features
 from mfactcheck.trainer import Trainer
 from mfactcheck.utils.log_helper import LogHelper
-from mfactcheck.utils.model_utils import get_model_dir
-from mfactcheck.utils.dataset.data_utils import _clean_last as clean
 from mfactcheck.utils.predict_utils import predictions_aggregator
 
 
 def predict(logger, args):
+    """Predict script for NLI module"""
 
-    processor = NLIProcessor()
-    output_mode = "classification"
-    args.onnx = False
-
-    # load/download the right model
-    if not os.path.isdir(args.output_dir):
-        get_model_dir(args.output_dir, args.add_ro, "nli", args.onnx)
-
-    label_list = processor.get_labels()
-    num_labels = len(label_list)
-
-    # Load the trained model
-    model = None
-    model = BertForSequenceClassification.from_pretrained(
-        args.output_dir, num_labels=num_labels
+    module = NLIMBert(args.output_dir)
+    model = module.model
+    label_list = module.label_list
+    num_labels = module.num_labels
+    eval_examples = module.processor.get_dev_examples(
+        args.data_dir, args.predict_rte_file
     )
-    tokenizer = BertTokenizer.from_pretrained(args.output_dir, do_lower_case=False)
-
-    eval_examples = processor.get_dev_examples(args.data_dir, args.predict_rte_file)
     # eval_examples = eval_examples[0:20]  # debugging
     num_eg = len(eval_examples)
 
     eval_data = convert_examples_to_features(
-        eval_examples, label_list, args.max_seq_length, tokenizer, output_mode
+        eval_examples,
+        label_list,
+        args.max_seq_length,
+        module.tokenizer,
+        "classification",
     )
 
+    args.onnx = False  # used in pipelines
     trainer = Trainer(model=model, args=args)
     preds, labels, new_guids, guids_map = trainer.predict(eval_data, num_eg)
     preds = np.argmax(preds, axis=1)  # 0 = Support; 1 = Refute; 2 = NEI
