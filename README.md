@@ -11,7 +11,7 @@
 
 ## II. API (MVP for research illustration purpose only)
 
-* Try fun claims such as "COVID-19 was sent over by aliens from Mars." Good way to retrieve facts and learn some Portuguese and Romanian!
+* Try fun claims such as {"COVID-19 was sent over by aliens from Mars."} Good way to retrieve facts and learn some Portuguese and Romanian!
 
 * System runs at approx 20 QPS. Last step on cached pre-retrieved top 5 evidence sentences runs within 0.25s SLA; end-to-end approx 30s (all steps).
 
