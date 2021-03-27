@@ -10,7 +10,7 @@
 
 
 ## II. API (MVP for research illustration purpose only)
-The end to end system will be served via a live API during the ECIR 2021 conference. Furthermore, it can be accessed locally via Docker at approx 20 QPS.
+The end to end system will be served via a live API during the ECIR 2021 conference. Furthermore, it can be accessed locally via Docker at approx 20 QPS. Last step on cached pre-retrieved top 5 evidence sentences within 0.25 SLA; end-to-end approx 30s (all steps).
 
 ![Multilingual evidence retrieval and fact verification system.](/assets/pacepa_eg.png)
 
