@@ -71,7 +71,9 @@ class Pipeline:
         # the stored optimized onnx model for the module given by the output_dir value.
 
         # pre-optimized for this hardware so turn off on the fly optimizations
-        self.options.graph_optimization_level = rt.GraphOptimizationLevel.ORT_DISABLE_ALL
+        # self.options.graph_optimization_level = rt.GraphOptimizationLevel.ORT_DISABLE_ALL
+        # still faster on the fly 
+        
         self.model_quant = os.path.join(
             self.args.output_dir, "converted-optimized.onnx"
         )

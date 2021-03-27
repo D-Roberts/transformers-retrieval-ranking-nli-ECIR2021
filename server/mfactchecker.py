@@ -22,13 +22,8 @@ class MFactChecker:
         self.post_init()
 
     def post_init(self):
-        # if not os.path.isdir(Config.dataset_folder):
-        #     os.makedirs(Config.dataset_folder)
         os.makedirs(Config.dataset_folder, exist_ok=True)
-        # if not os.path.isdir(Config.data_dir):
-        #     os.makedirs(Config.data_dir)
         os.makedirs(Config.data_dir, exist_ok=True)
-
 
     def predict(self):
         self.verifier()
@@ -60,7 +55,7 @@ class MFactChecker:
             if len(self.r.keys()) == 0:
                 claim_id = 1
             else:
-                claim_id = max([int(x.decode("utf8")) for x in self.r.keys()]) + 1
+                claim_id = max([int(x.decode("utf-8")) for x in self.r.keys()]) + 1
 
         else:
             # an ID was entered
@@ -143,5 +138,4 @@ class MFactChecker:
                 d_to_write["evidence"].append(line[1])
         json_obj = json.dumps(d_to_write)
         self.r.set(str(claim_id), json_obj)
-        # snapshot
-        self.r.bgsave()
+       
