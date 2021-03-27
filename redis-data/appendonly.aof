@@ -116,3 +116,22 @@ $2
 14
 $960
 {"id": "14", "evidence": [" [ en COVID-19 ] Coronavirus disease 2019 (COVID-19) is a contagious disease caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2).", " [ en COVID-19 ] The first case was identified in Wuhan, China, in December 2019.", " [ ro COVID-19 ] Infectii au fost raportate in intreaga lume occidentala si Asia-Pacific, in cea mai mare parte la turisti provenind din China Continentala, cu transmitere locala raportata in Romania Italia Spania Germania, Franta, Hong Kong, Vietnam, Thailanda, Singapore, Japonia, Coreea de Sud si Australia.", " [ ro COVID-19 ] Incepand cu 11 februarie 2020, China Continentala este considerata ca o zona cunoscuta cu transmitere comunitara de SARS-CoV-2.", " [ pt COVID-19 ] Os antibioticos nao tem efeito contra virus.O SARS-CoV-2 foi identificado pela primeira vez em seres humanos em dezembro de 2019 na cidade de Wuhan, na China."], "claim": "COVID-19 was sent over by aliens from Mars."}
+*2
+$6
+SELECT
+$1
+0
+*3
+$3
+SET
+$2
+15
+$1145
+{"id": "15", "evidence": [" [ en Russians ] The Russians (Russian: \u0440\u0443\u0441\u0441\u043a\u0438\u0435) are an East Slavic ethnic group native to Eastern Europe, who share a common Russian ancestry, culture, and history.", " [ en Russians ] They are the largest Slavic nation, as well as the largest European nation.", " [ en Russians ] The ethnic Russians were formed from East Slavic tribes and their cultural ancestry is based in Kievan Rus'.", " [ en Russians ] The majority of Russians live throughout the Russian Federation, but notable minorities exist in other former Soviet states such as Belarus, Kazakhstan, Moldova, Ukraine and the Baltic states.", " [ pt R\u00fassia ] Rossia, pronuncia russa: [r\u0250\u02c8sjij\u0259] (escutar )), oficialmente Federacao Russa (em russo:  \u0420\u043e\u0441\u0441\u0438\u0438\u0441\u043a\u0430\u044f \u0424\u0435\u0434\u0435\u0440\u0430\u0446\u0438\u044f, Rossiiskaia Federatsia, pronuncia russa: [r\u0250\u02c8sjijsk\u0259j\u0259 fj\u026adj\u026a\u02c8rats\u0268j\u0259] (escutar )), e um pais localizado no norte da Eurasia."], "claim": "Human are from Mars and Russians are from Venus."}
+*3
+$3
+SET
+$2
+16
+$1208
+{"id": "16", "evidence": [" [ en Ion Mihai Pacepa ] Ion Mihai Pacepa (Romanian pronunciation: [i\u02c8on mi\u02c8haj pa\u02c8t\u0283epa]; 28 October 1928 \u2013 14 February 2021) was a two-star general in the Securitate, the secret police of Communist Romania, who defected to the United States in July 1978 following President Jimmy Carter's approval of his request for political asylum.", " [ ro Ion Mihai Pacepa ] Ion Mihai Pacepa (n. 28 octombrie 1928, Bucuresti, Romania \u2013 d. 14 februarie 2021, Statele Unite ale Americii, SUA) a fost un general in Securitate si jurnalist roman.", " [ pt Ion Mihai Pacepa ] Ion Mihai Pacepa (Bucareste, 28 de outubro de 1928 \u2013 14 de fevereiro de 2021) foi um general tres estrelas da Securitate (a policia secreta da Romenia comunista) que desertou para os Estados Unidos em julho de 1978.", " [ pt Ion Mihai Pacepa ] Ion Mihai Pacepa foi general da policia secreta da Romenia comunista, antes de pedir demissao do seu cargo e fugir para os EUA no fim da decada de 70.", " [ pt Ion Mihai Pacepa ] Morreu nos Estados Unidos em 14 de fevereiro de 2021, aos 92 anos de idade, de COVID-19."], "claim": "Ion Mihai Pacepa, the former Securitate general, is alive."}

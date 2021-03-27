@@ -34,6 +34,9 @@ COPY src src
 COPY server server
 
 ENV PYTHONPATH "${PYTHONPATH}:src"
+
+RUN python3 server/preload.py
+
 ENV FLASK_APP app:app
 
 ENTRYPOINT ["./server/gunicorn_starter.sh"]

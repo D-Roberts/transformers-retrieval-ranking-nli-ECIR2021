@@ -18,11 +18,6 @@ LogHelper.setup()
 logger = LogHelper.get_logger(os.path.splitext(os.path.basename(__file__))[0])
 
 
-def normalize(text):
-    """Resolve different type of unicode encodings."""
-    return unicodedata.normalize("NFD", text)
-
-
 def processed_line(method, line):
     nps, summaries, pages = method.exact_match(line)
     line["noun_phrases"] = nps

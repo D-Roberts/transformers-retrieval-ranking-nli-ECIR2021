@@ -22,10 +22,13 @@ class MFactChecker:
         self.post_init()
 
     def post_init(self):
-        if not os.path.isdir(Config.dataset_folder):
-            os.makedirs(Config.dataset_folder)
-        if not os.path.isdir(Config.data_dir):
-            os.makedirs(Config.data_dir)
+        # if not os.path.isdir(Config.dataset_folder):
+        #     os.makedirs(Config.dataset_folder)
+        os.makedirs(Config.dataset_folder, exist_ok=True)
+        # if not os.path.isdir(Config.data_dir):
+        #     os.makedirs(Config.data_dir)
+        os.makedirs(Config.data_dir, exist_ok=True)
+
 
     def predict(self):
         self.verifier()

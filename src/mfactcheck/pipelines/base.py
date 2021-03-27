@@ -17,6 +17,7 @@ import argparse
 import os
 from tqdm import tqdm
 import torch
+import onnxruntime as rt
 from onnxruntime import ExecutionMode, InferenceSession, SessionOptions, RunOptions
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler, TensorDataset
 
@@ -68,6 +69,9 @@ class Pipeline:
         # self.options.log_severity_level = 1
         self.options.execution_mode = ExecutionMode.ORT_SEQUENTIAL
         # the stored optimized onnx model for the module given by the output_dir value.
+
+        # pre-optimized for this hardware so turn off on the fly optimizations
+        self.options.graph_optimization_level = rt.GraphOptimizationLevel.ORT_DISABLE_ALL
         self.model_quant = os.path.join(
             self.args.output_dir, "converted-optimized.onnx"
         )

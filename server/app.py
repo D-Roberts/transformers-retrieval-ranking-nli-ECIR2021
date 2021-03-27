@@ -20,8 +20,7 @@ from mfactcheck.pipelines.multi_nli import MultiNLIPipeline
 app = Flask(__name__)
 cur_dir = os.path.dirname(__file__)
 
-# start redis cache for retrieved sentences
-
+# use redis cache for retrieved sentences
 r = Redis(host='redis', port=6379)
 # r = Redis(port=6379)
 
