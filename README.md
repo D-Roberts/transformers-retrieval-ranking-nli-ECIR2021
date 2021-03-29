@@ -29,7 +29,7 @@ If you use this repository please consider giving it a star and citing our paper
 ![Multilingual evidence retrieval and fact verification system.](/assets/pacepa_eg.png)
 
 
-### Steps to access API at http://0.0.0.0:8080/ :
+### Steps to access API locally, at http://0.0.0.0:8080/ :
 
 Requires up to 4Gb RAM. 
 Tested on MacOS Big Sur and Ubuntu18.04 64-bitX86. Pretrained models will be downloaded from S3.
