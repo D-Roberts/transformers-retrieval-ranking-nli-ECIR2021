@@ -1,5 +1,5 @@
 ## I. Article.
-If you use this repository please consider citing our paper and starring this repository: 
+If you use this repository please consider giving it a star and citing our paper: 
 
 [Multilingual Evidence Retrieval and Fact Verification to Combat Global Disinformation: The Power of Polyglotism](https://arxiv.org/pdf/2012.08919.pdf)
 ```
