@@ -12,7 +12,7 @@ If you use this repository please consider giving it a star and citing our paper
 ```
 
 
-## II. API (MVP for research illustration purpose only) Live at: http://34.207.240.102:8080/
+## II. API (MVP for research illustration purpose only). Live at: http://34.207.240.102:8080/
 
 * Try fun claims such as {"COVID-19 was sent over by aliens from Mars."} Good way to retrieve facts and learn some Portuguese and Romanian!
 
