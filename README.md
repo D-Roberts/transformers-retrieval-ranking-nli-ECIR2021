@@ -12,18 +12,11 @@ If you use this repository please consider citing the paper:
 ```
 
 
-## II. API (MVP for research illustration purpose only). Live at: http://34.207.240.102:8080/
+## II. API (MVP for research illustration purpose only). 
 
-* Try fun claims such as {"COVID-19 was sent over by aliens from Mars."} Good way to retrieve facts and learn some Portuguese and Romanian!
+* System runs at approx 20 QPS. Last step on cached pre-retrieved top 5 evidence sentences runs within 0.25s SLA; end-to-end approx 30s (all steps: constituency parsing, term searches with MediaWiki API in 3 languages (~12-20 terms); retrieve Wiki page summaries; ONNX runtime sentence scoring (100-500 sentences); top-5 natural language inference ONNX runtime scoring). WIP.
 
-* System runs at approx 20 QPS. Last step on cached pre-retrieved top 5 evidence sentences runs within 0.25s SLA; end-to-end approx 30s (all steps: constituency parsing, term searches with MediaWiki API in 3 languages (~12-20 terms); retrieve Wiki page summaries; ONNX runtime sentence scoring (100-500 sentences); top-5 natural language inference ONNX runtime scoring).
-
-* If busy - reload. Scaled to limited capacity.
-
-* The end to end system will be served via a live API during the ECIR 2021 conference. 
-
-* Furthermore, it can be accessed locally via Docker.
-
+* See below steps to build the application and access it locally.
 
 
 ![Multilingual evidence retrieval and fact verification system.](/assets/pacepa_eg.png)
