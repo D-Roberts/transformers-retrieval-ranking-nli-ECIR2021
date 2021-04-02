@@ -259,7 +259,6 @@ class Trainer:
                     loss, id_size = self.training_step_nli(batch, num_labels)
                 elif self.module == "sentence":
                     loss, id_size = self.training_step_sentence(batch, num_labels, it)
-                # should have a sanity check here
 
                 tr_loss += loss.item()
                 nb_tr_examples += id_size
@@ -298,7 +297,6 @@ class Trainer:
         return eval_data, guid_ids_map
 
     def predict(self, predict_inputs, num_eg):
-        logger.info(f"***** Predicting ***** with onnx {self.args.onnx}")
         eval_data, guid_map = self._prepare_inputs(predict_inputs, num_eg)
         eval_dataloader = self._get_eval_dataloader(eval_data)
         return (
