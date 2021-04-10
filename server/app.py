@@ -21,6 +21,7 @@ app = Flask(__name__)
 cur_dir = os.path.dirname(__file__)
 
 # use redis cache for retrieved sentences
+# TODO: set up flask_cache and TTL
 r = Redis(host='redis', port=6379)
 # r = Redis(port=6379)
 
@@ -74,5 +75,5 @@ def feedback():
     return render_template("thanks.html")
 
 
-# if __name__ == "__main__":
-#     app.run(host="0.0.0.0", port=8080, processes=1)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080, processes=1)

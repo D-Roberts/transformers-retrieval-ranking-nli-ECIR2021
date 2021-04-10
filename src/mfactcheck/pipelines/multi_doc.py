@@ -87,6 +87,7 @@ class Doc_Retrieval:
         while i < 9:
             try:
                 wikipedia.set_lang(lang)
+                wikipedia.set_rate_limiting(True)
                 docs = wikipedia.search(np)
                 for doc in docs[: self.k_wiki_results]:
                     if doc and lang + " " + doc not in page_dict:
@@ -112,7 +113,7 @@ class Doc_Retrieval:
         noun_phrases = self.get_noun_phrases(line)
         # logger.info(f"line{line}")
         page_dict = {}
-        langs = ["en", "ro", "pt"]
+        langs = ["en", "es"]
 
         combos = list(itertools.product(noun_phrases, langs))
         # print(combos)

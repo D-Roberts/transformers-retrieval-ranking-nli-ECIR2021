@@ -135,3 +135,15 @@ $2
 16
 $1208
 {"id": "16", "evidence": [" [ en Ion Mihai Pacepa ] Ion Mihai Pacepa (Romanian pronunciation: [i\u02c8on mi\u02c8haj pa\u02c8t\u0283epa]; 28 October 1928 \u2013 14 February 2021) was a two-star general in the Securitate, the secret police of Communist Romania, who defected to the United States in July 1978 following President Jimmy Carter's approval of his request for political asylum.", " [ ro Ion Mihai Pacepa ] Ion Mihai Pacepa (n. 28 octombrie 1928, Bucuresti, Romania \u2013 d. 14 februarie 2021, Statele Unite ale Americii, SUA) a fost un general in Securitate si jurnalist roman.", " [ pt Ion Mihai Pacepa ] Ion Mihai Pacepa (Bucareste, 28 de outubro de 1928 \u2013 14 de fevereiro de 2021) foi um general tres estrelas da Securitate (a policia secreta da Romenia comunista) que desertou para os Estados Unidos em julho de 1978.", " [ pt Ion Mihai Pacepa ] Ion Mihai Pacepa foi general da policia secreta da Romenia comunista, antes de pedir demissao do seu cargo e fugir para os EUA no fim da decada de 70.", " [ pt Ion Mihai Pacepa ] Morreu nos Estados Unidos em 14 de fevereiro de 2021, aos 92 anos de idade, de COVID-19."], "claim": "Ion Mihai Pacepa, the former Securitate general, is alive."}
+*2
+$6
+SELECT
+$1
+0
+*3
+$3
+SET
+$2
+17
+$1027
+{"id": "17", "evidence": [" [ es Joe Biden ] Joseph Robinette Biden Jr. (pronunciacion en ingles: /d\u0292o\u028a \u02c8ba\u026ad\u0259n/ ( escuchar); Scranton, Pensilvania, 20 de noviembre de 1942), mas conocido como Joe Biden, es un abogado y politico estadounidense que se desempena como el 46.o presidente de los Estados Unidos desde el 20 de enero de 2021.", " [ es Joe Biden ] Ejercio como el 47.o vicepresidente de los Estados Unidos de 2009 a 2017, durante la administracion de Barack Obama.", " [ es Joe Biden ] Biden fue reelegido seis veces al Senado de los Estados Unidos y fue el cuarto senador de mas antiguedad cuando renuncio luego de ganar la vicepresidencia junto a Barack Obama en las elecciones presidenciales de 2008.", " [ es Joe Biden ] Llegado el 14 de diciembre, fue confirmado por el Colegio Electoral como presidente electo.", " [ es Joe Biden ] El 20 de enero de 2021, Biden fue investido como el 46.o presidente de los Estados Unidos."], "claim": "Joe Biden es el president de los Estados Unidos."}
