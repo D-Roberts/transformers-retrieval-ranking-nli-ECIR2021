@@ -12,9 +12,9 @@ If you use this repository please consider citing the paper:
 ```
 
 
-## II. API. Spanish - English. 
+## II. API. Spanish - English (WIP).
 
-* System runs at approx 20 QPS. Last step on cached pre-retrieved top 5 evidence sentences runs within 0.25s SLA; end-to-end approx 30s (all steps: constituency parsing, term searches with MediaWiki API in 3 languages (~12-20 terms); retrieve Wiki page summaries; ONNX runtime sentence scoring (100-500 sentences); top-5 natural language inference ONNX runtime scoring). WIP.
+* System runs at approx 20 QPS. Last step on cached pre-retrieved top 5 evidence sentences runs within 0.25s SLA; end-to-end approx 30s (all steps: constituency parsing, term searches with MediaWiki API in 3 languages (~12-20 terms); retrieve Wiki page summaries; ONNX runtime sentence scoring (100-500 sentences); top-5 natural language inference ONNX runtime scoring).
 
 * See below steps to build the system (as seen in diagram) and access it locally.
 
