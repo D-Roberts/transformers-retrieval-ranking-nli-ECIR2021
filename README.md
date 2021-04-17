@@ -1,15 +1,8 @@
 ## I. Article.
-If you use this repository please consider citing the paper: 
+
 
 [Multilingual Evidence Retrieval and Fact Verification to Combat Global Disinformation: The Power of Polyglotism](https://arxiv.org/pdf/2012.08919.pdf)
-```
-@article{roberts2020multilingual,
-  title={Multilingual Evidence Retrieval and Fact Verification to Combat Global Disinformation: The Power of Polyglotism},
-  author={Roberts, Denisa AO},
-  journal={arXiv preprint arXiv:2012.08919},
-  year={2020}
-}
-```
+
 
 
 ## II. System for Spanish - English.
@@ -39,6 +32,17 @@ docker-compose up --build
 ## III. To get the Romanian-English translated dataset (and readme file) for article replication:
 ```
 bash scripts/download-translated-data.sh
+```
+
+If you use this repository please consider citing the paper: 
+
+```
+@article{roberts2020multilingual,
+  title={Multilingual Evidence Retrieval and Fact Verification to Combat Global Disinformation: The Power of Polyglotism},
+  author={Roberts, Denisa AO},
+  journal={arXiv preprint arXiv:2012.08919},
+  year={2020}
+}
 ```
 
 ## IV. Dir structure:
