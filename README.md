@@ -36,7 +36,7 @@ docker-compose up --build
 ```
 
 
-## III. To get the Romanian-English translated dataset (and readme file):
+## III. To get the Romanian-English translated dataset (and readme file) for article replication:
 ```
 bash scripts/download-translated-data.sh
 ```
