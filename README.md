@@ -12,11 +12,7 @@ If you use this repository please consider citing the paper:
 ```
 
 
-## II. API. Spanish - English (WIP).
-
-* System runs at approx 20 QPS. Last step on cached pre-retrieved top 5 evidence sentences runs within 0.25s SLA; end-to-end approx 30s (all steps: constituency parsing, term searches with MediaWiki API in 3 languages (~12-20 terms); retrieve Wiki page summaries; ONNX runtime sentence scoring (100-500 sentences); top-5 natural language inference ONNX runtime scoring).
-
-* See below steps to build the system (as seen in diagram) and access it locally.
+## II. System for Spanish - English.
 
 
 ![Multilingual evidence retrieval and fact verification system.](/assets/pacepa_eg.png)
@@ -24,7 +20,7 @@ If you use this repository please consider citing the paper:
 
 ### Steps to access API locally, at http://0.0.0.0:8080/ :
 
-Requires up to 4Gb RAM. 
+Requires up to 3Gb RAM. 
 Tested on MacOS Big Sur and Ubuntu18.04 64-bitX86. Pretrained models will be downloaded from S3.
 
 Build locally:
