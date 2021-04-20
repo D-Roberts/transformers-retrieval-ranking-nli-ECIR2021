@@ -5,7 +5,7 @@
 
 
 
-## II. System for Spanish - English.
+## II. System for Spanish - English (WIP).
 
 
 ![Multilingual evidence retrieval and fact verification system.](/assets/pacepa_eg.png)
