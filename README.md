@@ -15,7 +15,7 @@ Disclaimer: For research illustration purposes only.
 ### Steps to access API locally, at http://0.0.0.0:8080/ :
 
 Requires up to 3Gb RAM. 
-Tested on MacOS Big Sur and Ubuntu18.04 64-bitX86. Pretrained models will be downloaded from S3.
+Tested on MacOS Big Sur and Ubuntu18.04 64-bitX86. Fine-tuned models will be downloaded from S3.
 
 Build locally:
 1. Get repo:
