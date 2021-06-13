@@ -5,7 +5,7 @@
 
 
 
-## II. System for Spanish - English (WIP). 
+## II. System for Spanish - English. 
 Disclaimer: For research illustration purposes only.
 
 
