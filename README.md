@@ -1,7 +1,7 @@
 ## I. Article.
 
 
-[Multilingual Evidence Retrieval and Fact Verification to Combat Global Disinformation: The Power of Polyglotism](https://arxiv.org/pdf/2012.08919.pdf)
+[Multilingual Evidence Retrieval and Fact Verification](https://arxiv.org/pdf/2012.08919.pdf)
 
 
 
