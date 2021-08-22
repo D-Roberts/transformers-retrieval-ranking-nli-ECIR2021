@@ -5,7 +5,7 @@
 
 
 
-## II. System for [Language X] - English. 
+## II. System for German - English. 
 Disclaimer: For research illustration purposes only.
 
 

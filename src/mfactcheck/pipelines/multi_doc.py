@@ -113,7 +113,7 @@ class Doc_Retrieval:
         noun_phrases = self.get_noun_phrases(line)
         # logger.info(f"line{line}")
         page_dict = {}
-        langs = ["en", "es"]
+        langs = ["en", "de"]
 
         combos = list(itertools.product(noun_phrases, langs))
         # print(combos)
