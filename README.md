@@ -5,7 +5,7 @@
 
 
 
-## II. System for German - English. 
+## II. System for German - English inference. 
 Disclaimer: For research illustration purposes only.
 
 
