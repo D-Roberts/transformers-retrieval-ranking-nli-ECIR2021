@@ -5,7 +5,7 @@
 
 
 
-## II. System for Spanish - English. 
+## II. System for [Language X] - English. 
 Disclaimer: For research illustration purposes only.
 
 
