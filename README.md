@@ -29,6 +29,9 @@ cd multilingual-nli-ECIR2021
 docker-compose up --build
 ```
 
+3. Enter a short statement/claim in English or select one of the cashed ids. 
+
+4. Enjoy the selected evidence/wikipedia summaries in multiple languages.
 
 ## III. To get the Romanian-English translated dataset (and readme file) for article replication:
 ```
