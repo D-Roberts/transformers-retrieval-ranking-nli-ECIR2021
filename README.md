@@ -1,11 +1,5 @@
-## Article.
 
-
-[Multilingual Evidence Retrieval and Natural Language Inference](https://arxiv.org/pdf/2012.08919.pdf)
-
-
-
-## Code.
+## Codebase for the article
 
 Requires up to 3Gb RAM. 
 Tested on MacOS Big Sur and Ubuntu18.04 64-bitX86. Fine-tuned models will be downloaded from S3. Expect initial build time approx 15min < t <= 30min.
@@ -122,3 +116,8 @@ docker-compose up --build
 
 ## License
 Apache License Version 2.0
+
+## Article 
+
+[Multilingual Evidence Retrieval and Natural Language Inference](https://arxiv.org/pdf/2012.08919.pdf)
+
