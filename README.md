@@ -1,7 +1,7 @@
 ## Article.
 
 
-[Multilingual Evidence Retrieval and Fact Verification](https://arxiv.org/pdf/2012.08919.pdf)
+[Multilingual Evidence Retrieval and Natural Language Inference](https://arxiv.org/pdf/2012.08919.pdf)
 
 
 
@@ -22,16 +22,6 @@ cd multilingual-nli-ECIR2021
 docker-compose up --build
 ```
 
-If you use this repository please consider citing the paper: 
-
-```
-@article{roberts2020multilingual,
-  title={Multilingual Evidence Retrieval and Fact Verification to Combat Global Disinformation: The Power of Polyglotism},
-  author={Roberts, Denisa AO},
-  journal={arXiv preprint arXiv:2012.08919},
-  year={2020}
-}
-```
 
 ## Dir structure:
 ```
@@ -128,9 +118,7 @@ If you use this repository please consider citing the paper:
 └── tests
     └── test_nli.py
     ```
-    
-## Contact:
-denisa.roberts[at]protonmail.com
+  
 
 ## License
 Apache License Version 2.0
