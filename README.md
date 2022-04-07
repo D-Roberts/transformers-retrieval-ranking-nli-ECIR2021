@@ -118,6 +118,5 @@ docker-compose up --build
 Apache License Version 2.0
 
 ## Article 
-
 [Multilingual Evidence Retrieval and Natural Language Inference](https://arxiv.org/pdf/2012.08919.pdf)
 
