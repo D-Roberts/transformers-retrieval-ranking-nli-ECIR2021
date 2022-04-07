@@ -1,18 +1,11 @@
-## I. Article.
+## Article.
 
 
 [Multilingual Evidence Retrieval and Fact Verification](https://arxiv.org/pdf/2012.08919.pdf)
 
 
 
-## II. System for Portuguese - English inference. 
-Disclaimer: For research illustration purposes only.
-
-
-![Multilingual evidence retrieval and fact verification system.](/assets/pacepa_eg.png)
-
-
-### Steps to access API locally, at http://0.0.0.0:8080/ :
+## Code.
 
 Requires up to 3Gb RAM. 
 Tested on MacOS Big Sur and Ubuntu18.04 64-bitX86. Fine-tuned models will be downloaded from S3. Expect initial build time approx 15min < t <= 30min.
@@ -29,13 +22,6 @@ cd multilingual-nli-ECIR2021
 docker-compose up --build
 ```
 
-3. Enter a short statement/claim in English or select one of the cashed ids. The scored evidence/wikipedia summaries in multiple languages will be automatically retrieved.
-
-## III. To get the Romanian-English translated dataset (and readme file) for article replication:
-```
-bash scripts/download-translated-data.sh
-```
-
 If you use this repository please consider citing the paper: 
 
 ```
@@ -47,7 +33,7 @@ If you use this repository please consider citing the paper:
 }
 ```
 
-## IV. Dir structure:
+## Dir structure:
 ```
 .
 ├── LICENSE
