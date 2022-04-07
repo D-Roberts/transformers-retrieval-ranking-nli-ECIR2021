@@ -17,7 +17,7 @@ git clone https://github.com/D-Roberts/multilingual-nli-ECIR2021.git
 cd multilingual-nli-ECIR2021
 ```
 
-2. Build and run Docker (CPU) for inference (ORT):
+2. Build and run Docker (CPU) for inference (onnx runtime):
 ```
 docker-compose up --build
 ```
