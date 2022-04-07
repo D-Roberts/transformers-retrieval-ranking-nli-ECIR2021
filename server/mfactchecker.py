@@ -50,7 +50,7 @@ class MFactChecker:
         # a claim was entered
         st = time.time()
         if len(claim_id_or_claim) > 20:
-            logger.info("Starting end to end MFactChecker...")
+            logger.info("Starting MFactChecker...")
             claim = claim_id_or_claim
             if len(self.r.keys()) == 0:
                 claim_id = 1

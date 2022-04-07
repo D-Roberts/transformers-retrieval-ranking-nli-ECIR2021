@@ -5,8 +5,6 @@
         {
             box-sizing: border-box;
         }
-
-        /* Set additional styling options for the columns*/
         .column {
             float: left;
             width: 50%;
@@ -34,10 +32,6 @@
         
         <div id='button'>
             <form action="/thanks" method="post">
-            <!-- <input style="background-color:Lightgreen;" type=submit value='Human agrees.'
-            name='feedback_button'>
-            <input style="background-color:Lightgreen;" type=submit value='Human disagrees.'
-            name='feedback_button'> -->
             <input style="background-color:Lightgreen;" type=hidden value='{{ retrieved }}'
             name='retrieved'>
             <input type=hidden value='{{ content }}' name='claim'>

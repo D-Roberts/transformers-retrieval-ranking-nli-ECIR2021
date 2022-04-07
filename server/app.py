@@ -11,6 +11,7 @@ from wtforms import Form, TextAreaField, validators
 from redis import Redis
 
 from server.mfactchecker import MFactChecker
+
 # from mfactchecker import MFactChecker
 from mfactcheck.pipelines.multi_doc import Doc_Retrieval
 from mfactcheck.pipelines.multi_sent import MultiSentPipeline
@@ -21,7 +22,7 @@ app = Flask(__name__)
 cur_dir = os.path.dirname(__file__)
 
 # use redis cache for retrieved sentences
-r = Redis(host='redis', port=6379)
+r = Redis(host="redis", port=6379)
 # r = Redis(port=6379)
 
 # load pipeline models to assemble MFactChecker
@@ -61,16 +62,6 @@ def results():
         )
 
     return render_template("claimform.html", form=form)
-
-
-# @app.route("/thanks", methods=["POST"])
-# def feedback():
-#     # mock feedback
-#     feedback = request.form["feedback_button"]
-#     claim = request.form["claim"]
-#     retrieved = request.form["retrieved"]
-
-#     return render_template("thanks.html")
 
 
 if __name__ == "__main__":
