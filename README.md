@@ -6,8 +6,7 @@
 [Multilingual Evidence Retrieval, Ranking and Natural Language Inference](https://arxiv.org/pdf/2012.08919.pdf)
 
 
-Requires up to 3Gb RAM. 
-Tested on MacOS Big Sur and Ubuntu18.04 64-bitX86. Fine-tuned models will be downloaded from S3. 
+Requires up to 3Gb RAM. Fine-tuned models will be downloaded from S3. 
 
 To cite:
 ```
