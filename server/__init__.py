@@ -1,1 +1,0 @@
-from .mfactchecker import MFactChecker
