@@ -10,6 +10,7 @@ Requires up to 3Gb RAM.
 Tested on MacOS Big Sur and Ubuntu18.04 64-bitX86. Fine-tuned models will be downloaded from S3. 
 
 To cite:
+```
 @inproceedings{olteanu2021multilingual,
   title={Multilingual Evidence Retrieval and Fact Verification to Combat Global Disinformation: The Power of Polyglotism},
   author={Olteanu Roberts, Denisa A},
@@ -18,3 +19,4 @@ To cite:
   year={2021},
   organization={Springer}
 }
+```
