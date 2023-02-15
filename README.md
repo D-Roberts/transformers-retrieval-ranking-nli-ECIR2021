@@ -1,7 +1,7 @@
 
 
 
-## Codebase for the article
+## PyTorch Codebase for the article
 
 [Multilingual Evidence Retrieval, Ranking and Natural Language Inference](https://arxiv.org/pdf/2012.08919.pdf)
 
