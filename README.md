@@ -6,7 +6,7 @@
 [Multilingual Evidence Retrieval, Ranking and Natural Language Inference](https://arxiv.org/pdf/2012.08919.pdf)
 
 
-Requires up to 3Gb RAM. Fine-tuned models will be downloaded from S3. 
+Requires up to 3Gb RAM. Fine-tuned models will be downloaded from S3; please email for access to models and datasets.
 
 To cite:
 ```
